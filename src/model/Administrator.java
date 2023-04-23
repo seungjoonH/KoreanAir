@@ -2,13 +2,8 @@ package model;
 
 public class Administrator extends User {
 	// constructors
-	public Administrator() {}
-	
-	// methods
-	@Override
-	public void login() {}
-
-	@Override
-	public void showFlights() {}
-	
+	public Administrator(String[] csv) { super(csv); }
+	public Administrator(String uid, String id, String password, String name) {
+		super(uid, id, password, name);
+	}
 }

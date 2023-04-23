@@ -1,10 +1,14 @@
 package model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 
+import controller.FlightManagementController;
+
 public class Flight {
-	private Vector<Seat> seats;
+	private String id;
 	private String airlineName;
 	private Airport departure;
 	private Airport destination;
@@ -12,8 +16,10 @@ public class Flight {
 	private int destinationGateNo;
 	LocalDateTime departureTime;
 	LocalDateTime arrivalTime;
+
+	private Vector<Seat> seats;
 	
-	public Vector<Seat> getSeats() { return seats; }
+	public String getId() { return id; }
 	public String getAirlineName() { return airlineName; }
 	public Airport getDeparture() { return departure; }
 	public Airport getDestination() { return destination; }
@@ -21,7 +27,8 @@ public class Flight {
 	public int getDestinationGateNo() { return destinationGateNo; }
 	public LocalDateTime getDepartureTime() { return departureTime; }
 	public LocalDateTime getArrivalTime() { return arrivalTime; }
-	public void setSeats(Vector<Seat> seats) { this.seats = seats; }
+	public Vector<Seat> getSeats() { return seats; }
+	public void setId(String id) { this.id = id; }
 	public void setAirlineName(String airlineName) { this.airlineName = airlineName; }
 	public void setDeparture(Airport departure) { this.departure = departure; }
 	public void setDestination(Airport destination) { this.destination = destination; }
@@ -29,8 +36,32 @@ public class Flight {
 	public void setDestinationGateNo(int destinationGateNo) { this.destinationGateNo = destinationGateNo; }
 	public void setDepartureTime(LocalDateTime departureTime) { this.departureTime = departureTime; }
 	public void setArrivalTime(LocalDateTime arrivalTime) { this.arrivalTime = arrivalTime; }
+	public void setSeats(Vector<Seat> seats) { this.seats = seats; }
+		
 	
-	public int getDuration() {
-		return 0;
+	public Flight(String[] csv) { fromCsv(csv); }
+	public void fromCsv(String[] csv) {
+		int l = csv.length, c = 0;
+		if (l > c) id = csv[c++];
+		if (l > c) airlineName = csv[c++];
+		if (l > c) departure = FlightManagementController.getAirport(csv[c++]);
+		if (l > c) destination = FlightManagementController.getAirport(csv[c++]);
+		if (l > c) departureGateNo = Integer.parseInt(csv[c++]);
+		if (l > c) destinationGateNo = Integer.parseInt(csv[c++]);
+		if (l > c) departureTime = LocalDateTime.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d HH:mm:ss"));
+		if (l > c) arrivalTime = LocalDateTime.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d HH:mm:ss"));
 	}
+	
+	public String[] toStrList() {
+	    return new String[]{
+    		id, 
+    		airlineName, 
+    		departure.city, 
+    		destination.city, 
+    		departureTime.toString(), 
+    		arrivalTime.toString()
+		};
+	}
+	
+	public int getDuration() { return 0; }
 }

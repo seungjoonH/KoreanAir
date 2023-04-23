@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 
 import main.Sex;
@@ -26,6 +27,7 @@ public class Customer extends User {
 	public void setReservations(Vector<Ticket> reservations) { this.reservations = reservations; }
 	
 	// Constructor
+	public Customer(String[] csv) { super(csv); fromCsv(csv); }
 	public Customer(
 			String uid, 
 			String id, 
@@ -44,13 +46,17 @@ public class Customer extends User {
 		this.mileagePoint = mileagePoint;
 		this.reservations = reservations;
 	}
-
-	// methods
-	@Override
-	public void login() {}
-	@Override
-	public void showFlights() {}
 	
+	@Override
+	public void fromCsv(String[] csv) {
+		int l = csv.length, c = 4;
+		if (l > c) sex = sexs[Integer.parseInt(csv[c++])];
+		if (l > c) birth = LocalDate.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d"));
+		if (l > c) passportNo = csv[c++];
+		if (l > c) mileagePoint = Integer.parseInt(csv[c++]);
+	}
+	
+	// methods
 	public void shareReservations(String uid, Ticket ticket) {}
 	public void addReservation(Ticket ticket) {}
 	public void addMileage(int value) {}

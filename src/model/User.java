@@ -1,6 +1,10 @@
 package model;
 
-public abstract class User {
+import main.Sex;
+
+public class User {
+	public static Sex[] sexs = { Sex.MALE, Sex.FEMALE };
+	
 	// attributes
 	private String uid;
 	private String id;
@@ -17,6 +21,7 @@ public abstract class User {
 	public void setName(String name) { this.name = name; }
 	public void setPassword(String password) { this.password = password; }
 	
+	public User(String[] csv) { fromCsv(csv); }
 	public User(String uid, String id, String password, String name) {
 		this.uid = uid;
 		this.id = id;
@@ -25,9 +30,14 @@ public abstract class User {
 	}
 	
 	// methods
-	public abstract void login();
-	public abstract void showFlights();
-	
+	public void fromCsv(String[] csv) {
+		int l = csv.length, c = 0;
+		if (l > c) uid = csv[c++];
+		if (l > c) id = csv[c++];
+		if (l > c) password = csv[c++];
+		if (l > c) name = csv[c++];
+	}
+
 	@Override
 	public String toString() {
 		return "uid: " + uid + "\n"

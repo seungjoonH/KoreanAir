@@ -16,7 +16,6 @@ import model.User;
 public class UserManagementController {
 	private static Vector<User> users = new Vector<User>();
 	private static Vector<String> adminUids = new Vector<String>();
-	public static Sex[] sexs = { Sex.MALE, Sex.FEMALE };
 	
 	public static void loadCustomers() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader("database/customers.csv"));
@@ -24,18 +23,7 @@ public class UserManagementController {
 
         while ((line = br.readLine()) != null) {
             String[] fields = line.split(";");
-            String uid = fields[0];
-            String id = fields[1];
-            String password = fields[2];
-            String name = fields[3];
-            Sex sex = sexs[Integer.parseInt(fields[4])];
-            LocalDate birth = LocalDate.parse(fields[5], DateTimeFormatter.ofPattern("yyyy.M.d"));
-            String passportNo = fields[6];
-            int mileagePoint = Integer.parseInt(fields[7]);
-            users.add(new Customer(
-				uid, id, password, name, sex, 
-				birth, passportNo, mileagePoint, new Vector<Ticket>()
-			));
+            users.add(new User(fields));
         }
         br.close();
 	}

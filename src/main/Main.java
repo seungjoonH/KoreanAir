@@ -1,9 +1,11 @@
 package main;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import controller.FlightManagementController;
 import controller.UserManagementController;
 import model.User;
 import view.Login;
@@ -23,8 +25,11 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		jframe = new JFrame();
 		
-		changeLevel(Pages.MENU);
 		UserManagementController.loadCustomers();
+		FlightManagementController.loadAirports();
+		FlightManagementController.loadFlights();
+		
+		changeLevel(Pages.MENU);
 
 		jframe.setTitle("Korean Air App");
 		jframe.setSize(WIDTH, HEIGHT);

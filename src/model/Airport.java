@@ -5,6 +5,15 @@ public class Airport {
 	String country;
 	String city;
 	
+	public Airport(String[] csv) { fromCsv(csv); }
+	
+	public void fromCsv(String[] csv) {
+		int l = csv.length, c = 0;
+		if (l > c) code = csv[c++];
+		if (l > c) country = csv[c++];
+		if (l > c) city = csv[c++];
+	}
+	
 	public String getCode() { return code; }
 	public String getCountry() { return country; }
 	public String getCity() { return city; }
