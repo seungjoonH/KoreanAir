@@ -1,5 +1,5 @@
 package main;
 
 public enum Pages {
-	MENU, LOGIN
+	MENU, LOGIN, FLIGHT_DETAIL
 }

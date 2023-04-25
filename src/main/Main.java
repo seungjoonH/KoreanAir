@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import controller.FlightManagementController;
 import controller.UserManagementController;
 import model.User;
-import view.Login;
 import view.Menu;
 
 public class Main {
@@ -28,24 +28,22 @@ public class Main {
 		UserManagementController.loadCustomers();
 		FlightManagementController.loadAirports();
 		FlightManagementController.loadFlights();
-		
-		changeLevel(Pages.MENU);
 
+		gotoPage(new Menu());
+		
 		jframe.setTitle("Korean Air App");
 		jframe.setSize(WIDTH, HEIGHT);
 		jframe.setResizable(false);
 		jframe.setLocationRelativeTo(null);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setVisible(true);
+		jframe.pack();
+		
 	}
 
-	public static void changeLevel(Pages page) {
+	public static void gotoPage(JPanel panel) {
 		jframe.getContentPane().removeAll();
-		switch (page) {
-		case MENU: jframe.getContentPane().add(new Menu()); break;
-		case LOGIN: jframe.getContentPane().add(new Login()); break;
-		}
-		
+	    jframe.getContentPane().add(panel);
 		jframe.revalidate();
 		jframe.repaint();
 	}

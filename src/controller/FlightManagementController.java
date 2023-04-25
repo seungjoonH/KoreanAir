@@ -52,6 +52,13 @@ public class FlightManagementController {
         br.close();
 	}
 	
+	public static Flight getFlight(String id) {
+		for (Flight flight : flights) {
+			if (id.equals(flight.getId())) return flight;
+		}
+		return null;
+	}
+	
 	public static String[][] getFlightsList() {
 	    String[][] list = new String[flights.size()][];
 	    for (int i = 0; i < flights.size(); i++) {
@@ -61,6 +68,8 @@ public class FlightManagementController {
 //	    System.out.println(list.length);
 	    return list;
 	}
+	
+//	public static search(String ) {}
 	
 	public void showFilterForm() {}
 	public void receiveFilteredInfo() {}

@@ -1,11 +1,11 @@
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 
 import controller.FlightManagementController;
+import main.DateUtil;
 
 public class Flight {
 	private String id;
@@ -37,7 +37,6 @@ public class Flight {
 	public void setDepartureTime(LocalDateTime departureTime) { this.departureTime = departureTime; }
 	public void setArrivalTime(LocalDateTime arrivalTime) { this.arrivalTime = arrivalTime; }
 	public void setSeats(Vector<Seat> seats) { this.seats = seats; }
-		
 	
 	public Flight(String[] csv) { fromCsv(csv); }
 	public void fromCsv(String[] csv) {
@@ -48,8 +47,8 @@ public class Flight {
 		if (l > c) destination = FlightManagementController.getAirport(csv[c++]);
 		if (l > c) departureGateNo = Integer.parseInt(csv[c++]);
 		if (l > c) destinationGateNo = Integer.parseInt(csv[c++]);
-		if (l > c) departureTime = LocalDateTime.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d HH:mm:ss"));
-		if (l > c) arrivalTime = LocalDateTime.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d HH:mm:ss"));
+		if (l > c) departureTime = LocalDateTime.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d HH:mm"));
+		if (l > c) arrivalTime = LocalDateTime.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d HH:mm"));
 	}
 	
 	public String[] toStrList() {
@@ -58,8 +57,8 @@ public class Flight {
     		airlineName, 
     		departure.city, 
     		destination.city, 
-    		departureTime.toString(), 
-    		arrivalTime.toString()
+    		DateUtil.timeToString(departureTime), 
+    		DateUtil.timeToString(arrivalTime)
 		};
 	}
 	

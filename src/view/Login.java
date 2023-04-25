@@ -13,10 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import controller.UserManagementController;
 import main.Main;
-import main.Pages;
 import model.User;
 
 public class Login extends JPanel implements ActionListener {
@@ -38,12 +38,18 @@ public class Login extends JPanel implements ActionListener {
 		JButton loginButton = new JButton("로그인");
 		loginButton.addActionListener(this);
 
-		// 뒤로 가기 버튼 생성
 		JPanel headPanel = new JPanel(new BorderLayout());
+
+		JPanel backButtonPanel = new JPanel(new BorderLayout());
 		JButton backButton = new JButton("뒤로");
 		backButton.addActionListener(this);
-		backButton.setPreferredSize(new Dimension(50, 20));
-		headPanel.add(backButton, BorderLayout.WEST);
+		backButtonPanel.add(backButton, BorderLayout.WEST);
+
+		JLabel titleLabel = new JLabel("로그인", SwingConstants.CENTER);
+		titleLabel.setFont(titleLabel.getFont().deriveFont(20f));
+
+		headPanel.add(backButtonPanel, BorderLayout.WEST);
+		headPanel.add(titleLabel, BorderLayout.CENTER);
 
 		JPanel loginPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -90,8 +96,8 @@ public class Login extends JPanel implements ActionListener {
 		String id = idField.getText();
 		String password = new String(passwordField.getPassword());
 
-		if (e.getActionCommand().equals("뒤로")) Main.changeLevel(Pages.MENU);
-		else if (e.getActionCommand().equals("로그인") && login(id, password)) Main.changeLevel(Pages.MENU);
+		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Menu());
+		else if (e.getActionCommand().equals("로그인") && login(id, password)) Main.gotoPage(new Menu());
 	}
 
 

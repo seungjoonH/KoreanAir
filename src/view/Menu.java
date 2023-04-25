@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -13,7 +15,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,7 +25,7 @@ import javax.swing.SpinnerNumberModel;
 
 import controller.FlightManagementController;
 import main.Main;
-import main.Pages;
+import model.Flight;
 
 public class Menu extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -143,6 +144,18 @@ public class Menu extends JPanel implements ActionListener {
 
 		String[][] data = FlightManagementController.getFlightsList();
 		JTable table = new JTable(data, columnNames);
+		
+		table.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent event) {
+		        if (event.getClickCount() == 2) {
+		            int row = table.getSelectedRow();
+		            Flight flight = FlightManagementController.getFlight(data[row][0]);
+		            Main.gotoPage(new FlightDetail(flight));
+		        }
+		    }
+		});
+		
+		table.setDefaultEditor(Object.class, null);
 		JScrollPane scrollPane = new JScrollPane(table);
 		listPanel.add(scrollPane);
 
@@ -152,26 +165,14 @@ public class Menu extends JPanel implements ActionListener {
 		panel.add(listPanel, BorderLayout.SOUTH);
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-		Main.getFrame().add(panel);
-		Main.getFrame().pack();
-		Main.getFrame().setResizable(false);
-		Main.getFrame().setVisible(true);
-		Main.getFrame().setLocationRelativeTo(null);
-		Main.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		add(panel);
 	}
 
-	public void logout() {
-		Main.setUser(null);
-	}
+	public void logout() { Main.setUser(null); }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("로그인"))
-			Main.changeLevel(Pages.LOGIN);
-		else if (e.getActionCommand().equals("로그아웃")) {
-			logout();
-			Main.changeLevel(Pages.MENU);
-		}
+		if (e.getActionCommand().equals("로그인")) Main.gotoPage(new Login());
+		else if (e.getActionCommand().equals("로그아웃")) { logout(); Main.gotoPage(new Menu()); }
 	}
 }
