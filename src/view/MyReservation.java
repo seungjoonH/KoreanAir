@@ -14,6 +14,8 @@ public class MyReservation extends JPanel implements ActionListener {
 	public MyReservation() {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+
+		// TODO: 여기 채우세요
 		
 		add(panel);
 	}

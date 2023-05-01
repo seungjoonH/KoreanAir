@@ -14,6 +14,8 @@ public class My extends JPanel implements ActionListener {
 	public My() {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+
+		// TODO: 여기 채우세요
 		
 		add(panel);
 	}
