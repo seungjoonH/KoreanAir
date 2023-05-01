@@ -1,5 +1,5 @@
-package main;
-
-public enum Pages {
-	MENU, LOGIN, FLIGHT_DETAIL
-}
+//package main;
+//
+//public enum Pages {
+//	MENU, LOGIN, FLIGHT_DETAIL
+//}

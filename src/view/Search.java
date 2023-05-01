@@ -27,12 +27,12 @@ import controller.FlightManagementController;
 import main.Main;
 import model.Flight;
 
-public class Menu extends JPanel implements ActionListener {
+public class Search extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private JButton logButton;
 
-	public Menu() {
+	public Search() {
 		JPanel sizedBox = new JPanel();
 		sizedBox.setPreferredSize(new Dimension(10, 0));
 
@@ -193,6 +193,6 @@ public class Menu extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("로그인")) Main.gotoPage(new Login());
-		else if (e.getActionCommand().equals("로그아웃")) { logout(); Main.gotoPage(new Menu()); }
+		else if (e.getActionCommand().equals("로그아웃")) { logout(); Main.gotoPage(new Search()); }
 	}
 }

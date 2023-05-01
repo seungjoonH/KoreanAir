@@ -151,7 +151,7 @@ public class FlightDetail extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Menu());
+		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Search());
 	}
 	
 	
