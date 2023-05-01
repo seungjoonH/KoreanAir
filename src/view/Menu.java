@@ -56,6 +56,26 @@ public class Menu extends JPanel implements ActionListener {
 
 		appbarPanel.add(logButton, BorderLayout.EAST);
 
+		JPanel codePanel = new JPanel();
+		codePanel.setLayout(new BoxLayout(codePanel, BoxLayout.X_AXIS));
+
+		JLabel codeLabel = new JLabel("항공편 코드:");
+		JTextField codeField = new JTextField(10);
+		codePanel.add(codeLabel);
+		codePanel.add(codeField);
+
+		JPanel airlinePanel = new JPanel();
+		airlinePanel.setLayout(new BoxLayout(airlinePanel, BoxLayout.X_AXIS));
+
+		JLabel airlineLabel = new JLabel("항공사:");
+		JTextField airlineField = new JTextField(10);
+		airlinePanel.add(airlineLabel);
+		airlinePanel.add(airlineField);
+
+		JPanel planePanel = new JPanel(new GridLayout(2, 1));
+		planePanel.add(codePanel);
+		planePanel.add(airlinePanel);
+		
 		JPanel fromPanel = new JPanel();
 		fromPanel.setLayout(new BoxLayout(fromPanel, BoxLayout.X_AXIS));
 
@@ -73,14 +93,13 @@ public class Menu extends JPanel implements ActionListener {
 		toPanel.add(toField);
 
 		JPanel airportPanel = new JPanel(new GridLayout(2, 1));
-
 		airportPanel.add(fromPanel);
 		airportPanel.add(toPanel);
 
 		JPanel depPanel = new JPanel();
 		depPanel.setLayout(new BoxLayout(depPanel, BoxLayout.X_AXIS));
 
-		JLabel depLabel = new JLabel("출발시각:");
+		JLabel depLabel = new JLabel("출발일:");
 		JTextField depField = new JTextField(10);
 		depPanel.add(depLabel);
 		depPanel.add(depField);
@@ -100,7 +119,7 @@ public class Menu extends JPanel implements ActionListener {
 
 		JPanel passengerPanel = new JPanel();
 		passengerPanel.setLayout(new BoxLayout(passengerPanel, BoxLayout.X_AXIS));
-		JLabel passengerLabel = new JLabel("예약수:");
+		JLabel passengerLabel = new JLabel("잔여석:");
 
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
 		JSpinner spinner = new JSpinner(spinnerModel);
@@ -127,6 +146,7 @@ public class Menu extends JPanel implements ActionListener {
 
 		JPanel searchPanel = new JPanel(new GridLayout(1, 3, 10, 0));
 
+		searchPanel.add(planePanel);
 		searchPanel.add(airportPanel);
 		searchPanel.add(timePanel);
 		searchPanel.add(pcPanel);

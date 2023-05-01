@@ -27,6 +27,11 @@ public class FlightDetail extends JPanel implements ActionListener {
 	    JPanel panel = new JPanel(new BorderLayout());
 	    panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
+	    JPanel sizedBoxW = new JPanel();
+	    JPanel sizedBoxH = new JPanel();
+	    sizedBoxW.setPreferredSize(new Dimension(750, 0));
+	    sizedBoxH.setPreferredSize(new Dimension(0, 50));
+	    
 	    JPanel headPanel = new JPanel(new BorderLayout());
 
 	    JPanel backButtonPanel = new JPanel(new BorderLayout());
@@ -52,34 +57,30 @@ public class FlightDetail extends JPanel implements ActionListener {
 	    JPanel codePanel = new JPanel(new BorderLayout());
 	    JPanel airlinePanel = new JPanel(new BorderLayout());
 	    JPanel remainPanel = new JPanel(new BorderLayout());
-	    JPanel sizedBoxW = new JPanel();
-	    JPanel sizedBoxH = new JPanel();
 	    
 	    JLabel codeLabel1 = buildLabel("항공편 코드", true);
 	    JLabel codeLabel2 = buildLabel(flight.getId(), false);
 	    codePanel.add(codeLabel1, BorderLayout.NORTH);
 	    codePanel.add(codeLabel2, BorderLayout.SOUTH);
-	    codePanel.setPreferredSize(new Dimension(100, 50));
+	    codePanel.setPreferredSize(new Dimension(170, 50));
 	    codePanel.setBackground(Color.WHITE);
 	    
 	    JLabel airlineLabel1 = buildLabel("항공사", true);
 	    JLabel airlineLabel2 = buildLabel(flight.getAirlineName(), false);
 	    airlinePanel.add(airlineLabel1, BorderLayout.NORTH);
 	    airlinePanel.add(airlineLabel2, BorderLayout.SOUTH);
-	    airlinePanel.setPreferredSize(new Dimension(300, 50));
+	    airlinePanel.setPreferredSize(new Dimension(170, 50));
 	    airlinePanel.setBackground(Color.WHITE);
 
 	    JLabel remainLabel1 = buildLabel("잔여석", true);
 	    JLabel remainLabel2 = buildLabel("1", false);
 	    remainPanel.add(remainLabel1, BorderLayout.NORTH);
 	    remainPanel.add(remainLabel2, BorderLayout.SOUTH);
-	    remainPanel.setPreferredSize(new Dimension(300, 50));
+	    remainPanel.setPreferredSize(new Dimension(170, 50));
 	    remainPanel.setBackground(Color.WHITE);
 	    
 	    JPanel flightInfoPanel = new JPanel(new GridLayout(0, 3, 20, 20));
 	    
-	    sizedBoxW.setPreferredSize(new Dimension(750, 0));
-	    sizedBoxH.setPreferredSize(new Dimension(0, 25));
 
 	    flightInfoPanel.add(codePanel);
 	    flightInfoPanel.add(airlinePanel);
@@ -89,13 +90,12 @@ public class FlightDetail extends JPanel implements ActionListener {
 	    flightPanel.add(flightInfoPanel, BorderLayout.WEST);
 	    flightPanel.add(sizedBoxW, BorderLayout.CENTER);
 	    flightPanel.add(sizedBoxW, BorderLayout.EAST);
-	    flightPanel.add(sizedBoxH, BorderLayout.SOUTH);
 	    
 	    JPanel depPanel = buildPanel(0, flight);
 	    JPanel arrPanel = buildPanel(1, flight);
-	    depPanel.setBackground(new Color(153, 220, 255));
-	    arrPanel.setBackground(new Color(153, 220, 255));
-	    
+//	    depPanel.setBackground(new Color(153, 220, 255));
+//	    arrPanel.setBackground(new Color(153, 220, 255));
+
 	    ImageIcon airplane = new ImageIcon("./asset/airplane.png");
 		Image resizedImage = airplane.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
 		JLabel imageLabel = new JLabel(new ImageIcon(resizedImage));
@@ -104,7 +104,7 @@ public class FlightDetail extends JPanel implements ActionListener {
 	    contentPanel.add(depPanel, BorderLayout.WEST);
 	    contentPanel.add(imageLabel, BorderLayout.CENTER);
 	    contentPanel.add(arrPanel, BorderLayout.EAST);
-	    contentPanel.setBackground(new Color(153, 220, 255));
+//	    contentPanel.setBackground(new Color(153, 220, 255));
 	    
 	    panel.add(headPanel, BorderLayout.NORTH);
 	    panel.add(contentPanel, BorderLayout.CENTER);

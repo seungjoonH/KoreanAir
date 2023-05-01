@@ -79,7 +79,7 @@ public class Login extends JPanel implements ActionListener {
 		User user = UserManagementController.getUserById(id);
 		String msg;
 		if (user != null) {
-			if (password.equals(user.getPassword())) {
+			if (password.equals(user.getPassword())) { 
 				Main.setUser(user);
 				return true;
 			}
