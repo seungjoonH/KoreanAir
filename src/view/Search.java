@@ -33,12 +33,14 @@ public class Search extends JPanel implements ActionListener {
 	private JButton logButton;
 
 	public Search() {
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+
+		JLabel profileLabel = new JLabel();
+		
 		JPanel sizedBox = new JPanel();
 		sizedBox.setPreferredSize(new Dimension(10, 0));
 
-		JPanel panel = new JPanel();
-
-		JLabel profileLabel = new JLabel();
 
 		if (Main.isLogged())
 			profileLabel = new JLabel(Main.getUser().getName() + " 님 환영합니다");

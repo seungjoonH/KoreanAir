@@ -29,6 +29,7 @@ public class Main {
 		FlightManagementController.loadAirports();
 		FlightManagementController.loadFlights();
 
+		// TODO: 여기 바꾸세요
 		gotoPage(new Search());
 		
 		jframe.setTitle("Korean Air App");
