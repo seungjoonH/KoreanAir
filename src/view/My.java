@@ -55,7 +55,7 @@ public class My extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==myResButton) {Main.gotoPage(new MyReservation());}
+		if(e.getSource()==myResButton) {Main.gotoPage(new MyReservation(new Flight(null)));}
 		else if(e.getSource()==myInfoButton) {Main.gotoPage(new MyInfo());}
 	}
 }
