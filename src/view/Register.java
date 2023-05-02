@@ -17,6 +17,7 @@ public class Register extends JPanel implements ActionListener {
 
 		// TODO: 여기 채우세요
 		
+		
 		add(panel);
 	}
 	

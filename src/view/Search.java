@@ -34,7 +34,6 @@ public class Search extends JPanel implements ActionListener {
 
 	public Search() {
 		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
 
 		JLabel profileLabel = new JLabel();
 		
