@@ -1,6 +1,10 @@
 package model;
 
 public class ExternalAirline extends Administrator {
+	public ExternalAirline(String uid, String id, String password, String name) {
+		super(uid, id, password, name);
+		// TODO Auto-generated constructor stub
+	}
 	private String airlineName;
 	
 	public String getAirlineName() { return airlineName; }
