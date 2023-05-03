@@ -1,12 +1,18 @@
 code;country;city
 ICN;Korea;Incheon
-GMP;Korea;Seoul
 CJU;Korea;Jeju
-PUS;Korea;Busan
-HND;Japan;Tokyo
-NRT;Japan;Narita
-CTS;Japan;Sapporo
+HND;Japan;Haneda
+PVG;China;Pudong
+PUS;Korea;Gimhae
 FUK;Japan;Fukuoka
-KIX;Japan;Osaka
-PVG;China;Shanghai
-TPE;Taiwan;Taipei
+GMP;Korea;Gimpo
+CTS;Japan;New Chitose
+NRT;Japan;Narita
+KIX;Japan;Kansai
+TPE;Taiwan;Taoyuan
+HKG;Hong Kong;Hong Kong
+BKK;Thailand;Suvarnabhumi
+SGN;Vietnam;Tan Son Nhat
+CMB;Sri Lanka;Bandaranaike
+PEN;Malaysia;Penang
+DAD;Vietnam;Da Nang

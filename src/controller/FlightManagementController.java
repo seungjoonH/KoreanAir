@@ -4,22 +4,22 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Vector;
 
 import model.Airport;
 import model.Flight;
 import model.FlightFilter;
-import model.PaymentAgency;
 
 public class FlightManagementController {
 	private static Vector<Airport> airports = new Vector<Airport>();
 	private static Vector<Flight> flights = new Vector<Flight>();
 	private static FlightFilter filter;
 	
-	public Vector<Flight> getFlights() { return flights; }
-	public FlightFilter getFilter() { return filter; }
-	public void setFlights(Vector<Flight> flights) { this.flights = flights; }
-	public void setFilter(FlightFilter filter) { this.filter = filter; }
+	public static Vector<Flight> getFlights() { return flights; }
+	public static FlightFilter getFilter() { return filter; }
+	public static void setFlights(Vector<Flight> f) { flights = f; }
+	public static void setFilter(FlightFilter f) { filter = f; }
 	
 	public static Airport getAirport(String code) {
 		for (Airport ap : airports) {
@@ -34,7 +34,6 @@ public class FlightManagementController {
 
         while ((line = br.readLine()) != null) {
             String[] fields = line.split(";");
-
             airports.add(new Airport(fields));
         }
 
@@ -64,19 +63,44 @@ public class FlightManagementController {
 	    for (int i = 0; i < flights.size(); i++) {
 	        list[i] = flights.get(i).toStrList();
 	    }
-//	    System.out.println(String.join(" / ", list[2]));
-//	    System.out.println(list.length);
 	    return list;
 	}
 	
-//	public static search(String ) {}
+	public static Vector<Flight> getFiltFlights() {
+		Vector<Flight> fs = new Vector<Flight>();
+		
+		for (Flight flight : flights) {
+			boolean satisfied = true;
+			LocalDateTime depDate = flight.getDepartureTime();
+			String year = String.valueOf(depDate.getYear());
+			String month = String.valueOf(depDate.getMonthValue());
+			String day = String.valueOf(depDate.getDayOfMonth());
+			
+			Airport depAirp = flight.getDeparture();
+			String dep = depAirp.toString(); 
+
+			Airport desAirp = flight.getDestination();
+			String des = desAirp.toString(); 
+			
+			if (!filter.getAirlineName().equals("")) satisfied &= flight.getAirlineName().contains(filter.getAirlineName());
+			if (!filter.getYear().equals("")) satisfied &= year.equals(filter.getYear());
+			if (!filter.getMonth().equals("")) satisfied &= month.equals(filter.getMonth());
+			if (!filter.getDay().equals("")) satisfied &= day.equals(filter.getDay());
+			if (!filter.getDeparture().equals("")) satisfied &= dep.contains(filter.getDeparture());
+			if (!filter.getArrival().equals("")) satisfied &= des.contains(filter.getArrival());
+			
+			if (satisfied) fs.add(flight);
+		}
+		
+		return fs;
+	}
 	
-	public void showFilterForm() {}
-	public void receiveFilteredInfo() {}
-	public void showFlights() {}
-	public void loadFlightsFromDB() {}
-	public void showReservationForm() {}
-	public void requestPayment(int price, PaymentAgency agency) {}
-	public void saveFlightsToDB() {}
-	public void showCompleteDialog() {}
+	public static String[][] getFiltFlightsList() {
+		Vector<Flight> fs = getFiltFlights();
+		String[][] list = new String[fs.size()][];
+	    for (int i = 0; i < fs.size(); i++) {
+	        list[i] = fs.get(i).toStrList();
+	    }
+	    return list;
+	}
 }

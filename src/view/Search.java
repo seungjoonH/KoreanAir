@@ -26,11 +26,17 @@ import javax.swing.SpinnerNumberModel;
 import controller.FlightManagementController;
 import main.Main;
 import model.Flight;
+import model.FlightFilter;
 
 public class Search extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
-	private JButton logButton;
+	private JTextField airlineField;
+	private JTextField yearField;
+	private JTextField monthField;
+	private JTextField dayField;
+	private JTextField fromField;
+	private JTextField toField;
 
 	public Search() {
 		JPanel panel = new JPanel();
@@ -43,7 +49,7 @@ public class Search extends JPanel implements ActionListener {
 		JLabel logoLabel = new JLabel(new ImageIcon(resizedImage));
 
 		JPanel appbarPanel = new JPanel(new BorderLayout());
-		logButton = new JButton(Main.isLogged() ? "로그아웃" : "로그인");
+		JButton logButton = new JButton(Main.isLogged() ? "로그아웃" : "로그인");
 		logButton.addActionListener(this);
 
 		JPanel backButtonPanel = new JPanel(new BorderLayout());
@@ -55,31 +61,43 @@ public class Search extends JPanel implements ActionListener {
 		appbarPanel.add(logoLabel, BorderLayout.CENTER);
 		appbarPanel.add(logButton, BorderLayout.EAST);
 
-		JPanel codePanel = new JPanel();
-		codePanel.setLayout(new BoxLayout(codePanel, BoxLayout.X_AXIS));
-
-		JLabel codeLabel = new JLabel("항공편 코드:");
-		JTextField codeField = new JTextField(10);
-		codePanel.add(codeLabel);
-		codePanel.add(codeField);
-
 		JPanel airlinePanel = new JPanel();
 		airlinePanel.setLayout(new BoxLayout(airlinePanel, BoxLayout.X_AXIS));
 
 		JLabel airlineLabel = new JLabel("항공사:");
-		JTextField airlineField = new JTextField(10);
+		airlineField = new JTextField(10);
 		airlinePanel.add(airlineLabel);
 		airlinePanel.add(airlineField);
 
-		JPanel planePanel = new JPanel(new GridLayout(2, 1));
-		planePanel.add(codePanel);
-		planePanel.add(airlinePanel);
+		JPanel depPanel = new JPanel();
+		depPanel.setLayout(new BoxLayout(depPanel, BoxLayout.X_AXIS));
+
+		JLabel depLabel = new JLabel("출발일:");
+		depPanel.add(depLabel);
+
+		yearField = new JTextField(4);
+		JLabel yearLabel = new JLabel("년");
+		monthField = new JTextField(2);
+		JLabel monthLabel = new JLabel("월");
+		dayField = new JTextField(2);
+		JLabel dayLabel = new JLabel("일");
+
+		depPanel.add(yearField);
+		depPanel.add(yearLabel);
+		depPanel.add(monthField);
+		depPanel.add(monthLabel);
+		depPanel.add(dayField);
+		depPanel.add(dayLabel);
+
+		JPanel firstPanel = new JPanel(new GridLayout(2, 1));
+		firstPanel.add(airlinePanel);
+		firstPanel.add(depPanel);
 		
 		JPanel fromPanel = new JPanel();
 		fromPanel.setLayout(new BoxLayout(fromPanel, BoxLayout.X_AXIS));
 
 		JLabel fromLabel = new JLabel("출발지:");
-		JTextField fromField = new JTextField(10);
+		fromField = new JTextField(10);
 		fromPanel.add(fromLabel);
 		fromPanel.add(fromField);
 
@@ -87,34 +105,13 @@ public class Search extends JPanel implements ActionListener {
 		toPanel.setLayout(new BoxLayout(toPanel, BoxLayout.X_AXIS));
 
 		JLabel toLabel = new JLabel("도착지:");
-		JTextField toField = new JTextField(10);
+		toField = new JTextField(10);
 		toPanel.add(toLabel);
 		toPanel.add(toField);
 
-		JPanel airportPanel = new JPanel(new GridLayout(2, 1));
-		airportPanel.add(fromPanel);
-		airportPanel.add(toPanel);
-
-		JPanel depPanel = new JPanel();
-		depPanel.setLayout(new BoxLayout(depPanel, BoxLayout.X_AXIS));
-
-		JLabel depLabel = new JLabel("출발일:");
-		JTextField depField = new JTextField(10);
-		depPanel.add(depLabel);
-		depPanel.add(depField);
-
-		JPanel arrPanel = new JPanel();
-		arrPanel.setLayout(new BoxLayout(arrPanel, BoxLayout.X_AXIS));
-
-		JLabel arrLabel = new JLabel("도착시각:");
-		JTextField arrField = new JTextField(10);
-		arrPanel.add(arrLabel);
-		arrPanel.add(arrField);
-
-		JPanel timePanel = new JPanel(new GridLayout(2, 1));
-
-		timePanel.add(depPanel);
-		timePanel.add(arrPanel);
+		JPanel secondPanel = new JPanel(new GridLayout(2, 1));
+		secondPanel.add(fromPanel);
+		secondPanel.add(toPanel);
 
 		JPanel passengerPanel = new JPanel();
 		passengerPanel.setLayout(new BoxLayout(passengerPanel, BoxLayout.X_AXIS));
@@ -135,20 +132,18 @@ public class Search extends JPanel implements ActionListener {
 		classPanel.add(classLabel);
 		classPanel.add(seatCombo);
 
-		JPanel pcPanel = new JPanel(new GridLayout(2, 1));
-		pcPanel.add(passengerPanel);
-		pcPanel.add(classPanel);
+		JPanel thirdPanel = new JPanel(new GridLayout(2, 1));
+		thirdPanel.add(passengerPanel);
+		thirdPanel.add(classPanel);
 
-//        JPanel buttonPanel = new JPanel();
 		JButton submitButton = new JButton("검색");
-//        buttonPanel.add(submitButton);
+		submitButton.addActionListener(this);
 
 		JPanel searchPanel = new JPanel(new GridLayout(1, 3, 10, 0));
 
-		searchPanel.add(planePanel);
-		searchPanel.add(airportPanel);
-		searchPanel.add(timePanel);
-		searchPanel.add(pcPanel);
+		searchPanel.add(firstPanel);
+		searchPanel.add(secondPanel);
+		searchPanel.add(thirdPanel);
 
 		JPanel searchBarPanel = new JPanel();
 		searchBarPanel.setLayout(new BoxLayout(searchBarPanel, BoxLayout.X_AXIS));
@@ -161,7 +156,12 @@ public class Search extends JPanel implements ActionListener {
 
 		String[] columnNames = { "코드", "항공사", "출발지", "도착지", "출발시각", "도착시각" };
 
-		String[][] data = FlightManagementController.getFlightsList();
+		String[][] data;
+		
+		FlightFilter filter = FlightManagementController.getFilter();
+		if (filter == null) data = FlightManagementController.getFlightsList();
+		else data = FlightManagementController.getFiltFlightsList();
+		
 		JTable table = new JTable(data, columnNames);
 		
 		table.addMouseListener(new MouseAdapter() {
@@ -186,6 +186,19 @@ public class Search extends JPanel implements ActionListener {
 
 		add(panel);
 	}
+	
+	public void filt() {
+		FlightFilter filter = new FlightFilter();
+		
+		filter.setAirlineName(airlineField.getText());
+		filter.setYear(yearField.getText());
+		filter.setMonth(monthField.getText());
+		filter.setDay(dayField.getText());
+		filter.setDeparture(fromField.getText());
+		filter.setArrival(toField.getText());
+		
+		FlightManagementController.setFilter(filter);
+	}
 
 	public void logout() { Main.setUser(null); }
 
@@ -194,5 +207,6 @@ public class Search extends JPanel implements ActionListener {
 		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Home());
 		else if (e.getActionCommand().equals("로그인")) Main.gotoPage(new Login());
 		else if (e.getActionCommand().equals("로그아웃")) { logout(); Main.gotoPage(new Search()); }
+		else if (e.getActionCommand().equals("검색")) { filt(); Main.gotoPage(new Search()); }
 	}
 }

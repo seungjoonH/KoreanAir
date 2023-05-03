@@ -208,7 +208,7 @@ public class MyInfo extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Home());
+		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new My());
 		else if (e.getActionCommand().equals("저장") && submit()) {
 			UserManagementController.updateUser(changed);
 		}

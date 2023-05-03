@@ -1,24 +1,32 @@
 package model;
 
-import java.time.LocalDateTime;
-
 public class FlightFilter {
 	private String airlineName;
-	private Airport departure;
-	private Airport destination;
-	private LocalDateTime departureTime;
-	private LocalDateTime arrivalTime;
-	
+	private String year;
+	private String month;
+	private String day;
+	private String departure;
+	private String arrival;
+	private int remain;
+	private String seatClass;
+
 	public String getAirlineName() { return airlineName; }
-	public Airport getDeparture() { return departure; }
-	public Airport getDestination() { return destination; }
-	public LocalDateTime getDepartureTime() { return departureTime; }
-	public LocalDateTime getArrivalTime() { return arrivalTime; }
+	public String getYear() { return year; }
+	public String getMonth() { return month; }
+	public String getDay() { return day; }
+	public String getDeparture() { return departure; }
+	public String getArrival() { return arrival; }
+	public int getRemain() { return remain; }
+	public String getSeatClass() { return seatClass; }
+	
 	public void setAirlineName(String airlineName) { this.airlineName = airlineName; }
-	public void setDeparture(Airport departure) { this.departure = departure; }
-	public void setDestination(Airport destination) { this.destination = destination; }
-	public void setDepartureTime(LocalDateTime departureTime) { this.departureTime = departureTime; }
-	public void setArrivalTime(LocalDateTime arrivalTime) { this.arrivalTime = arrivalTime; } 
+	public void setYear(String year) { this.year = year; }
+	public void setMonth(String month) { this.month = month; }
+	public void setDay(String day) { this.day = day; }
+	public void setDeparture(String departure) { this.departure = departure; }
+	public void setArrival(String arrival) { this.arrival = arrival; }
+	public void setRemain(int remain) { this.remain = remain; }
+	public void setSeatClass(String seatClass) { this.seatClass = seatClass; }
 	
 	public String getQuery() { return ""; }
 }

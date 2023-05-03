@@ -20,4 +20,9 @@ public class Airport {
 	public void setCode(String code) { this.code = code; }
 	public void setCountry(String country) { this.country = country; }
 	public void setCity(String city) { this.city = city; }
+	
+	@Override
+	public String toString() {
+		return code + " " + country + " " + city;
+	}
 }

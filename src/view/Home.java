@@ -24,7 +24,7 @@ public class Home extends JPanel implements ActionListener {
 		setLayout(null);
 		
 		JLabel backImage;
-		ImageIcon back= new ImageIcon("./asset/background.png");
+		ImageIcon back = new ImageIcon("./asset/background.png");
 		Image backImg = back.getImage().getScaledInstance(Main.WIDTH, Main.HEIGHT, Image.SCALE_DEFAULT);
 		backImage = new JLabel(new ImageIcon(backImg));
 		backImage.setLocation(0,60);
@@ -82,7 +82,7 @@ public class Home extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("로그인")) Main.gotoPage(new Login());
 		else if (e.getActionCommand().equals("로그아웃")) { logout(); Main.gotoPage(new Home()); }
-		else if(e.getSource()==searchButton) {Main.gotoPage(new Search());}
+		else if(e.getSource()==searchButton) { Main.gotoPage(new Search()); }
 		else if(e.getSource()==myButton) {
 			if (Main.isLogged())
 				Main.gotoPage(new My());
