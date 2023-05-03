@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,9 +35,17 @@ public class Login extends JPanel implements ActionListener {
 
 		idField = new JTextField(20);
 		passwordField = new JPasswordField(20);
-
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		JButton loginButton = new JButton("로그인");
 		loginButton.addActionListener(this);
+		JButton registerButton = new JButton("회원가입");
+		registerButton.addActionListener(this);
+		buttonPanel.add(loginButton);
+		buttonPanel.add(registerButton);
+		
+		
 
 		JPanel headPanel = new JPanel(new BorderLayout());
 
@@ -66,7 +75,7 @@ public class Login extends JPanel implements ActionListener {
 		c.gridx = 0; c.gridy = 2;
 		c.gridwidth = 2;
 		c.anchor = GridBagConstraints.CENTER;
-		loginPanel.add(loginButton, c);
+		loginPanel.add(buttonPanel, c);
 
 		panel.setLayout(new BorderLayout());
 		panel.add(headPanel, BorderLayout.NORTH);
@@ -98,6 +107,7 @@ public class Login extends JPanel implements ActionListener {
 
 		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Home());
 		else if (e.getActionCommand().equals("로그인") && login(id, password)) Main.gotoPage(new Home());
+		else if (e.getActionCommand().equals("회원가입")) Main.gotoPage(new Register());
 	}
 
 

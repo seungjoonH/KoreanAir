@@ -17,6 +17,8 @@ public class User {
 	private Sex sex;
 	private LocalDate birth;
 	private String passportNo;
+	private String phone;
+	private String email;
 	private Vector<Ticket> reservations;
 	private int mileagePoint;
 
@@ -28,6 +30,8 @@ public class User {
 	public Sex getSex() { return sex; }
 	public LocalDate getBirth() { return birth; }
 	public String getPassportNo() { return passportNo; }
+	public String getPhone() { return phone; }
+	public String getEmail() { return email; }
 	public Vector<Ticket> getReservations() { return reservations; }
 	public int getMileagePoint() { return mileagePoint; }
 	public void setUid(String uid) { this.uid = uid; }
@@ -37,6 +41,8 @@ public class User {
 	public void setSex(Sex sex) { this.sex = sex; }
 	public void setBirth(LocalDate birth) { this.birth = birth; }
 	public void setPassportNo(String passportNo) { this.passportNo = passportNo; }
+	public void setPhone(String phone) { this.phone = phone; }
+	public void setEmail(String email) { this.email = email; }
 	public void setMileagePoint(int mileagePoint) { this.mileagePoint = mileagePoint; }
 	public void setReservations(Vector<Ticket> reservations) { this.reservations = reservations; }
 	
@@ -50,6 +56,8 @@ public class User {
 			Sex sex, 
 			LocalDate birth, 
 			String passportNo, 
+			String phone, 
+			String email, 
 			int mileagePoint,
 			Vector<Ticket> reservations 
 	) {
@@ -60,6 +68,8 @@ public class User {
 		this.sex = sex;
 		this.birth = birth;
 		this.passportNo = passportNo;
+		this.phone = phone;
+		this.email = email;
 		this.mileagePoint = mileagePoint;
 		this.reservations = reservations;
 	}
@@ -71,9 +81,25 @@ public class User {
 		if (l > c) password = csv[c++];
 		if (l > c) name = csv[c++];
 		if (l > c) sex = sexs[Integer.parseInt(csv[c++])];
-		if (l > c) birth = LocalDate.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy.M.d"));
+		if (l > c) birth = LocalDate.parse(csv[c++], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		if (l > c) passportNo = csv[c++];
+		if (l > c) phone = csv[c++];
+		if (l > c) email = csv[c++];
 		if (l > c) mileagePoint = Integer.parseInt(csv[c++]);
+	}
+	
+	public String toCsv() {
+		String sexStr = "";
+		if (sex == Sex.MALE) sexStr = "0";
+		else if (sex == Sex.FEMALE) sexStr = "1";
+		
+		String[] values = {
+			uid, id, password, name, sexStr, 
+			birth.toString(), passportNo, phone, 
+			email, String.valueOf(mileagePoint) 
+		};
+		
+		return String.join(";", values);
 	}
 	
 	// methods

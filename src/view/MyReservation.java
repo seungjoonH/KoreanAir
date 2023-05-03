@@ -51,6 +51,11 @@ public class MyReservation extends JPanel implements ActionListener {
 	    
 	    JLabel titleLabel = new JLabel("예약 정보", SwingConstants.CENTER);
 	    titleLabel.setFont(titleLabel.getFont().deriveFont(20f));
+	    
+	    JPanel reserveButtonPanel = new JPanel(new BorderLayout());
+	    JButton reserveButton = new JButton("예약	");
+	    reserveButton.addActionListener(this);
+	    reserveButtonPanel.add(reserveButton, BorderLayout.WEST);
 
 	    headPanel.add(backButtonPanel, BorderLayout.WEST);
 	    headPanel.add(titleLabel, BorderLayout.CENTER);
