@@ -35,14 +35,8 @@ public class Search extends JPanel implements ActionListener {
 	public Search() {
 		JPanel panel = new JPanel();
 
-		JLabel profileLabel = new JLabel();
-		
 		JPanel sizedBox = new JPanel();
 		sizedBox.setPreferredSize(new Dimension(10, 0));
-
-
-		if (Main.isLogged()) 
-			profileLabel = new JLabel(Main.getUser().getName() + " 님 환영합니다");
 
 		ImageIcon logo = new ImageIcon("./asset/logo.png");
 		Image resizedImage = logo.getImage().getScaledInstance(200, 25, Image.SCALE_DEFAULT);
@@ -57,8 +51,7 @@ public class Search extends JPanel implements ActionListener {
 		backButton.addActionListener(this);
 		backButtonPanel.add(backButton, BorderLayout.WEST);
 		
-		if (Main.isLogged()) appbarPanel.add(profileLabel, BorderLayout.WEST);
-		else appbarPanel.add(backButtonPanel, BorderLayout.WEST);
+		appbarPanel.add(backButtonPanel, BorderLayout.WEST);
 		appbarPanel.add(logoLabel, BorderLayout.CENTER);
 		appbarPanel.add(logButton, BorderLayout.EAST);
 

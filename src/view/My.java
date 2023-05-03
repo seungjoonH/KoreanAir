@@ -12,10 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Main;
+import model.Flight;
 
 public class My extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private JButton myResButton, myInfoButton ;
+	
 	public My() {
 		setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
 		
@@ -35,13 +36,13 @@ public class My extends JPanel implements ActionListener {
 		logoLabel.setLocation(400,20);
 		logoLabel.setSize(200,25);
 		
-		myResButton = new JButton("예약정보");
+		JButton myResButton = new JButton("예약정보");
 		myResButton.setBounds(400,200,200,100);
 		myResButton.setFocusable(false);
 		myResButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		myResButton.addActionListener(this);
 		
-		myInfoButton = new JButton("회원정보");
+		JButton myInfoButton = new JButton("회원정보");
 		myInfoButton.setBounds(400,350,200,100);
 		myInfoButton.setFocusable(false);
 		myInfoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -55,7 +56,7 @@ public class My extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==myResButton) {Main.gotoPage(new MyReservation(new Flight(null)));}
-		else if(e.getSource()==myInfoButton) {Main.gotoPage(new MyInfo());}
+		if (e.getActionCommand().equals("예약정보")) Main.gotoPage(new MyReservation(new Flight(null)));
+		else if (e.getActionCommand().equals("회원정보")) Main.gotoPage(new MyInfo());
 	}
 }

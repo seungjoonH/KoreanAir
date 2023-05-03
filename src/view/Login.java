@@ -97,7 +97,7 @@ public class Login extends JPanel implements ActionListener {
 		String password = new String(passwordField.getPassword());
 
 		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Home());
-		else if (e.getActionCommand().equals("로그인") && login(id, password)) Main.gotoPage(new Search());
+		else if (e.getActionCommand().equals("로그인") && login(id, password)) Main.gotoPage(new Home());
 	}
 
 

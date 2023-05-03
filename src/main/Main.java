@@ -20,12 +20,16 @@ public class Main {
 	public static JFrame getFrame() { return jframe; }
 	public static void setUser(User user) { loggedUser = user; }
 	public static User getUser() { return loggedUser; }
-	public static boolean isLogged() { return getUser() != null; }
+	public static boolean isLogged() { return loggedUser != null; }
+	public static boolean isAdmin() { 
+		return UserManagementController.isAdmin(loggedUser.getId());
+	}
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		jframe = new JFrame();
 		
 		UserManagementController.loadCustomers();
+		UserManagementController.loadAdminUids();
 		FlightManagementController.loadAirports();
 		FlightManagementController.loadFlights();
 

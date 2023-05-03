@@ -1,13 +1,22 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import main.Main;
+import model.User;
 
 public class MyInfo extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -15,6 +24,26 @@ public class MyInfo extends JPanel implements ActionListener {
 	public MyInfo() {
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+		
+		JPanel appbarPanel = new JPanel(new BorderLayout());
+		
+		ImageIcon logo = new ImageIcon("./asset/logo.png");
+		Image resizedImage = logo.getImage().getScaledInstance(200, 25, Image.SCALE_DEFAULT);
+		JLabel logoLabel = new JLabel(new ImageIcon(resizedImage));
+
+		JPanel backButtonPanel = new JPanel(new BorderLayout());
+		JButton backButton = new JButton("뒤로");
+		backButton.addActionListener(this);
+		backButtonPanel.add(backButton, BorderLayout.WEST);
+		
+		JPanel submitButtonPanel = new JPanel(new BorderLayout());
+		JButton submitButton = new JButton("저장");
+		submitButton.addActionListener(this);
+		submitButtonPanel.add(submitButton, BorderLayout.EAST);
+
+		appbarPanel.add(backButtonPanel, BorderLayout.WEST);
+		appbarPanel.add(logoLabel, BorderLayout.CENTER);
+		appbarPanel.add(submitButton, BorderLayout.EAST);
 		
 		JLabel idLabel = new JLabel("아이디: ");
 		JTextField idTextField = new JTextField(20);
@@ -31,51 +60,49 @@ public class MyInfo extends JPanel implements ActionListener {
 		JLabel mileageLabel = new JLabel("보유 마일리지: ");
 		JTextField mileageTextField = new JTextField(20);
 		
-		String id = "johndoe";
-		String password = "********";
-		String name = "John Doe";
-		String gender = "남성";
-		String birth = "1990년 1월 1일";
-		String passport = "AB123456";
-		String mileage = "10000 마일";
+		User user = Main.getUser();
 		
-		// 가져온 사용자 정보를 UI에 적용
-		idTextField.setText(id);
-		passwordField.setText(password);
-		nameTextField.setText(name);
-		genderTextField.setText(gender);
-		birthTextField.setText(birth);
-		passportTextField.setText(passport);
-		mileageTextField.setText(mileage);
+		idTextField.setText(user.getId());
+		passwordField.setText(user.getPassword());
+		nameTextField.setText(user.getName());
+		genderTextField.setText(user.getSex().name());
+		birthTextField.setText(user.getBirth().toString());
+		passportTextField.setText(user.getPassportNo());
+		mileageTextField.setText(user.getMileagePoint() + "");
 		
-		// 확인 버튼
-		JButton confirmButton = new JButton("확인");
-		confirmButton.addActionListener(this);
 		
-		// JPanel에 UI 구성 요소 추가
-		panel.setLayout(new GridLayout(8, 2));
-		panel.add(idLabel);
-		panel.add(idTextField);
-		panel.add(passwordLabel);
-		panel.add(passwordField);
-		panel.add(nameLabel);
-		panel.add(nameTextField);
-		panel.add(genderLabel);
-		panel.add(genderTextField);
-		panel.add(birthLabel);
-		panel.add(birthTextField);
-		panel.add(passportLabel);
-		panel.add(passportTextField);
-		panel.add(mileageLabel);
-		panel.add(mileageTextField);
-		panel.add(new JLabel());
-		panel.add(confirmButton);
+		JPanel contentPanel = new JPanel();
+		contentPanel.setLayout(new GridLayout(8, 2));
+		
+		contentPanel.add(idLabel);
+		contentPanel.add(idTextField);
+		contentPanel.add(passwordLabel);
+		contentPanel.add(passwordField);
+		contentPanel.add(nameLabel);
+		contentPanel.add(nameTextField);
+		contentPanel.add(genderLabel);
+		contentPanel.add(genderTextField);
+		contentPanel.add(birthLabel);
+		contentPanel.add(birthTextField);
+		contentPanel.add(passportLabel);
+		contentPanel.add(passportTextField);
+		contentPanel.add(mileageLabel);
+		contentPanel.add(mileageTextField);
+		contentPanel.add(new JLabel());
+		
+		JPanel wrapperPanel = new JPanel(new BorderLayout());
+		wrapperPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		wrapperPanel.add(contentPanel, BorderLayout.CENTER);
+		
+		panel.setLayout(new BorderLayout());
+		panel.add(appbarPanel, BorderLayout.NORTH);
+		panel.add(wrapperPanel, BorderLayout.CENTER);
 		
 		add(panel);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO: 사용자 정보 변경 로직 구현
+		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new My());
 	}
 }

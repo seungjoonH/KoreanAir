@@ -4,13 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Vector;
-
-import main.Sex;
-import model.Customer;
-import model.Ticket;
+ 
 import model.User;
 
 public class UserManagementController {
@@ -20,6 +16,7 @@ public class UserManagementController {
 	public static void loadCustomers() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader("database/customers.csv"));
         String line = br.readLine();
+        users = new Vector<User>();
 
         while ((line = br.readLine()) != null) {
             String[] fields = line.split(";");
@@ -28,9 +25,19 @@ public class UserManagementController {
         br.close();
 	}
 	
+	public static void loadAdminUids() throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader("database/admins.csv"));
+        String line = br.readLine();
+        
+        adminUids = new Vector<String>(Arrays.asList(line.split(";")));
+        br.close();
+	}
+
 	public static boolean isMember(String uid) { return getUser(uid) != null; }
 	public static User getUser(String uid) {
-		for (User user : users) { if (user.getUid() == uid) return user; }
+		for (User customer : users) { 
+			if (customer.getUid() == uid) return customer; 
+		}
 		return null; 
 	}
 	public static User getUserById(String id) {
@@ -39,8 +46,7 @@ public class UserManagementController {
 		}
 		return null; 
 	}
-	public void addCustomer(Customer customer) {}
-	public boolean isAdmin(Customer customer) { return false; }
-//	public Vector<Customer> getCustomers(Customer customer) { return new Vector(); }
-//	public Customer addshowReservations(Customer customer) { return new Customer(); }
+	public static boolean isAdmin(String id) {
+		return adminUids.contains(getUserById(id).getUid());
+	}
 }

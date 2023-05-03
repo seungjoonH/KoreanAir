@@ -34,7 +34,9 @@ public class Home extends JPanel implements ActionListener {
 		JLabel profileLabel = new JLabel();
 		
 		if (Main.isLogged()) {
-			profileLabel = new JLabel(Main.getUser().getName() + " 님 환영합니다");
+			profileLabel = new JLabel(Main.getUser().getName() 
+				+ (Main.isAdmin() ? " 관리자" : " ") 
+				+ "님 환영합니다");
 			profileLabel.setLocation(10,20);
 			profileLabel.setSize(150,30);
 		}
