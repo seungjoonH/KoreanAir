@@ -41,7 +41,7 @@ public class Search extends JPanel implements ActionListener {
 		sizedBox.setPreferredSize(new Dimension(10, 0));
 
 
-		if (Main.isLogged())
+		if (Main.isLogged()) 
 			profileLabel = new JLabel(Main.getUser().getName() + " 님 환영합니다");
 
 		ImageIcon logo = new ImageIcon("./asset/logo.png");
@@ -52,9 +52,14 @@ public class Search extends JPanel implements ActionListener {
 		logButton = new JButton(Main.isLogged() ? "로그아웃" : "로그인");
 		logButton.addActionListener(this);
 
-		appbarPanel.add(profileLabel, BorderLayout.WEST);
+		JPanel backButtonPanel = new JPanel(new BorderLayout());
+		JButton backButton = new JButton("뒤로");
+		backButton.addActionListener(this);
+		backButtonPanel.add(backButton, BorderLayout.WEST);
+		
+		if (Main.isLogged()) appbarPanel.add(profileLabel, BorderLayout.WEST);
+		else appbarPanel.add(backButtonPanel, BorderLayout.WEST);
 		appbarPanel.add(logoLabel, BorderLayout.CENTER);
-
 		appbarPanel.add(logButton, BorderLayout.EAST);
 
 		JPanel codePanel = new JPanel();
@@ -193,7 +198,8 @@ public class Search extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("로그인")) Main.gotoPage(new Login());
+		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Home());
+		else if (e.getActionCommand().equals("로그인")) Main.gotoPage(new Login());
 		else if (e.getActionCommand().equals("로그아웃")) { logout(); Main.gotoPage(new Search()); }
 	}
 }

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import controller.FlightManagementController;
 import controller.UserManagementController;
 import model.User;
-import view.MyInfo;
+import view.Home;
 
 public class Main {
 	public static final int WIDTH = 1024;
@@ -30,7 +30,7 @@ public class Main {
 		FlightManagementController.loadFlights();
 
 		// TODO: 여기 바꾸세요
-		gotoPage(new MyInfo());
+		gotoPage(new Home());
 		
 		jframe.setTitle("Korean Air App");
 		jframe.setSize(WIDTH, HEIGHT);
