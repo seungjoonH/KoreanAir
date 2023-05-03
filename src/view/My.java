@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Main;
+import model.Flight;
 
 public class My extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
