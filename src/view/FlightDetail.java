@@ -22,8 +22,11 @@ import model.Flight;
 
 public class FlightDetail extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	private Flight flight;
+	
 				
-	public FlightDetail(Flight flight) {
+	public FlightDetail(Flight selectedFlight) {
+		flight = selectedFlight;
 	    JPanel panel = new JPanel(new BorderLayout());
 	    panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -128,7 +131,7 @@ public class FlightDetail extends JPanel implements ActionListener {
 		String[][] strs = { {
 			"공항", flight.getDeparture().getCity(),
 			"게이트", flight.getDepartureGateNo() + "번",
-			"날짜", DateUtil.onlyDateToString(flight.getDepartureTime()),
+			"날짜", DateUtil.onlyDateToString(flight.getDepartureTime()),	
 			"시간", DateUtil.onlyTimeToString(flight.getDepartureTime())
 		}, {
 			"공항", flight.getDestination().getCity(),
@@ -152,7 +155,6 @@ public class FlightDetail extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("뒤로")) Main.gotoPage(new Search());
+		else if (e.getActionCommand().equals("예약")) Main.gotoPage(new Reservation(flight));
 	}
-	
-	
 }

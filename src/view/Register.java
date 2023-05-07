@@ -47,7 +47,7 @@ public class Register extends JPanel implements ActionListener {
 		JLabel passwordLabel = new JLabel("비밀번호 :");
 		JLabel nameLabel = new JLabel("이름 :");
 		JLabel sexLabel = new JLabel("성별 :");
-		JLabel birthLabel = new JLabel("생년월일(YYYYMMDD) :");
+		JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");
 		JLabel emailLabel = new JLabel("이메일 :");
 		JLabel phoneLabel = new JLabel("휴대폰(- 생략) :");
 		JLabel passportNoLabel = new JLabel("여권번호(영문 1자리 + 숫자 8자리) :");
