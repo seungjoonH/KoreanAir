@@ -3,7 +3,7 @@ package util;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Flight;
+import model.flight.Flight;
 
 public abstract class Filter {
 

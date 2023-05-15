@@ -16,8 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import main.Main;
-import model.LoginState;
-import model.User;
+import model.enums.LoginState;
+import model.user.User;
 import view.listener.Route;
 
 public class LoginPage extends Page implements ActionListener {

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import model.CSVModel;
-import model.Customer;
 
 public abstract class DAO<T extends CSVModel> {
 	private List<T> objs = new ArrayList<>();

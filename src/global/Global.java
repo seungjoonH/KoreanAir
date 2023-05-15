@@ -5,7 +5,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import model.Sex;
+import model.enums.Sex;
 
 public class Global {
 	public static final String appTitle = "Korean Air"; 

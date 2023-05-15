@@ -1,9 +1,10 @@
-package model;
+package model.user;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import global.Global;
+import model.enums.Sex;
 
 public class Customer extends User {
 	protected Sex sex;

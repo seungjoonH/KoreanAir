@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.Admin;
+import model.user.Admin;
 
 public class AdminDAO extends DAO<Admin> {
 	

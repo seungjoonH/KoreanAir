@@ -1,6 +1,6 @@
 package util;
 
-import model.Flight;
+import model.flight.Flight;
 
 import java.time.LocalDateTime;
 import java.util.List;

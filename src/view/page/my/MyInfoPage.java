@@ -5,7 +5,7 @@ import java.io.Serial;
 
 import javax.swing.*;
 
-import model.User;
+import model.user.User;
 import view.page.CustomerInfoPage;
 
 public class MyInfoPage extends CustomerInfoPage implements ActionListener {

@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import model.User;
+import model.user.User;
 import view.listener.Route;
 
 public class LoginButton extends JButton implements ActionListener {

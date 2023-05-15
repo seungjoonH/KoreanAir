@@ -6,9 +6,9 @@ import java.io.Serial;
 import javax.swing.JFrame;
 
 import global.Global;
-import model.Airport;
-import model.Flight;
-import model.User;
+import model.flight.Airport;
+import model.flight.Flight;
+import model.user.User;
 import view.page.HomePage;
 import view.page.Page;
 

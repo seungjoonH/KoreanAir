@@ -1,4 +1,4 @@
-package model;
+package model.flight;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 
 import global.DateUtil;
+import model.CSVModel;
 import model.dao.AirportDAO;
 import model.dao.FlightDAO;
 

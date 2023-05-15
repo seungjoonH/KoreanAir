@@ -1,13 +1,16 @@
-package model;
+package model.user;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import main.Main;
+import model.CSVModel;
 import model.dao.AdminDAO;
 import model.dao.CustomerDAO;
 import model.dao.DAO;
+import model.enums.LoginState;
+import model.enums.RegisterState;
+import model.enums.Sex;
 
 public abstract class User implements CSVModel {
 	private static User logged;
@@ -31,7 +34,7 @@ public abstract class User implements CSVModel {
 		customerDAO.update((Customer) logged);
 	}
 
-	public static LoginState login(String id, String pw) { 
+	public static LoginState login(String id, String pw) {
 		User foundUser = findUser(id);
 		
 		if (foundUser == null) { return LoginState.NO_MEM; }

@@ -1,7 +1,7 @@
 package view.page;
 
-import model.Customer;
-import model.User;
+import model.user.Customer;
+import model.user.User;
 
 import javax.swing.*;
 import java.awt.*;

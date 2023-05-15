@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.Airport;
+import model.flight.Airport;
 
 public class AirportDAO extends DAO<Airport> {
 	private AirportDAO() {}

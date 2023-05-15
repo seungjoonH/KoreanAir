@@ -1,4 +1,4 @@
-package model;
+package model.flight;
 
 public class Seat {
 	int row;

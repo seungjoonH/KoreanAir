@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 import global.Global;
 import main.Main;
-import model.User;
+import model.user.User;
 import view.listener.Route;
 import view.widget.LoginButton;
 import view.widget.ProfileWidget;

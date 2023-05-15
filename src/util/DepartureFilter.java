@@ -1,7 +1,7 @@
 package util;
 
-import model.Airport;
-import model.Flight;
+import model.flight.Airport;
+import model.flight.Flight;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ public class DepartureFilter extends Filter {
 
     protected boolean found(Flight f, String keyword) {
         Airport departure = f.getDeparture();
-        return departure.toString().contains(keyword);
+        return departure.toString().toLowerCase().contains(keyword.toLowerCase());
     }
 }

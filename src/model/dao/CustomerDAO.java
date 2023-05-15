@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.Customer;
+import model.user.Customer;
 
 public class CustomerDAO extends DAO<Customer> {
 	private CustomerDAO() {}

@@ -8,7 +8,7 @@ import java.util.List;
 import javax.swing.JTable;
 
 import main.Main;
-import model.Flight;
+import model.flight.Flight;
 import view.page.FlightDetailPage;
 import view.page.Page;
 

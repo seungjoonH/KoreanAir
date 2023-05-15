@@ -21,7 +21,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-import model.Flight;
+import model.flight.Flight;
 import model.dao.FlightDAO;
 import util.AirlineFilter;
 import util.DateFilter;

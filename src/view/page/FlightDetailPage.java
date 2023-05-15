@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import global.DateUtil;
-import model.Flight;
+import model.flight.Flight;
 
 public class FlightDetailPage extends Page {
 	@Serial
