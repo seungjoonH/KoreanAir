@@ -67,8 +67,8 @@ public class Appbar extends JPanel implements ActionListener {
 	public void displayTitle(String title) { 
 		centerWidget = new JPanel();
 		JLabel titleLabel = new JLabel(title);
-		titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-		centerWidget.add(titleLabel); build(); 
+		titleLabel.setFont(new Font("LucidaGrande", Font.BOLD, 20));
+		centerWidget.add(titleLabel); build();
 	}
 	
 	@Override
