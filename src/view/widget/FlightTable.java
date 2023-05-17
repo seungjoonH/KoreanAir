@@ -7,10 +7,9 @@ import java.util.List;
 
 import javax.swing.JTable;
 
-import main.Main;
 import model.flight.Flight;
 import view.page.FlightDetailPage;
-import view.page.Page;
+import view.page.route.Route;
 
 public class FlightTable extends JTable implements MouseListener {
 	@Serial
@@ -38,10 +37,8 @@ public class FlightTable extends JTable implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2) {
-			Main m = Main.getMain();
-			Page p = m.getCurrentPage();
 			FlightDetailPage.setFlight(flights.get(getSelectedRow()));
-			m.gotoPage(new FlightDetailPage(new BackButton(p), null, true));
+			Route.goTo(new FlightDetailPage(new BackButton(), null, true));
 		}
 	}
 

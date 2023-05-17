@@ -7,8 +7,9 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import model.enums.RegisterState;
+import model.user.Customer;
 import model.user.User;
-import view.listener.Route;
+import view.page.route.Route;
 
 public class RegisterPage extends CustomerInfoPage {
 	@Serial
@@ -38,11 +39,19 @@ public class RegisterPage extends CustomerInfoPage {
 		JOptionPane.showMessageDialog(this, msg);
 	}
 
+	@Override
+	protected void setUser() {
+		String[] csvList = getCSV();
+		csvList[0] = User.getNextUid();
+		csvList[csvList.length - 1] = "0";
+		formedUser = new Customer(csvList);
+	}
+
 	protected void submit() { register(); }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		super.actionPerformed(e);
-		if (state == RegisterState.SUCCESS) Route.getRoute().goBack();
+		if (state == RegisterState.SUCCESS) goBack();
 	}
 }

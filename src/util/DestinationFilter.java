@@ -6,10 +6,12 @@ import model.flight.Flight;
 import java.util.List;
 
 public class DestinationFilter extends Filter {
-    public DestinationFilter(List<Flight> flights) { super(flights); }
+    public DestinationFilter(List<Flight> flights, String keyword) { super(flights, keyword); }
 
-    protected boolean found(Flight f, String keyword) {
-        Airport destination = f.getDeparture();
-        return destination.toString().toLowerCase().contains(keyword.toLowerCase());
+    protected boolean found(Flight f) {
+        Airport destination = f.getDestination();
+        String desString = "";
+        if (destination != null) desString = destination.toString();
+        return desString.toLowerCase().contains(keyword.toLowerCase());
     }
 }

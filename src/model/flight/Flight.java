@@ -8,14 +8,10 @@ import java.util.Vector;
 import global.DateUtil;
 import model.CSVModel;
 import model.dao.AirportDAO;
+import model.dao.AirportDAOFactory;
 import model.dao.FlightDAO;
 
 public class Flight implements CSVModel {
-	private static final FlightDAO flightDAO = FlightDAO.getDAO();
-	private static final AirportDAO airportDAO = AirportDAO.getDAO();
-
-	public static void loadAll() throws IOException { flightDAO.loadCSV(); }
-
 	private String id;
 	private String airlineName;
 	private Airport departure;
@@ -45,8 +41,8 @@ public class Flight implements CSVModel {
 		int l = csvList.length, c = 0;
 		if (l > c && !csvList[c].equals("")) id = csvList[c++];
 		if (l > c && !csvList[c].equals("")) airlineName = csvList[c++];
-		if (l > c && !csvList[c].equals("")) departure = airportDAO.getAirport(csvList[c++]);
-		if (l > c && !csvList[c].equals("")) destination = airportDAO.getAirport(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) departure = AirportDAOFactory.getFactory().getAirport(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) destination = AirportDAOFactory.getFactory().getAirport(csvList[c++]);
 		if (l > c && !csvList[c].equals("")) departureGateNo = Integer.parseInt(csvList[c++]);
 		if (l > c && !csvList[c].equals("")) destinationGateNo = Integer.parseInt(csvList[c++]);
 		if (l > c && !csvList[c].equals("")) departureTime = LocalDateTime.parse(csvList[c++], format);

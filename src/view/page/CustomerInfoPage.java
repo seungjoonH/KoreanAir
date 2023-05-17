@@ -41,7 +41,7 @@ public abstract class CustomerInfoPage extends Page implements ActionListener {
     protected abstract String getSubmitButtonText();
 
     @Override
-    protected void build() {
+    protected final void buildContent() {
         JLabel idLabel = new JLabel("아이디 :");
         JLabel passwordLabel = new JLabel("비밀번호 :");
         JLabel nameLabel = new JLabel("이름 :");
@@ -121,9 +121,9 @@ public abstract class CustomerInfoPage extends Page implements ActionListener {
         return result;
     }
 
-    protected void setUser() {
-        String[] csvList = {
-            User.getNextUid(),
+    protected String[] getCSV() {
+        return new String[] {
+            "",
             idField.getText(),
             passwordField.getText(),
             nameField.getText(),
@@ -132,10 +132,11 @@ public abstract class CustomerInfoPage extends Page implements ActionListener {
             passportNoField.getText(),
             phoneField.getText(),
             emailField.getText(),
-            "0"
+            ""
         };
-        formedUser = new Customer(csvList);
     }
+
+    protected abstract void setUser();
 
     @Override
     public void actionPerformed(ActionEvent e) {

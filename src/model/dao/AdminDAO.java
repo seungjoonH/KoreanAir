@@ -1,14 +1,11 @@
 package model.dao;
 
 import model.user.Admin;
+import model.user.User;
+
+import java.util.List;
 
 public class AdminDAO extends DAO<Admin> {
-	
-	private AdminDAO() {}
-	private static AdminDAO dao = new AdminDAO();
-	
-	public static AdminDAO getDAO() { return dao; }
-
 	@Override
 	protected String getFilepath() { return filepath + "admins.csv"; };
 	

@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DateFilter extends Filter {
-    public DateFilter(List<Flight> flights) { super(flights); }
+    public DateFilter(List<Flight> flights, String keyword) { super(flights, keyword); }
 
-    protected boolean found(Flight f, String keyword) {
+    protected boolean found(Flight f) {
         LocalDateTime date = f.getDepartureTime();
         String year = keyword.substring(0, 4);
         String month = keyword.substring(5, 7);

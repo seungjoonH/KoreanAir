@@ -3,11 +3,6 @@ package model.dao;
 import model.flight.Flight;
 
 public class FlightDAO extends DAO<Flight> {
-	private FlightDAO() {}
-	private static FlightDAO dao = new FlightDAO();
-	
-	public static FlightDAO getDAO() { return dao; }
-
 	@Override
 	protected String getFilepath() { return filepath + "flights.csv"; };
 

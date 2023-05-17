@@ -33,7 +33,7 @@ public class FlightDetailPage extends Page {
     protected String getTitle() { return "항공편 상세보기"; }
 
     @Override
-    protected void build() {
+    protected void buildContent() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 

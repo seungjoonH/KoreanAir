@@ -6,10 +6,6 @@ import model.dao.AirportDAO;
 import java.io.IOException;
 
 public class Airport implements CSVModel {
-
-	private static final AirportDAO airportDAO = AirportDAO.getDAO();
-	public static void loadAll() throws IOException { airportDAO.loadCSV(); }
-
 	String code;
 	String country;
 	String city;

@@ -1,4 +1,4 @@
-package view.page.my;
+package view.page;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import global.Global;
-import main.Main;
-import view.listener.Route;
+import view.Window;
+import view.page.route.Route;
 import view.page.Page;
 
 public class MyPage extends Page {
@@ -27,26 +27,26 @@ public class MyPage extends Page {
 	}
 
 	@Override
-	protected void build() {
+	protected void buildContent() {
 		final int btnW = 200;
 		final int btnH = 100;
 		
-		final int btnPanelW = Main.WIDTH / 2;
+		final int btnPanelW = Window.WIDTH / 2;
 		final int btnPanelH = 100;
-		final int btnPanelLTx = Main.WIDTH / 4;
-		final int btnPanelLTy = Main.HEIGHT / 2 - btnPanelH;
+		final int btnPanelLTx = Window.WIDTH / 4;
+		final int btnPanelLTy = Window.HEIGHT / 2 - btnPanelH;
 		
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		
 		JButton myResButton = new JButton("예약정보");
 		myResButton.setPreferredSize(new Dimension(btnW, btnH));
 		myResButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		myResButton.addActionListener(Route.getRoute());
+		myResButton.addActionListener(new Route());
 		
 		JButton myInfoButton = new JButton("회원정보");
 		myInfoButton.setPreferredSize(new Dimension(btnW, btnH));
 		myInfoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		myInfoButton.addActionListener(Route.getRoute());
+		myInfoButton.addActionListener(new Route());
 		
 		buttonPanel.add(myResButton, BorderLayout.WEST);
 		buttonPanel.add(myInfoButton, BorderLayout.EAST);
@@ -54,7 +54,7 @@ public class MyPage extends Page {
 		buttonPanel.setOpaque(false);
 
 		JLabel backgroundLabel = new JLabel(Global.background);
-		backgroundLabel.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
+		backgroundLabel.setBounds(0, 0, Window.WIDTH, Window.HEIGHT);
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);

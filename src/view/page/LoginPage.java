@@ -15,10 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import main.Main;
 import model.enums.LoginState;
 import model.user.User;
-import view.listener.Route;
+import view.page.route.Route;
 
 public class LoginPage extends Page implements ActionListener {
 	@Serial
@@ -34,7 +33,8 @@ public class LoginPage extends Page implements ActionListener {
 		super(left, right, displayTitle); 
 	}
 	
-	public void build() {
+	@Override
+	protected void buildContent() {
 		JLabel idLabel = new JLabel("아이디:");
 		JLabel passwordLabel = new JLabel("비밀번호:");
 
@@ -44,7 +44,7 @@ public class LoginPage extends Page implements ActionListener {
 		JButton loginButton = new JButton("로그인");
 		loginButton.addActionListener(this);
 		JButton registerButton = new JButton("회원가입");
-		registerButton.addActionListener(Route.getRoute());
+		registerButton.addActionListener(new Route());
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -92,7 +92,7 @@ public class LoginPage extends Page implements ActionListener {
 		};
 		
 		JOptionPane.showMessageDialog(this, msgs[state.ordinal()]);
-		if (state == LoginState.SUCCESS) Main.getMain().gotoPage(new HomePage());
+		if (state == LoginState.SUCCESS) goTo(new HomePage());
 			
 	}
 

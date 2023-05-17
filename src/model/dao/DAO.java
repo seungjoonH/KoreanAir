@@ -19,42 +19,33 @@ public abstract class DAO<T extends CSVModel> {
 	
 	protected abstract T getConstructor(String[] csvList);
 
-	public List<T> getObj() { return objs; }
-	public void loadCSV() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(getFilepath()));
-        String line = br.readLine();
-        objs = new ArrayList<T>();
+	List<T> getObj() { return objs; }
+	void setObj(List<T> objs) { this.objs = objs; }
 
-        while ((line = br.readLine()) != null) {
-            String[] csvList = line.split(";");
-            objs.add(getConstructor(csvList));
-        }
-        br.close();
-	}
-	
-	public void saveCSV() throws IOException {
-		PrintWriter pw = new PrintWriter(new FileWriter(getFilepath()));
-		
-        pw.println(getHeader());
-        for (T obj : objs) pw.println(String.join(";", obj.toCSV()));
+	public void loadCSV() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(getFilepath()));
+			String line = br.readLine();
+			objs = new ArrayList<T>();
 
-        pw.close();
-	}
-	
-	public void add(T obj) {
-		objs.add(obj);
-		try { saveCSV(); } 
+			while ((line = br.readLine()) != null) {
+				String[] csvList = line.split(";");
+				objs.add(getConstructor(csvList));
+			}
+			br.close();
+		}
 		catch (IOException e) { e.printStackTrace(); }
 	}
+	
+	public void saveCSV() {
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(getFilepath()));
 
-	public void update(T obj) {
-		ListIterator<T> iterator = objs.listIterator();
-		while (iterator.hasNext()) {
-			T o = iterator.next();
-			if (o.getKey().equals(obj.getKey())) { iterator.set(obj); break; }
+			pw.println(getHeader());
+			for (T obj : objs) pw.println(String.join(";", obj.toCSV()));
+
+			pw.close();
 		}
-
-		try { saveCSV(); }
 		catch (IOException e) { e.printStackTrace(); }
 	}
 	

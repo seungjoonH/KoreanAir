@@ -1,10 +1,12 @@
-package view.page.my;
+package view.page;
 
 import java.awt.event.ActionListener;
 import java.io.Serial;
 
 import javax.swing.*;
 
+import model.dao.CustomerDAOFactory;
+import model.user.Customer;
 import model.user.User;
 import view.page.CustomerInfoPage;
 
@@ -25,6 +27,7 @@ public class MyInfoPage extends CustomerInfoPage implements ActionListener {
     @Override
     public void setInit() {
         super.setInit();
+        CustomerDAOFactory.getFactory().loadList();
         idField.setText(User.getId());
         passwordField.setText(User.getPassword());
         nameField.setText(User.getName());
@@ -36,11 +39,10 @@ public class MyInfoPage extends CustomerInfoPage implements ActionListener {
     }
 
     protected void setUser() {
-        super.setUser();
-        String[] csvList = formedUser.toCSV();
+        String[] csvList = getCSV();
         csvList[0] = User.getUid();
         csvList[csvList.length - 1] = String.valueOf(User.getMileagePoint());
-        formedUser.fromCSV(csvList);
+        formedUser = new Customer(csvList);
     }
 
     public void submit() {

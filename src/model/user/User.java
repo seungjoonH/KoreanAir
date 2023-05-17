@@ -1,37 +1,36 @@
 package model.user;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 import model.CSVModel;
-import model.dao.AdminDAO;
-import model.dao.CustomerDAO;
-import model.dao.DAO;
+import model.dao.*;
 import model.enums.LoginState;
 import model.enums.RegisterState;
 import model.enums.Sex;
 
 public abstract class User implements CSVModel {
+	/* STATIC */
 	private static User logged;
-	protected static final DAO<Admin> adminDAO = AdminDAO.getDAO();
-	protected static final DAO<Customer> customerDAO = CustomerDAO.getDAO();
-	
-	private String uid;
-	private String id;
-	private String password;
-	private String name;
-	
-	public static void loadAll() throws IOException {
-		adminDAO.loadCSV(); customerDAO.loadCSV();
+
+	public static List<? extends User> getDAOList() {
+		if (isLoggedUserAdmin()) return AdminDAOFactory.getFactory().getList();
+		return CustomerDAOFactory.getFactory().getList();
 	}
 
 	public static boolean isLogged() { return logged != null; }
 	public static boolean isLoggedUserAdmin() { return logged.isAdmin(); }
+	public static void updateLogged() {
+		if (!isLogged()) return;
+		List<? extends User> users = getDAOList();
+		for (User user : users) { if (user.uid.equals(logged.uid)) logged = user; }
+	}
+
 	public static User getUser() { return logged; }
 	public static void setUser(User user) {
 		user.uid = logged.uid; logged = user;
-		customerDAO.update((Customer) logged);
+		if (user.isAdmin()) AdminDAOFactory.getFactory().update((Admin) logged);
+		CustomerDAOFactory.getFactory().update((Customer) logged);
 	}
 
 	public static LoginState login(String id, String pw) {
@@ -49,11 +48,18 @@ public abstract class User implements CSVModel {
 		User foundUser = findUser(newcomer.id);
 		
 		if (foundUser != null) { return RegisterState.DUP_ID; }
-		
-		customerDAO.add((Customer) newcomer);
+
+		CustomerDAOFactory.getFactory().add((Customer) newcomer);
 		
 		return RegisterState.SUCCESS;
 	}
+
+	/* NON-STATIC */
+
+	private String uid;
+	private String id;
+	private String password;
+	private String name;
 
 	public static String getUid() { return logged.uid; }
 	public static String getId() { return logged.id; }
@@ -67,8 +73,8 @@ public abstract class User implements CSVModel {
 	public static int getMileagePoint() { return ((Customer) logged).mileagePoint; }
 
 	private static User findUser(String id) {
-		List<Admin> admins = adminDAO.getObj();
-		List<Customer> customers = customerDAO.getObj();
+		List<Admin> admins = AdminDAOFactory.getFactory().getList();
+		List<Customer> customers = CustomerDAOFactory.getFactory().getList();
 		
 		for (User a : admins) { if (a.id.equals(id)) return (Admin) a; }
 		for (User c : customers) { if (c.id.equals(id)) return (Customer) c; }
@@ -77,7 +83,7 @@ public abstract class User implements CSVModel {
 	}
 	
 	public static String getNextUid() {
-		List<Customer> customers = customerDAO.getObj();
+		List<Customer> customers = CustomerDAOFactory.getFactory().getList();
 		
 		int maxUid = 0;		
 		for (User c : customers) {

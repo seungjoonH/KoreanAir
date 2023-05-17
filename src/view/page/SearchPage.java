@@ -21,13 +21,13 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import model.dao.FlightDAOFactory;
 import model.flight.Flight;
-import model.dao.FlightDAO;
 import util.AirlineFilter;
 import util.DateFilter;
 import util.DepartureFilter;
 import util.DestinationFilter;
-import view.listener.Route;
+import view.page.route.Route;
 import view.widget.FlightTable;
 
 public class SearchPage extends Page implements ActionListener {
@@ -55,7 +55,7 @@ public class SearchPage extends Page implements ActionListener {
 	}
 
 	@Override
-	public void build() {
+	protected void buildContent() {
 		panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
@@ -179,18 +179,16 @@ public class SearchPage extends Page implements ActionListener {
 
 		String date = year + "-" + month + "-" + day;
 
-
-		flights = FlightDAO.getDAO().getObj();
-		flights = new AirlineFilter(flights).search(airlineField.getText());
-		flights = new DepartureFilter(flights).search(fromField.getText());
-		flights = new DestinationFilter(flights).search(toField.getText());
-		flights = new DateFilter(flights).search(date);
+		flights = FlightDAOFactory.getFactory().getList();
+		flights = new AirlineFilter(flights, airlineField.getText()).search();
+		flights = new DepartureFilter(flights, fromField.getText()).search();
+		flights = new DestinationFilter(flights, toField.getText()).search();
+		flights = new DateFilter(flights, date).search();
 	}
 
 	public void search() {
-		Route r = Route.getRoute();
 		buildPanel(false, true);
-		r.refresh();
+		Route.refresh();
 
 		int searched = flights.size();
 		String msg = "총 " + searched + "개의 결과가 검색되었습니다.";

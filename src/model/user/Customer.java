@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import global.Global;
+import model.CSVModel;
 import model.enums.Sex;
 
 public class Customer extends User {
@@ -50,7 +51,7 @@ public class Customer extends User {
 		if (l > c && !csvList[c].equals("")) passportNo = csvList[c++];
 		if (l > c && !csvList[c].equals("")) phone = csvList[c++];
 		if (l > c && !csvList[c].equals("")) email = csvList[c++];
-		if (l > c && !csvList[c].equals("")) mileagePoint = parseMileagePoint(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) mileagePoint = parseMileagePoint(csvList[c]);
 	}
 
 	@Override
