@@ -12,7 +12,9 @@ public abstract class DAOFactory<T extends CSVModel> {
         CustomerDAOFactory.getFactory().loadList();
         AdminDAOFactory.getFactory().loadList();
         AirportDAOFactory.getFactory().loadList();
+        AirplaneDAOFactory.getFactory().loadList();
         FlightDAOFactory.getFactory().loadList();
+        ReservationFactory.getFactory().loadList();
     }
 
     private List<T> list = new ArrayList<>();
@@ -40,4 +42,6 @@ public abstract class DAOFactory<T extends CSVModel> {
     protected DAO<T> getDAO() { return create(); }
 
     protected abstract DAO<T> create();
+
+    public String getLastKey() { return list.get(list.size() - 1).getKey(); }
 }

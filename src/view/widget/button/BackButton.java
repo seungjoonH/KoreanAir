@@ -1,4 +1,4 @@
-package view.widget;
+package view.widget.button;
 
 import javax.swing.JButton;
 

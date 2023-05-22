@@ -1,4 +1,4 @@
-package view.widget;
+package view.widget.widget;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

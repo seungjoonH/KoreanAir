@@ -17,10 +17,19 @@ public class MyInfoPage extends CustomerInfoPage implements ActionListener {
     @Override
     protected String getTitle() { return "내 정보"; }
 
-
+    public MyInfoPage() {
+        super(null, null, true);
+    }
+    public MyInfoPage(JComponent left) {
+        super(left, null, true);
+    }
+    public MyInfoPage(JComponent left, JComponent right) {
+        super(left, right, true);
+    }
     public MyInfoPage(JComponent left, JComponent right, boolean displayTitle) {
         super(left, right, displayTitle);
     }
+
     @Override
     protected String getSubmitButtonText() { return "저장"; }
 
@@ -31,7 +40,7 @@ public class MyInfoPage extends CustomerInfoPage implements ActionListener {
         idField.setText(User.getId());
         passwordField.setText(User.getPassword());
         nameField.setText(User.getName());
-        sexCombo.setSelectedItem(User.getSex());
+        sexCombo.setSelectedIndex(User.getSex().ordinal());
         birthField.setText(User.getBirth().toString());
         emailField.setText(User.getEmail());
         phoneField.setText(User.getPhone());

@@ -21,9 +21,18 @@ public class MyPage extends Page {
 
 	@Override
 	protected String getTitle() { return "마이페이지"; }
-	
+
+	public MyPage() {
+		super(null, null, true);
+	}
+	public MyPage(JComponent left) {
+		super(left, null, true);
+	}
+	public MyPage(JComponent left, JComponent right) {
+		super(left, right, true);
+	}
 	public MyPage(JComponent left, JComponent right, boolean displayTitle) {
-		super(left, right, displayTitle); 
+		super(left, right, displayTitle);
 	}
 
 	@Override

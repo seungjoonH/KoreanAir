@@ -22,11 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import model.dao.FlightDAOFactory;
+import model.flight.Airplane;
 import model.flight.Flight;
-import util.AirlineFilter;
-import util.DateFilter;
-import util.DepartureFilter;
-import util.DestinationFilter;
+import util.*;
 import view.page.route.Route;
 import view.widget.FlightTable;
 
@@ -47,9 +45,20 @@ public class SearchPage extends Page implements ActionListener {
 	private JTextField dayField;
 	private JTextField fromField;
 	private JTextField toField;
+	private JSpinner seatSpinner;
+	private JComboBox<Airplane.SeatClass> seatCombo;
 
 	private List<Flight> flights;
 
+	public SearchPage() {
+		super(null, null, true);
+	}
+	public SearchPage(JComponent left) {
+		super(left, null, true);
+	}
+	public SearchPage(JComponent left, JComponent right) {
+		super(left, right, true);
+	}
 	public SearchPage(JComponent left, JComponent right, boolean displayTitle) {
 		super(left, right, displayTitle);
 	}
@@ -125,31 +134,37 @@ public class SearchPage extends Page implements ActionListener {
 		secondPanel.add(fromPanel);
 		secondPanel.add(toPanel);
 
-		JPanel passengerPanel = new JPanel();
-		passengerPanel.setLayout(new BoxLayout(passengerPanel, BoxLayout.X_AXIS));
+		JPanel seatPanel = new JPanel();
+		seatPanel.setLayout(new BoxLayout(seatPanel, BoxLayout.X_AXIS));
 		JLabel passengerLabel = new JLabel("잔여석:");
 
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
-		JSpinner spinner = new JSpinner(spinnerModel);
-		passengerPanel.add(passengerLabel);
-		passengerPanel.add(spinner);
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
+		seatSpinner = new JSpinner(spinnerModel);
+		seatPanel.add(passengerLabel);
+		seatPanel.add(seatSpinner);
 
 		JPanel classPanel = new JPanel();
 		classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.X_AXIS));
 		JLabel classLabel = new JLabel("좌석등급:");
 
-		String[] seatClasses = { "이코노미", "비지니스", "퍼스트" };
-		DefaultComboBoxModel<String> seatModel = new DefaultComboBoxModel<>(seatClasses);
-		JComboBox<String> seatCombo = new JComboBox<>(seatModel);
+		seatCombo = new JComboBox<>(Airplane.SeatClass.values());
+		seatCombo.setSelectedIndex(Airplane.SeatClass.ECONOMY.ordinal());
 		classPanel.add(classLabel);
 		classPanel.add(seatCombo);
 
 		JPanel thirdPanel = new JPanel(new GridLayout(2, 1));
-		thirdPanel.add(passengerPanel);
+		thirdPanel.add(seatPanel);
 		thirdPanel.add(classPanel);
 
+		JButton clearButton = new JButton("초기화");
+		clearButton.addActionListener(this);
 		JButton submitButton = new JButton("검색");
 		submitButton.addActionListener(this);
+
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+		buttonPanel.add(clearButton);
+		buttonPanel.add(submitButton);
 
 		JPanel searchPanel = new JPanel(new GridLayout(1, 3, 10, 0));
 
@@ -160,7 +175,7 @@ public class SearchPage extends Page implements ActionListener {
 		searchBarPanel = new JPanel();
 		searchBarPanel.setLayout(new BoxLayout(searchBarPanel, BoxLayout.X_AXIS));
 		searchBarPanel.add(searchPanel);
-		searchBarPanel.add(submitButton);
+		searchBarPanel.add(buttonPanel);
 	}
 	private void buildTable() {
 		filterFlights();
@@ -169,23 +184,35 @@ public class SearchPage extends Page implements ActionListener {
 		tablePane = new JScrollPane(table);
 	}
 
-	private void filterFlights() {
+	private String getDateKeyword() {
 		String year = yearField.getText();
 		String month = monthField.getText();
 		String day = dayField.getText();
-		if (year.equals("")) year = "####";
-		if (month.equals("")) month = "##";
-		if (day.equals("")) day = "##";
 
-		String date = year + "-" + month + "-" + day;
+		year = year.equals("") ? "####" : String.format("%04d", Integer.parseInt(year));
+		month = month.equals("") ? "##" : String.format("%02d", Integer.parseInt(month));
+		day = day.equals("") ? "##" : String.format("%02d", Integer.parseInt(day));
 
+		return year + "-" + month + "-" + day;
+	}
+
+	private String getRemainSeatKeyword() {
+		return seatSpinner.getValue() + ";" + seatCombo.getSelectedIndex();
+	}
+
+	private void filterFlights() {
 		flights = FlightDAOFactory.getFactory().getList();
 		flights = new AirlineFilter(flights, airlineField.getText()).search();
 		flights = new DepartureFilter(flights, fromField.getText()).search();
 		flights = new DestinationFilter(flights, toField.getText()).search();
-		flights = new DateFilter(flights, date).search();
+		flights = new DateFilter(flights, getDateKeyword()).search();
+		flights = new RemainSeatFilter(flights, getRemainSeatKeyword()).search();
 	}
 
+	public void clear() {
+		buildPanel(true, false);
+		Route.refresh();
+	}
 	public void search() {
 		buildPanel(false, true);
 		Route.refresh();
@@ -198,6 +225,7 @@ public class SearchPage extends Page implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String c = e.getActionCommand();
-		if (c.equals("검색")) search();
+		if (c.equals("초기화")) clear();
+		else if (c.equals("검색")) search();
 	}
 }

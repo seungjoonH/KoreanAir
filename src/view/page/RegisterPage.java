@@ -6,12 +6,12 @@ import java.io.Serial;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import model.enums.RegisterState;
 import model.user.Customer;
 import model.user.User;
-import view.page.route.Route;
 
 public class RegisterPage extends CustomerInfoPage {
+	public enum RegisterState { DUP_ID, INVLD_IPT, SUCCESS }
+
 	@Serial
 	private static final long serialVersionUID = 1L;
 
@@ -19,16 +19,28 @@ public class RegisterPage extends CustomerInfoPage {
 
 	@Override
 	protected String getTitle() { return "회원가입"; }
-	
+
+	public RegisterPage() {
+		super(null, null, true);
+	}
+	public RegisterPage(JComponent left) {
+		super(left, null, true);
+	}
+	public RegisterPage(JComponent left, JComponent right) {
+		super(left, right, true);
+	}
 	public RegisterPage(JComponent left, JComponent right, boolean displayTitle) {
-		super(left, right, displayTitle); 
+		super(left, right, displayTitle);
 	}
 
 	@Override
 	protected String getSubmitButtonText() { return "회원가입"; }
 
 	public void register() {
-		if (!validateField()) state = RegisterState.INVLD_IPT;
+		if (!validateField()) {
+			state = RegisterState.INVLD_IPT;
+			return;
+		}
 		setUser();
 
 		String msg = "성공적으로 회원가입 되었습니다.";

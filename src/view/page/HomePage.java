@@ -7,17 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serial;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import global.Global;
 import model.user.User;
 import view.Window;
 import view.page.route.Route;
-import view.widget.LoginButton;
-import view.widget.ProfileWidget;
+import view.widget.button.LoginButton;
+import view.widget.widget.ProfileWidget;
 
 public class HomePage extends Page implements ActionListener {
 	@Serial
@@ -25,9 +22,18 @@ public class HomePage extends Page implements ActionListener {
 
 	@Override
 	protected String getTitle() { return "홈"; }
-	
+
 	public HomePage() {
 		super(new ProfileWidget(), new LoginButton(), false);
+	}
+	public HomePage(JComponent left) {
+		super(left, new LoginButton(), false);
+	}
+	public HomePage(JComponent left, JComponent right) {
+		super(left, right, false);
+	}
+	public HomePage(JComponent left, JComponent right, boolean displayTitle) {
+		super(left, right, displayTitle);
 	}
 
 	@Override

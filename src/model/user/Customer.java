@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import global.Global;
-import model.CSVModel;
-import model.enums.Sex;
 
 public class Customer extends User {
+	public enum Sex { MALE, FEMALE }
+
 	protected Sex sex;
 	protected LocalDate birth;
 	protected String passportNo;

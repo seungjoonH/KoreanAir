@@ -1,17 +1,17 @@
 package global;
 
+import model.user.Customer;
+
 import java.awt.Dimension;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import model.enums.Sex;
-
 public class Global {
 	public static final String appTitle = "Korean Air"; 
 	public static final Dimension windowSize = new Dimension(1024, 600);
 	
-	public static Sex[] sexs = { Sex.MALE, Sex.FEMALE };
+	public static Customer.Sex[] sexs = { Customer.Sex.MALE, Customer.Sex.FEMALE };
 	
 	public static ImageIcon logo = new ImageIcon("./asset/logo.png");
 	private static Image backImage = new ImageIcon("./asset/background.png")

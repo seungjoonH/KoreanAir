@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import global.DateUtil;
+import model.flight.Airplane;
 import model.flight.Flight;
 
 public class FlightDetailPage extends Page {
@@ -25,6 +26,12 @@ public class FlightDetailPage extends Page {
 	private static Flight flight;
     public static void setFlight(Flight f) { flight = f; }
 
+    public FlightDetailPage(JComponent left) {
+        super(left, null, true);
+    }
+    public FlightDetailPage(JComponent left, JComponent right) {
+        super(left, right, true);
+    }
     public FlightDetailPage(JComponent left, JComponent right, boolean displayTitle) {
         super(left, right, displayTitle);
     }
@@ -38,14 +45,15 @@ public class FlightDetailPage extends Page {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JPanel sizedBoxW = new JPanel();
-        JPanel sizedBoxH = new JPanel();
         sizedBoxW.setPreferredSize(new Dimension(750, 0));
-        sizedBoxH.setPreferredSize(new Dimension(0, 50));
 
         JPanel flightPanel = new JPanel(new BorderLayout());
         JPanel codePanel = new JPanel(new BorderLayout());
         JPanel airlinePanel = new JPanel(new BorderLayout());
-        JPanel remainPanel = new JPanel(new BorderLayout());
+        JPanel firstPanel = new JPanel(new BorderLayout());
+        JPanel businessPanel = new JPanel(new BorderLayout());
+        JPanel economyPanel = new JPanel(new BorderLayout());
+        JPanel soldOutPanel = new JPanel(new BorderLayout());
 
         JLabel codeLabel1 = buildLabel("항공편 코드", true);
         JLabel codeLabel2 = buildLabel(flight.getId(), false);
@@ -61,21 +69,45 @@ public class FlightDetailPage extends Page {
         airlinePanel.setPreferredSize(new Dimension(170, 50));
         airlinePanel.setBackground(Color.WHITE);
 
-        JLabel remainLabel1 = buildLabel("잔여석", true);
-        JLabel remainLabel2 = buildLabel("1", false);
-        remainPanel.add(remainLabel1, BorderLayout.NORTH);
-        remainPanel.add(remainLabel2, BorderLayout.SOUTH);
-        remainPanel.setPreferredSize(new Dimension(170, 50));
-        remainPanel.setBackground(Color.WHITE);
+        int first = flight.getRemainSeat(Airplane.SeatClass.FIRST);
+        int business = flight.getRemainSeat(Airplane.SeatClass.BUSINESS);
+        int economy = flight.getRemainSeat(Airplane.SeatClass.ECONOMY);
 
-        JPanel flightInfoPanel = new JPanel(new GridLayout(0, 3, 20, 20));
+        JLabel firstLabel1 = buildLabel("잔여석 (퍼스트)", true);
+        JLabel firstLabel2 = buildLabel(String.valueOf(first), false);
+        firstPanel.add(firstLabel1, BorderLayout.NORTH);
+        firstPanel.add(firstLabel2, BorderLayout.SOUTH);
+        firstPanel.setPreferredSize(new Dimension(170, 50));
+        firstPanel.setBackground(Color.WHITE);
 
+        JLabel businessLabel1 = buildLabel("잔여석 (비지니스)", true);
+        JLabel businessLabel2 = buildLabel(String.valueOf(business), false);
+        businessPanel.add(businessLabel1, BorderLayout.NORTH);
+        businessPanel.add(businessLabel2, BorderLayout.SOUTH);
+        businessPanel.setPreferredSize(new Dimension(170, 50));
+        businessPanel.setBackground(Color.WHITE);
+
+        JLabel economyLabel1 = buildLabel("잔여석 (이코노미)", true);
+        JLabel economyLabel2 = buildLabel(String.valueOf(economy), false);
+        economyPanel.add(economyLabel1, BorderLayout.NORTH);
+        economyPanel.add(economyLabel2, BorderLayout.SOUTH);
+        economyPanel.setPreferredSize(new Dimension(170, 50));
+        economyPanel.setBackground(Color.WHITE);
+
+        JLabel soldOutLabel = buildLabel("매진", true);
+        soldOutPanel.add(soldOutLabel, BorderLayout.CENTER);
+        soldOutPanel.setPreferredSize(new Dimension(170, 50));
+        soldOutPanel.setBackground(new Color(255, 115, 115));
+
+        JPanel flightInfoPanel = new JPanel(new GridLayout(0, 5, 20, 20));
 
         flightInfoPanel.add(codePanel);
         flightInfoPanel.add(airlinePanel);
-        flightInfoPanel.add(remainPanel);
+        if (first > 0) flightInfoPanel.add(firstPanel);
+        if (business > 0) flightInfoPanel.add(businessPanel);
+        if (economy > 0) flightInfoPanel.add(economyPanel);
+        if (first + business + economy == 0) flightInfoPanel.add(soldOutPanel);
 
-        flightPanel.add(sizedBoxH, BorderLayout.NORTH);
         flightPanel.add(flightInfoPanel, BorderLayout.WEST);
         flightPanel.add(sizedBoxW, BorderLayout.CENTER);
         flightPanel.add(sizedBoxW, BorderLayout.EAST);

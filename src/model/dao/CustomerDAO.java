@@ -1,10 +1,6 @@
 package model.dao;
 
-import model.user.Admin;
 import model.user.Customer;
-import model.user.User;
-
-import java.util.List;
 
 public class CustomerDAO extends DAO<Customer> {
 	@Override

@@ -11,7 +11,8 @@ public class Airport implements CSVModel {
 	String city;
 
 	public String getCity() { return city; }
-	
+	public String getCountry() { return country; }
+
 	public Airport(String[] csv) { fromCSV(csv); }
 
 	public void fromCSV(String[] csvList) {

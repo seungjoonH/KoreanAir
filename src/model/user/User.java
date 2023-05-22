@@ -5,9 +5,8 @@ import java.util.List;
 
 import model.CSVModel;
 import model.dao.*;
-import model.enums.LoginState;
-import model.enums.RegisterState;
-import model.enums.Sex;
+import view.page.LoginPage;
+import view.page.RegisterPage;
 
 public abstract class User implements CSVModel {
 	/* STATIC */
@@ -33,25 +32,25 @@ public abstract class User implements CSVModel {
 		CustomerDAOFactory.getFactory().update((Customer) logged);
 	}
 
-	public static LoginState login(String id, String pw) {
+	public static LoginPage.LoginState login(String id, String pw) {
 		User foundUser = findUser(id);
 		
-		if (foundUser == null) { return LoginState.NO_MEM; }
-		if (!foundUser.validPassword(pw)) { return LoginState.PW_INCRT; }
+		if (foundUser == null) { return LoginPage.LoginState.NO_MEM; }
+		if (!foundUser.validPassword(pw)) { return LoginPage.LoginState.PW_INCRT; }
 		
 		logged = foundUser;
-		return LoginState.SUCCESS;
+		return LoginPage.LoginState.SUCCESS;
 	}
 	
 	public static void logout() { logged = null; }
-	public static RegisterState register(User newcomer) {
+	public static RegisterPage.RegisterState register(User newcomer) {
 		User foundUser = findUser(newcomer.id);
 		
-		if (foundUser != null) { return RegisterState.DUP_ID; }
+		if (foundUser != null) { return RegisterPage.RegisterState.DUP_ID; }
 
 		CustomerDAOFactory.getFactory().add((Customer) newcomer);
 		
-		return RegisterState.SUCCESS;
+		return RegisterPage.RegisterState.SUCCESS;
 	}
 
 	/* NON-STATIC */
@@ -65,7 +64,7 @@ public abstract class User implements CSVModel {
 	public static String getId() { return logged.id; }
 	public static String getPassword() { return logged.password; }
 	public static String getName() { return logged.name; }
-	public static Sex getSex() { return ((Customer) logged).sex; }
+	public static Customer.Sex getSex() { return ((Customer) logged).sex; }
 	public static LocalDate getBirth() { return ((Customer) logged).birth; }
 	public static String getEmail() { return ((Customer) logged).email; }
 	public static String getPassportNo() { return ((Customer) logged).passportNo; }

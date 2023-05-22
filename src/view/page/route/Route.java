@@ -6,8 +6,10 @@ import java.util.Stack;
 
 import main.Main;
 import view.page.*;
-import view.widget.BackButton;
-import view.widget.LoginButton;
+import view.widget.button.BackButton;
+import view.widget.button.LoginButton;
+
+import javax.swing.*;
 
 public class Route implements ActionListener {
 	private static final Stack<Page> pages = new Stack<>();
@@ -30,14 +32,19 @@ public class Route implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String c = e.getActionCommand();
+		JButton back = new BackButton();
+		JButton login = new LoginButton();
+
 		switch (c) {
 			case "뒤로" -> goBack();
-			case "로그인" -> goTo(new LoginPage(new BackButton(), null, true));
+			case "로그인" -> goTo(new LoginPage(back));
 			case "로그아웃" -> goTo(new HomePage());
-			case "회원가입" -> goTo(new RegisterPage(new BackButton(), null, true));
-			case "마이페이지" -> goTo(new MyPage(new BackButton(), null, true));
-			case "항공편조회" -> goTo(new SearchPage(new BackButton(), new LoginButton(), true));
-			case "회원정보" -> goTo(new MyInfoPage(new BackButton(), null, true));
+			case "회원가입" -> goTo(new RegisterPage(back));
+			case "마이페이지" -> goTo(new MyPage(back));
+			case "항공편조회" -> goTo(new SearchPage(back, login));
+			case "회원정보" -> goTo(new MyInfoPage(back));
+			case "예약" -> goTo(new ReservationPage(back));
+			case "예약정보" -> goTo(new MyReservationPage(back));
 		}
 	}
 }

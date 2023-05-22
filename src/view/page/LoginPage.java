@@ -15,11 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import model.enums.LoginState;
 import model.user.User;
 import view.page.route.Route;
 
 public class LoginPage extends Page implements ActionListener {
+	public enum LoginState { NO_MEM, PW_INCRT, SUCCESS }
+
 	@Serial
 	private static final long serialVersionUID = 1L;
 
@@ -28,9 +29,18 @@ public class LoginPage extends Page implements ActionListener {
 	
 	private JTextField idField;
 	private JTextField pwField;
-	
+
+	public LoginPage() {
+		super(null, null, true);
+	}
+	public LoginPage(JComponent left) {
+		super(left, null, true);
+	}
+	public LoginPage(JComponent left, JComponent right) {
+		super(left, right, true);
+	}
 	public LoginPage(JComponent left, JComponent right, boolean displayTitle) {
-		super(left, right, displayTitle); 
+		super(left, right, displayTitle);
 	}
 	
 	@Override

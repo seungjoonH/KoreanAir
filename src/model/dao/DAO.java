@@ -26,6 +26,12 @@ public abstract class DAO<T extends CSVModel> {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(getFilepath()));
 			String line = br.readLine();
+
+			if (!line.equals(getHeader())) {
+				System.out.println("[ERROR] " + getFilepath() + " file open cannot be finished");
+				System.out.println("Header does not exist!");
+				System.exit(1);
+			}
 			objs = new ArrayList<T>();
 
 			while ((line = br.readLine()) != null) {

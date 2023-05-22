@@ -1,7 +1,6 @@
 package view.page;
 
 import model.user.Customer;
-import model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ public abstract class CustomerInfoPage extends Page implements ActionListener {
     protected JTextField idField;
     protected JTextField passwordField;
     protected JTextField nameField;
-    protected JComboBox<String> sexCombo;
+    protected JComboBox<Customer.Sex> sexCombo;
     protected JTextField birthField;
     protected JTextField emailField;
     protected JTextField phoneField;
@@ -20,8 +19,18 @@ public abstract class CustomerInfoPage extends Page implements ActionListener {
 
     protected JButton submitButton;
 
-
     protected static Customer formedUser;
+
+
+    protected CustomerInfoPage() {
+        super(null, null, true);
+    }
+    protected CustomerInfoPage(JComponent left) {
+        super(left, null, true);
+    }
+    protected CustomerInfoPage(JComponent left, JComponent right) {
+        super(left, right, true);
+    }
     protected CustomerInfoPage(JComponent left, JComponent right, boolean displayTitle) {
         super(left, right, displayTitle);
     }
@@ -31,7 +40,7 @@ public abstract class CustomerInfoPage extends Page implements ActionListener {
         idField = new JTextField(20);
         passwordField = new JPasswordField(20);
         nameField = new JTextField(20);
-        sexCombo = new JComboBox<String>();
+        sexCombo = new JComboBox<>(Customer.Sex.values());
         birthField = new JTextField(20);
         emailField = new JTextField(20);
         phoneField = new JTextField(20);
@@ -65,10 +74,6 @@ public abstract class CustomerInfoPage extends Page implements ActionListener {
         c.gridy = 5; registerPanel.add(emailLabel, c);
         c.gridy = 6; registerPanel.add(phoneLabel, c);
         c.gridy = 7; registerPanel.add(passportNoLabel, c);
-
-        String[] sexs = { "남성", "여성" };
-        DefaultComboBoxModel<String> sexModel = new DefaultComboBoxModel<String>(sexs);
-        sexCombo = new JComboBox<String>(sexModel);
 
         c.gridx = 1; c.anchor = GridBagConstraints.LINE_END;
         c.gridy = 0; registerPanel.add(idField, c);

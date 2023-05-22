@@ -13,8 +13,8 @@ public class AdminDAO extends DAO<Admin> {
 	protected String getHeader() { return "uid;id;password;name"; }; 
 
 	@Override
-	protected Admin getConstructor(String[] fields) {
-		return new Admin(fields);
+	protected Admin getConstructor(String[] csvList) {
+		return new Admin(csvList);
 	}
 
 	@Override

@@ -1,0 +1,11 @@
+model;first;business;economy
+Boeing737;0;40;200
+Boeing747;8;80;330
+Boeing777;16;120;400
+Boeing787;12;90;330
+AirbusA320;0;30;180
+AirbusA330;10;60;250
+AirbusA350;14;100;350
+AirbusA380;12;94;301
+EmbraerE190;0;12;84
+BombardierCRJ900;0;10;76

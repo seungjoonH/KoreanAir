@@ -5,11 +5,14 @@ import java.awt.event.MouseListener;
 import java.io.Serial;
 import java.util.List;
 
-import javax.swing.JTable;
+import javax.swing.*;
 
 import model.flight.Flight;
 import view.page.FlightDetailPage;
+import view.page.ReservationPage;
 import view.page.route.Route;
+import view.widget.button.BackButton;
+import view.widget.button.ReserveButton;
 
 public class FlightTable extends JTable implements MouseListener {
 	@Serial
@@ -37,8 +40,13 @@ public class FlightTable extends JTable implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2) {
-			FlightDetailPage.setFlight(flights.get(getSelectedRow()));
-			Route.goTo(new FlightDetailPage(new BackButton(), null, true));
+			Flight flight = flights.get(getSelectedRow());
+			FlightDetailPage.setFlight(flight);
+			ReservationPage.setFlight(flight);
+
+			JButton reserveButton = new JButton("예약");
+			reserveButton.addActionListener(new Route());
+			Route.goTo(new FlightDetailPage(new BackButton(), new ReserveButton()));
 		}
 	}
 

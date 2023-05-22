@@ -3,13 +3,14 @@ package model.flight;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 import global.DateUtil;
 import model.CSVModel;
-import model.dao.AirportDAO;
-import model.dao.AirportDAOFactory;
-import model.dao.FlightDAO;
+import model.dao.*;
+import model.reservation.Reservation;
 
 public class Flight implements CSVModel {
 	private String id;
@@ -18,10 +19,10 @@ public class Flight implements CSVModel {
 	private Airport destination;
 	private int departureGateNo;
 	private int destinationGateNo;
-	LocalDateTime departureTime;
-	LocalDateTime arrivalTime;
+	private LocalDateTime departureTime;
+	private LocalDateTime arrivalTime;
+	private Airplane airplane;
 
-	private Vector<Seat> seats;
 
 	public String getId() { return id; }
 	public String getAirlineName() { return airlineName; }
@@ -31,6 +32,23 @@ public class Flight implements CSVModel {
 	public int getDestinationGateNo() { return destinationGateNo; }
 	public LocalDateTime getDepartureTime() { return departureTime; }
 	public LocalDateTime getArrivalTime() { return arrivalTime; }
+
+	public List<Reservation> getReservations() {
+		return ReservationFactory.getFactory().getReservationByFlight(id);
+	}
+	public int getRemainSeat(Airplane.SeatClass seatClass) {
+		int seat = airplane.getSeat(seatClass);
+		for (Reservation re : getReservations()) seat -= re.getSeat(seatClass);
+		return seat;
+	}
+
+	public int getAllRemainSeat() {
+		return (
+			getRemainSeat(Airplane.SeatClass.FIRST)
+			+ getRemainSeat(Airplane.SeatClass.BUSINESS)
+			+ getRemainSeat(Airplane.SeatClass.ECONOMY)
+		);
+	}
 	
 	public Flight(String[] csv) { fromCSV(csv); }
 
@@ -46,7 +64,8 @@ public class Flight implements CSVModel {
 		if (l > c && !csvList[c].equals("")) departureGateNo = Integer.parseInt(csvList[c++]);
 		if (l > c && !csvList[c].equals("")) destinationGateNo = Integer.parseInt(csvList[c++]);
 		if (l > c && !csvList[c].equals("")) departureTime = LocalDateTime.parse(csvList[c++], format);
-		if (l > c && !csvList[c].equals("")) arrivalTime = LocalDateTime.parse(csvList[c], format);
+		if (l > c && !csvList[c].equals("")) arrivalTime = LocalDateTime.parse(csvList[c++], format);
+		if (l > c && !csvList[c].equals("")) airplane = AirplaneDAOFactory.getFactory().getAirplane(csvList[c]);
 	}
 
 	@Override
@@ -59,7 +78,8 @@ public class Flight implements CSVModel {
     		String.valueOf(departureGateNo),
     		String.valueOf(destinationGateNo),
     		DateUtil.timeToString(departureTime), 
-    		DateUtil.timeToString(arrivalTime)
+    		DateUtil.timeToString(arrivalTime),
+			airplane.model,
 		}; 
 	}
 	
