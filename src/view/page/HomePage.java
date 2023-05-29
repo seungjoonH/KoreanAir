@@ -47,13 +47,16 @@ public class HomePage extends Page implements ActionListener {
 		final int btnPanelLTy = Window.HEIGHT / 2 - btnPanelH;
 		
 		JPanel buttonPanel = new JPanel(new BorderLayout());
-		
-		JButton searchButton = new JButton("항공편조회");
+
+		String leftText = "항공편조회/" + (User.isLoggedUserAdmin() ? "수정" : "예약");
+		String rightText = User.isLoggedUserAdmin() ? "항공편생성" : "마이페이지";
+
+		JButton searchButton = new JButton(leftText);
 		searchButton.setPreferredSize(new Dimension(btnW, btnH));
 		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		searchButton.addActionListener(new Route());
 		
-		JButton myButton = new JButton("마이페이지");
+		JButton myButton = new JButton(rightText);
 		myButton.setPreferredSize(new Dimension(btnW, btnH));
 		myButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		myButton.addActionListener(User.isLogged() ? new Route() : this);

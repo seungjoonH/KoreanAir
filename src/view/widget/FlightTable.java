@@ -12,7 +12,7 @@ import view.page.FlightDetailPage;
 import view.page.ReservationPage;
 import view.page.route.Route;
 import view.widget.button.BackButton;
-import view.widget.button.ReserveButton;
+import view.widget.button.FlightDetailRightButton;
 
 public class FlightTable extends JTable implements MouseListener {
 	@Serial
@@ -44,9 +44,10 @@ public class FlightTable extends JTable implements MouseListener {
 			FlightDetailPage.setFlight(flight);
 			ReservationPage.setFlight(flight);
 
-			JButton reserveButton = new JButton("예약");
-			reserveButton.addActionListener(new Route());
-			Route.goTo(new FlightDetailPage(new BackButton(), new ReserveButton()));
+			JButton rightButton = new FlightDetailRightButton();
+			Route.goTo(new FlightDetailPage(new BackButton(), rightButton));
+
+
 		}
 	}
 

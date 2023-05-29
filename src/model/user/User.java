@@ -18,7 +18,10 @@ public abstract class User implements CSVModel {
 	}
 
 	public static boolean isLogged() { return logged != null; }
-	public static boolean isLoggedUserAdmin() { return logged.isAdmin(); }
+	public static boolean isLoggedUserAdmin() {
+		if (!isLogged()) return false;
+		return logged.isAdmin();
+	}
 	public static void updateLogged() {
 		if (!isLogged()) return;
 		List<? extends User> users = getDAOList();

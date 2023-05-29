@@ -37,7 +37,7 @@ public class ReservationPage extends Page implements ActionListener, ChangeListe
 
     private PassengerInputForm[] forms;
 
-    private int passengerNumber = 0;
+    private int passengerNumber = 1;
     private int selected = 0;
     private int remain = 0;
 

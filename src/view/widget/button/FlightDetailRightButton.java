@@ -8,12 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serial;
 
-public class ReserveButton extends JButton implements ActionListener {
+public class FlightDetailRightButton extends JButton implements ActionListener {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public ReserveButton() {
-        super("예약");
+    public FlightDetailRightButton() {
+        super(User.isLoggedUserAdmin() ? "수정" : "예약");
         addActionListener(User.isLogged() ? new Route() : this);
     }
 

@@ -41,7 +41,7 @@ public class Route implements ActionListener {
 			case "로그아웃" -> goTo(new HomePage());
 			case "회원가입" -> goTo(new RegisterPage(back));
 			case "마이페이지" -> goTo(new MyPage(back));
-			case "항공편조회" -> goTo(new SearchPage(back, login));
+			case "항공편조회/예약", "항공편조회/수정" -> goTo(new SearchPage(back, login));
 			case "회원정보" -> goTo(new MyInfoPage(back));
 			case "예약" -> goTo(new ReservationPage(back));
 			case "예약정보" -> goTo(new MyReservationPage(back));

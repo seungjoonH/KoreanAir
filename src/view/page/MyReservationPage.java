@@ -45,6 +45,7 @@ public class MyReservationPage extends Page implements ChangeListener {
     protected void setInit() {
         ReservationFactory.getFactory().loadList();
         reservations = ReservationFactory.getFactory().getReservationByUid(User.getUid());
+
         reservationsView = new ArrayList<>();
 
         for (Reservation reservation : reservations) {
@@ -53,7 +54,7 @@ public class MyReservationPage extends Page implements ChangeListener {
             reservationsView.add(panel);
         }
 
-        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, reservations.size() - 1, 1);
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, reservations.size(), 1);
         spinner = new JSpinner(spinnerModel);
         Dimension d = spinner.getPreferredSize(); d.width = 100;
         spinner.setPreferredSize(d);
@@ -90,8 +91,10 @@ public class MyReservationPage extends Page implements ChangeListener {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BorderLayout());
 
-        JPanel spinnerPanel = new JPanel();
+        JPanel spinnerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        spinnerPanel.add(new JLabel("예약번호: "));
         spinnerPanel.add(spinner);
 
         reservationPanel.add(reservationsView.get(index));
@@ -103,9 +106,9 @@ public class MyReservationPage extends Page implements ChangeListener {
 
         userInfoScrollPane.setViewportView(userInfoPanel);
 
-        contentPanel.add(spinnerPanel);
-        contentPanel.add(reservationPanel);
-        contentPanel.add(userInfoScrollPane);
+        contentPanel.add(spinnerPanel, BorderLayout.NORTH);
+        contentPanel.add(reservationPanel, BorderLayout.CENTER);
+        contentPanel.add(userInfoScrollPane, BorderLayout.SOUTH);
 
         panel.add(contentPanel);
 
@@ -131,7 +134,7 @@ public class MyReservationPage extends Page implements ChangeListener {
         JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");
         JLabel ppLabel = new JLabel("여권번호 :");
 
-        c.gridx = 0; c.gridy = 12;
+        c.gridx = 0; c.gridy = 0;
         c.anchor = GridBagConstraints.LINE_START;
         panel.add(userLabel, c); c.gridy++;
         panel.add(nameLabel, c); c.gridy++;
@@ -139,7 +142,7 @@ public class MyReservationPage extends Page implements ChangeListener {
         panel.add(birthLabel, c); c.gridy++;
         panel.add(ppLabel, c);
 
-        c.gridx = 1; c.gridy = 13;
+        c.gridx = 1; c.gridy = 1;
         c.anchor = GridBagConstraints.LINE_END;
         panel.add(forms.get(this.index).get(index).getNameField(), c); c.gridy++;
         c.anchor = GridBagConstraints.LINE_START;
@@ -154,7 +157,7 @@ public class MyReservationPage extends Page implements ChangeListener {
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        index = (int) spinner.getValue();
+        index = (int) spinner.getValue() - 1;
         reservationPanel.removeAll();
         reservationPanel.add(reservationsView.get(index));
         loadPassengerNumber();

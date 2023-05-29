@@ -3,19 +3,22 @@ package view.page;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serial;
+import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import global.Global;
+import model.dao.ReservationFactory;
+import model.reservation.Reservation;
+import model.user.User;
 import view.Window;
 import view.page.route.Route;
 import view.page.Page;
 
-public class MyPage extends Page {
+public class MyPage extends Page implements ActionListener {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
@@ -50,8 +53,13 @@ public class MyPage extends Page {
 		JButton myResButton = new JButton("예약정보");
 		myResButton.setPreferredSize(new Dimension(btnW, btnH));
 		myResButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		myResButton.addActionListener(new Route());
-		
+
+		List<Reservation> reservations = ReservationFactory.getFactory()
+				.getReservationByUid(User.getUid());
+
+		boolean reserved = reservations.size() > 0;
+		myResButton.addActionListener(reserved ? new Route() : this);
+
 		JButton myInfoButton = new JButton("회원정보");
 		myInfoButton.setPreferredSize(new Dimension(btnW, btnH));
 		myInfoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -71,5 +79,16 @@ public class MyPage extends Page {
 		panel.add(backgroundLabel);
 		
 		add(panel);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String c = e.getActionCommand();
+		String msg = null;
+
+		if (c.equals("예약정보")) msg = "예약 정보가 없습니다!\n 먼저 예약해주세요.";
+
+		if (msg == null) return;
+		JOptionPane.showMessageDialog(this, msg);
 	}
 }
