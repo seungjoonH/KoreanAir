@@ -1,5 +1,7 @@
 package view.widget;
 
+import view.Window;
+
 import javax.swing.*;
 import java.awt.*;
 

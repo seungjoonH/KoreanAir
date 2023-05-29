@@ -138,7 +138,7 @@ public class ReservationPage extends Page implements ActionListener, ChangeListe
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JLabel userLabel = new HeaderTypeLabel("고객 정보 #" + (index + 1), true);
+        JLabel userLabel = new HeaderTypeLabel("승객 정보 #" + (index + 1), true);
         JLabel nameLabel = new JLabel("이름 :");
         JLabel sexLabel = new JLabel("성별 :");
         JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");

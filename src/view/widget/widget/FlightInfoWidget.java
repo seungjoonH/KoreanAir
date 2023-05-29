@@ -15,7 +15,9 @@ public class FlightInfoWidget extends JPanel {
         setPreferredSize(new Dimension(view.Window.WIDTH, Window.HEIGHT / 4));
 
         JPanel headPanel = new JPanel();
-        headPanel.add(new HeaderTypeLabel("항공편 정보", true));
+        JLabel headerTypeLabel = new HeaderTypeLabel("항공편 정보", true);
+        headerTypeLabel.setPreferredSize(new Dimension(Window.WIDTH - 40, 30));
+        headPanel.add(headerTypeLabel);
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridBagLayout());

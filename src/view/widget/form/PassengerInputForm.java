@@ -55,7 +55,7 @@ public class PassengerInputForm {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        String title = "고객 정보" + (index < 0 ? " #" + (index + 1) : "");
+        String title = "승객 정보" + (index < 0 ? " #" + (index + 1) : "");
         JLabel userLabel = buildLabel(title, true);
         JLabel nameLabel = new JLabel("이름 :");
         JLabel sexLabel = new JLabel("성별 :");

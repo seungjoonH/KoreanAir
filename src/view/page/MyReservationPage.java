@@ -4,6 +4,7 @@ import model.dao.ReservationFactory;
 import model.reservation.Reservation;
 import model.user.Customer;
 import model.user.User;
+import view.Window;
 import view.page.route.Route;
 import view.widget.HeaderTypeLabel;
 import view.widget.form.PassengerInputForm;
@@ -63,6 +64,10 @@ public class MyReservationPage extends Page implements ChangeListener {
         userInfoPanel = new JPanel();
         forms = new ArrayList<>();
         setForms();
+
+        reservationPanel.removeAll();
+        reservationPanel.add(reservationsView.get(index));
+        loadPassengerNumber();
     }
 
     private void setForms() {
@@ -97,17 +102,16 @@ public class MyReservationPage extends Page implements ChangeListener {
         spinnerPanel.add(new JLabel("예약번호: "));
         spinnerPanel.add(spinner);
 
-        reservationPanel.add(reservationsView.get(index));
+        JPanel reservationInfoPanel = new JPanel(new BorderLayout());
+        reservationInfoPanel.add(new FlightInfoWidget(reservations.get(index).getFlight()), BorderLayout.CENTER);
+        reservationInfoPanel.setPreferredSize(new Dimension(Window.WIDTH - 40, Window.HEIGHT / 3));
 
-        JScrollPane userInfoScrollPane = new JScrollPane();
-        userInfoPanel = new JPanel();
-
-        loadPassengerNumber();
-
-        userInfoScrollPane.setViewportView(userInfoPanel);
+        JPanel userInfoScrollPane = new JPanel(new BorderLayout());
+        userInfoScrollPane.add(new JScrollPane(userInfoPanel), BorderLayout.CENTER);
+        userInfoScrollPane.setPreferredSize(new Dimension(Window.WIDTH - 40, Window.HEIGHT / 2));
 
         contentPanel.add(spinnerPanel, BorderLayout.NORTH);
-        contentPanel.add(reservationPanel, BorderLayout.CENTER);
+        contentPanel.add(reservationInfoPanel, BorderLayout.CENTER);
         contentPanel.add(userInfoScrollPane, BorderLayout.SOUTH);
 
         panel.add(contentPanel);
@@ -119,8 +123,11 @@ public class MyReservationPage extends Page implements ChangeListener {
         userInfoPanel.setLayout(new GridLayout(0, 3));
         userInfoPanel.removeAll();
 
-        for (int i = 0; i < reservations.get(index).getPassengerSize(); i++) {
-            userInfoPanel.add(buildUserInfoPanel(i));
+        int size = reservations.get(index).getPassengerSize();
+
+        for (int i = 0; i < 10; i++) {
+            if (i < size) userInfoPanel.add(buildUserInfoPanel(i));
+            else userInfoPanel.add(new JPanel());
         }
     }
 
@@ -128,7 +135,7 @@ public class MyReservationPage extends Page implements ChangeListener {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JLabel userLabel = new HeaderTypeLabel("고객 정보 #" + (index + 1), true);
+        JLabel userLabel = new HeaderTypeLabel("승객 정보 #" + (index + 1), true);
         JLabel nameLabel = new JLabel("이름 :");
         JLabel sexLabel = new JLabel("성별 :");
         JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");
