@@ -9,10 +9,11 @@ import javax.swing.*;
 
 import model.flight.Flight;
 import view.page.FlightDetailPage;
+import view.page.FlightModifyPage;
 import view.page.ReservationPage;
 import view.page.route.Route;
 import view.widget.button.BackButton;
-import view.widget.button.FlightDetailRightButton;
+import view.widget.widget.FlightDetailRightWidget;
 
 public class FlightTable extends JTable implements MouseListener {
 	@Serial
@@ -42,10 +43,11 @@ public class FlightTable extends JTable implements MouseListener {
 		if (e.getClickCount() == 2) {
 			Flight flight = flights.get(getSelectedRow());
 			FlightDetailPage.setFlight(flight);
+			FlightModifyPage.setFlight(flight);
 			ReservationPage.setFlight(flight);
 
-			JButton rightButton = new FlightDetailRightButton();
-			Route.goTo(new FlightDetailPage(new BackButton(), rightButton));
+			JPanel rightWidget = new FlightDetailRightWidget();
+			Route.goTo(new FlightDetailPage(new BackButton(), rightWidget));
 
 
 		}

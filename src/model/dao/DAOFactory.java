@@ -39,6 +39,14 @@ public abstract class DAOFactory<T extends CSVModel> {
         }
         saveList();
     }
+    public void delete(T obj) {
+        ListIterator<T> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            T o = iterator.next();
+            if (o.getKey().equals(obj.getKey())) { iterator.remove(); break; }
+        }
+        saveList();
+    }
     protected DAO<T> getDAO() { return create(); }
 
     protected abstract DAO<T> create();

@@ -35,8 +35,8 @@ public class Appbar extends JPanel {
 		
 		leftWidget.setLayout(new FlowLayout(FlowLayout.LEFT));
 		rightWidget.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		leftWidget.setPreferredSize(new Dimension(160, 40));
-		rightWidget.setPreferredSize(new Dimension(160, 40));
+		leftWidget.setPreferredSize(new Dimension(180, 30));
+		rightWidget.setPreferredSize(new Dimension(180, 30));
 		
 		Image resizedImage = Global.logo.getImage().getScaledInstance(220, 30, Image.SCALE_DEFAULT);
 		JLabel logoLabel = new JLabel(new ImageIcon(resizedImage));
@@ -44,6 +44,7 @@ public class Appbar extends JPanel {
 	}
 	
 	private void build() {
+		removeAll();
 		add(leftWidget, BorderLayout.WEST);
 		add(centerWidget, BorderLayout.CENTER);
 		add(rightWidget, BorderLayout.EAST);

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public abstract class CustomerInfoPage extends Page implements ActionListener {
+public abstract class CustomerInfoPage extends Page {
     protected JTextField idField;
     protected JTextField passwordField;
     protected JTextField nameField;

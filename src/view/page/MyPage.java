@@ -18,7 +18,7 @@ import view.Window;
 import view.page.route.Route;
 import view.page.Page;
 
-public class MyPage extends Page implements ActionListener {
+public class MyPage extends Page {
 	@Serial
 	private static final long serialVersionUID = 1L;
 

@@ -8,7 +8,7 @@ public class FlightDAO extends DAO<Flight> {
 
 	@Override
 	protected String getHeader() {
-		return "id;airline;depAirp;desAirp;depGateNo;desGateNo;depTime;arrTime;airplane";
+		return "id;airline;depAirp;desAirp;depGateNo;desGateNo;depTime;arrTime;airplane;firstPrice;businessPrice;economyPrice";
 	}
 	
 	@Override

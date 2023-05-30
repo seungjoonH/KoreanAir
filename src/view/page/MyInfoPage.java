@@ -10,7 +10,7 @@ import model.user.Customer;
 import model.user.User;
 import view.page.CustomerInfoPage;
 
-public class MyInfoPage extends CustomerInfoPage implements ActionListener {
+public class MyInfoPage extends CustomerInfoPage {
     @Serial
     private static final long serialVersionUID = 1L;
 

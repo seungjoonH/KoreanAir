@@ -2,16 +2,18 @@ package view.page;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.io.Serial;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import main.Main;
 import view.Window;
 import view.page.route.Route;
 import view.widget.Appbar;
 
-public abstract class Page extends JPanel {
+public abstract class Page extends JPanel implements ActionListener {
 	@Serial
 	private static final long serialVersionUID = 1L;
 	
@@ -27,6 +29,12 @@ public abstract class Page extends JPanel {
 		this.left = left; this.right = right;
 		this.displayTitle = displayTitle;
 		build();
+	}
+
+	public void refresh() {
+		removeAll();
+		build();
+		Main.build();
 	}
 
 	protected final void build() {

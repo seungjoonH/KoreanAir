@@ -22,6 +22,9 @@ public class Flight implements CSVModel {
 	private LocalDateTime departureTime;
 	private LocalDateTime arrivalTime;
 	private Airplane airplane;
+	private int firstPrice;
+	private int businessPrice;
+	private int economyPrice;
 
 
 	public String getId() { return id; }
@@ -32,6 +35,10 @@ public class Flight implements CSVModel {
 	public int getDestinationGateNo() { return destinationGateNo; }
 	public LocalDateTime getDepartureTime() { return departureTime; }
 	public LocalDateTime getArrivalTime() { return arrivalTime; }
+	public Airplane getAirplane() { return airplane; }
+	public int getFirstPrice() { return firstPrice; }
+	public int getBusinessPrice() { return businessPrice; }
+	public int getEconomyPrice() { return economyPrice; }
 
 	public List<Reservation> getReservations() {
 		return ReservationFactory.getFactory().getReservationByFlight(id);
@@ -54,8 +61,6 @@ public class Flight implements CSVModel {
 
 	@Override
 	public void fromCSV(String[] csvList) {
-		final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy.M.d HH:mm");
-		
 		int l = csvList.length, c = 0;
 		if (l > c && !csvList[c].equals("")) id = csvList[c++];
 		if (l > c && !csvList[c].equals("")) airlineName = csvList[c++];
@@ -63,9 +68,12 @@ public class Flight implements CSVModel {
 		if (l > c && !csvList[c].equals("")) destination = AirportDAOFactory.getFactory().getAirport(csvList[c++]);
 		if (l > c && !csvList[c].equals("")) departureGateNo = Integer.parseInt(csvList[c++]);
 		if (l > c && !csvList[c].equals("")) destinationGateNo = Integer.parseInt(csvList[c++]);
-		if (l > c && !csvList[c].equals("")) departureTime = LocalDateTime.parse(csvList[c++], format);
-		if (l > c && !csvList[c].equals("")) arrivalTime = LocalDateTime.parse(csvList[c++], format);
-		if (l > c && !csvList[c].equals("")) airplane = AirplaneDAOFactory.getFactory().getAirplane(csvList[c]);
+		if (l > c && !csvList[c].equals("")) departureTime = DateUtil.stringToTime(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) arrivalTime = DateUtil.stringToTime(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) airplane = AirplaneDAOFactory.getFactory().getAirplane(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) firstPrice = Integer.parseInt(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) businessPrice = Integer.parseInt(csvList[c++]);
+		if (l > c && !csvList[c].equals("")) economyPrice = Integer.parseInt(csvList[c]);
 	}
 
 	@Override
@@ -79,8 +87,10 @@ public class Flight implements CSVModel {
     		String.valueOf(destinationGateNo),
     		DateUtil.timeToString(departureTime), 
     		DateUtil.timeToString(arrivalTime),
-			airplane.model,
-		}; 
+			String.valueOf(firstPrice),
+			String.valueOf(businessPrice),
+			String.valueOf(economyPrice),
+		};
 	}
 	
 	public String[] toTableFormattedString() {

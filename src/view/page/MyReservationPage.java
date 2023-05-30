@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,4 +171,7 @@ public class MyReservationPage extends Page implements ChangeListener {
         loadPassengerNumber();
         Route.refresh();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {}
 }

@@ -16,7 +16,7 @@ import view.page.route.Route;
 import view.widget.button.LoginButton;
 import view.widget.widget.ProfileWidget;
 
-public class HomePage extends Page implements ActionListener {
+public class HomePage extends Page {
 	@Serial
 	private static final long serialVersionUID = 1L;
 

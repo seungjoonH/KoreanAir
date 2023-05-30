@@ -16,13 +16,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationPage extends Page implements ActionListener, ChangeListener {
+public class ReservationPage extends Page implements ChangeListener {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -109,15 +108,15 @@ public class ReservationPage extends Page implements ActionListener, ChangeListe
         passengerPanel.add(new JLabel("인원 수:"));
         passengerPanel.add(numberOfPassengersSpinner);
 
-        JButton reservationButton = new JButton("예약");
-        reservationButton.addActionListener(this);
+        JButton paymentButton = new JButton("결제");
+        paymentButton.addActionListener(new Route());
 
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
 
         controlPanel.add(seatPanel);
         controlPanel.add(passengerPanel);
-        controlPanel.add(reservationButton);
+        controlPanel.add(paymentButton);
 
         JScrollPane userInfoScrollPane = new JScrollPane();
         userInfoPanel = new JPanel();

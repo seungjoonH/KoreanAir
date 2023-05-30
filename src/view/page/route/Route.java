@@ -36,7 +36,7 @@ public class Route implements ActionListener {
 		JButton login = new LoginButton();
 
 		switch (c) {
-			case "뒤로" -> goBack();
+			case "뒤로" -> { goBack(); Route.getThisPage().refresh(); }
 			case "로그인" -> goTo(new LoginPage(back));
 			case "로그아웃" -> goTo(new HomePage());
 			case "회원가입" -> goTo(new RegisterPage(back));
@@ -45,6 +45,9 @@ public class Route implements ActionListener {
 			case "회원정보" -> goTo(new MyInfoPage(back));
 			case "예약" -> goTo(new ReservationPage(back));
 			case "예약정보" -> goTo(new MyReservationPage(back));
+			case "항공편생성" -> goTo(new FlightCreatePage(back));
+			case "수정" -> goTo(new FlightModifyPage(back));
+			case "결제" -> goTo(new PaymentPage(back));
 		}
 	}
 }

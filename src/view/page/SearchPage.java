@@ -28,7 +28,7 @@ import util.*;
 import view.page.route.Route;
 import view.widget.FlightTable;
 
-public class SearchPage extends Page implements ActionListener {
+public class SearchPage extends Page {
 	@Serial
 	private static final long serialVersionUID = 1L;
 

@@ -6,18 +6,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serial;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import global.DateUtil;
+import model.dao.FlightDAOFactory;
+import model.dao.ReservationFactory;
 import model.flight.Airplane;
 import model.flight.Flight;
+import model.user.User;
+import view.page.route.Route;
 
 public class FlightDetailPage extends Page {
 	@Serial
@@ -25,6 +26,15 @@ public class FlightDetailPage extends Page {
     
 	private static Flight flight;
     public static void setFlight(Flight f) { flight = f; }
+
+    public static boolean delete() {
+        boolean reserved = ReservationFactory.getFactory().getReservationByFlight(flight.getKey()).size() > 0;
+        if (reserved) return false;
+        FlightDAOFactory.getFactory().delete(flight);
+        Route.goBack();
+        Route.getThisPage().refresh();
+        return true;
+    }
 
     public FlightDetailPage(JComponent left) {
         super(left, null, true);
@@ -162,4 +172,7 @@ public class FlightDetailPage extends Page {
 
         return panel;
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {}
 }

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import model.user.User;
 import view.page.route.Route;
 
-public class LoginPage extends Page implements ActionListener {
+public class LoginPage extends Page {
 	public enum LoginState { NO_MEM, PW_INCRT, SUCCESS }
 
 	@Serial
