@@ -13,8 +13,9 @@ public class Customer extends User {
 	protected String passportNo;
 	protected String phone;
 	protected String email;
-//	private Vector<Ticket> reservations;
 	protected int mileagePoint;
+
+	public int getPoint() { return mileagePoint; }
 
 	public Customer(String[] csv) {
 		super(csv);

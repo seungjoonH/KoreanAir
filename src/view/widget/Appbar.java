@@ -50,8 +50,12 @@ public class Appbar extends JPanel {
 		add(rightWidget, BorderLayout.EAST);
 	}
 	
-	public void setLeftWidget(JComponent widget) { leftWidget.add(widget); build(); }
-	public void setRightWidget(JComponent widget) { rightWidget.add(widget); build(); }
+	public void setLeftWidget(JComponent widget) {
+		leftWidget.removeAll(); leftWidget.add(widget); build();
+	}
+	public void setRightWidget(JComponent widget) {
+		rightWidget.removeAll(); rightWidget.add(widget); build();
+	}
 	public void displayTitle(String title) { 
 		centerWidget = new JPanel();
 		JLabel titleLabel = new JLabel(title);

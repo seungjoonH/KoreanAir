@@ -8,6 +8,7 @@ import model.user.Customer;
 import model.user.User;
 import view.page.route.Route;
 import view.widget.HeaderTypeLabel;
+import view.widget.button.BackButton;
 import view.widget.form.PassengerInputForm;
 import view.widget.widget.FlightInfoWidget;
 
@@ -110,6 +111,7 @@ public class ReservationPage extends Page implements ChangeListener {
 
         JButton paymentButton = new JButton("결제");
         paymentButton.addActionListener(new Route());
+        paymentButton.addActionListener(this);
 
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
@@ -205,7 +207,13 @@ public class ReservationPage extends Page implements ChangeListener {
         };
 
         Reservation reservation = new Reservation(csvList);
-        ReservationFactory.getFactory().add(reservation);
+
+        if (reservation.getRemainSeat() < passengerNumber) {
+            JOptionPane.showMessageDialog(this, "좌석이 부족합니다");
+            return;
+        }
+        PaymentPage.setReservation(reservation);
+        Route.goTo(new PaymentPage(new BackButton()));
     }
 
     @Override
@@ -218,12 +226,7 @@ public class ReservationPage extends Page implements ChangeListener {
             remainingSeatsLabel.setText(String.valueOf(remain));
             Route.refresh();
         }
-        else if (c.equals("예약")) {
-            reserve();
-            String msg = "예약이 완료되었습니다";
-            JOptionPane.showMessageDialog(this, msg);
-            Route.goBack();
-        }
+        else if (c.equals("결제")) { reserve(); }
     }
 
     @Override

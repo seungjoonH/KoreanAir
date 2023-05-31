@@ -5,7 +5,6 @@ import model.user.Customer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public abstract class CustomerInfoPage extends Page {
     protected JTextField idField;
@@ -49,6 +48,9 @@ public abstract class CustomerInfoPage extends Page {
 
     protected abstract String getSubmitButtonText();
 
+    protected JLabel buildMileageTextLabel() { return null; }
+    protected JTextField buildMileageField() { return null; }
+
     @Override
     protected final void buildContent() {
         JLabel idLabel = new JLabel("아이디 :");
@@ -74,6 +76,7 @@ public abstract class CustomerInfoPage extends Page {
         c.gridy = 5; registerPanel.add(emailLabel, c);
         c.gridy = 6; registerPanel.add(phoneLabel, c);
         c.gridy = 7; registerPanel.add(passportNoLabel, c);
+        c.gridy = 8; registerPanel.add(buildMileageTextLabel(), c);
 
         c.gridx = 1; c.anchor = GridBagConstraints.LINE_END;
         c.gridy = 0; registerPanel.add(idField, c);
@@ -86,10 +89,11 @@ public abstract class CustomerInfoPage extends Page {
         c.gridy = 5; registerPanel.add(emailField, c);
         c.gridy = 6; registerPanel.add(phoneField, c);
         c.gridy = 7; registerPanel.add(passportNoField, c);
+        c.gridy = 8; registerPanel.add(buildMileageField(), c);
 
         c.gridx = 0; c.gridwidth = 2;
         c.anchor = GridBagConstraints.CENTER;
-        c.gridy = 8; registerPanel.add(submitButton, c);
+        c.gridy = 9; registerPanel.add(submitButton, c);
 
         add(registerPanel, BorderLayout.CENTER);
     }

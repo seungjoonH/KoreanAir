@@ -102,7 +102,7 @@ public class LoginPage extends Page {
 		};
 		
 		JOptionPane.showMessageDialog(this, msgs[state.ordinal()]);
-		if (state == LoginState.SUCCESS) goTo(new HomePage());
+		if (state == LoginState.SUCCESS) Route.goHome();
 			
 	}
 

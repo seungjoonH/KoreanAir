@@ -12,10 +12,14 @@ import view.widget.button.LoginButton;
 import javax.swing.*;
 
 public class Route implements ActionListener {
-	private static final Stack<Page> pages = new Stack<>();
+	private static Stack<Page> pages = new Stack<>();
 
 	public static void push(Page page) { pages.push(page); }
 
+	public static void goHome() {
+		pages = new Stack<>();
+		goTo(new HomePage());
+	}
 	public static void goBack() {
 		pages.pop(); Main.build();
 	}
@@ -38,7 +42,7 @@ public class Route implements ActionListener {
 		switch (c) {
 			case "뒤로" -> { goBack(); Route.getThisPage().refresh(); }
 			case "로그인" -> goTo(new LoginPage(back));
-			case "로그아웃" -> goTo(new HomePage());
+			case "로그아웃" -> goHome();
 			case "회원가입" -> goTo(new RegisterPage(back));
 			case "마이페이지" -> goTo(new MyPage(back));
 			case "항공편조회/예약", "항공편조회/수정" -> goTo(new SearchPage(back, login));
@@ -47,7 +51,6 @@ public class Route implements ActionListener {
 			case "예약정보" -> goTo(new MyReservationPage(back));
 			case "항공편생성" -> goTo(new FlightCreatePage(back));
 			case "수정" -> goTo(new FlightModifyPage(back));
-			case "결제" -> goTo(new PaymentPage(back));
 		}
 	}
 }

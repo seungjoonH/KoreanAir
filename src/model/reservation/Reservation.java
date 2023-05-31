@@ -38,12 +38,25 @@ public class Reservation implements CSVModel {
     @Override
     public String getKey() { return id; }
 
+    public int getSeat() { return getSeat(getSeatClass()); }
+
     public int getSeat(Airplane.SeatClass seatClass) {
         return switch (seatClass) {
             case FIRST -> first;
             case BUSINESS -> business;
             case ECONOMY -> economy;
         };
+    }
+
+    public int getRemainSeat() {
+        return getFlight().getRemainSeat(getSeatClass());
+    }
+
+    public Airplane.SeatClass getSeatClass() {
+        Airplane.SeatClass seatClass = Airplane.SeatClass.ECONOMY;
+        if (first > 0) seatClass = Airplane.SeatClass.FIRST;
+        if (business > 0) seatClass = Airplane.SeatClass.BUSINESS;
+        return seatClass;
     }
 
     public int getPassengerSize() {
@@ -74,6 +87,10 @@ public class Reservation implements CSVModel {
         List<Flight> flights = FlightDAOFactory.getFactory().getList();
         for (Flight f : flights) { if (f.getKey().equals(flight)) return f; }
         return null;
+    }
+
+    public int getPrice() {
+        return getFlight().getPrice(getSeatClass());
     }
 
     @Override

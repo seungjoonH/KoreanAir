@@ -36,9 +36,13 @@ public class Flight implements CSVModel {
 	public LocalDateTime getDepartureTime() { return departureTime; }
 	public LocalDateTime getArrivalTime() { return arrivalTime; }
 	public Airplane getAirplane() { return airplane; }
-	public int getFirstPrice() { return firstPrice; }
-	public int getBusinessPrice() { return businessPrice; }
-	public int getEconomyPrice() { return economyPrice; }
+	public int getPrice(Airplane.SeatClass seatClass) {
+		return switch (seatClass) {
+			case FIRST -> firstPrice;
+			case BUSINESS -> businessPrice;
+			case ECONOMY -> economyPrice;
+		};
+	}
 
 	public List<Reservation> getReservations() {
 		return ReservationFactory.getFactory().getReservationByFlight(id);

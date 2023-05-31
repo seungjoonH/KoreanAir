@@ -45,6 +45,7 @@ public class MyInfoPage extends CustomerInfoPage {
         emailField.setText(User.getEmail());
         phoneField.setText(User.getPhone());
         passportNoField.setText(User.getPassportNo());
+        passportNoField.setText(User.getPassportNo());
     }
 
     protected void setUser() {
@@ -59,5 +60,15 @@ public class MyInfoPage extends CustomerInfoPage {
         setUser();
         User.setUser(formedUser);
         JOptionPane.showMessageDialog(this, "성공적으로 저장 되었습니다");
+    }
+
+    protected JLabel buildMileageTextLabel() {
+        return new JLabel("보유 마일리지: ");
+    }
+    protected JTextField buildMileageField() {
+        JTextField mileageField = new JTextField(20);
+        mileageField.setText(String.valueOf(User.getMileagePoint()));
+        mileageField.setEnabled(false);
+        return mileageField;
     }
 }

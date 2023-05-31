@@ -74,6 +74,15 @@ public abstract class User implements CSVModel {
 	public static String getPhone() { return ((Customer) logged).phone; }
 	public static int getMileagePoint() { return ((Customer) logged).mileagePoint; }
 
+	public static void earnMileagePoint(int amount) {
+		((Customer) logged).mileagePoint += amount;
+		CustomerDAOFactory.getFactory().update((Customer) logged);
+	}
+	public static void useMileagePoint(int amount) {
+		((Customer) logged).mileagePoint -= amount;
+		CustomerDAOFactory.getFactory().update((Customer) logged);
+	}
+
 	private static User findUser(String id) {
 		List<Admin> admins = AdminDAOFactory.getFactory().getList();
 		List<Customer> customers = CustomerDAOFactory.getFactory().getList();
