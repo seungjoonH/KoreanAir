@@ -10,6 +10,7 @@ import javax.swing.*;
 import model.flight.Flight;
 import view.page.FlightDetailPage;
 import view.page.FlightModifyPage;
+import view.page.PaymentPage;
 import view.page.ReservationPage;
 import view.page.route.Route;
 import view.widget.button.BackButton;
