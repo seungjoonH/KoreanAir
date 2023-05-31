@@ -46,6 +46,8 @@ public class HomePage extends Page {
 		final int btnPanelLTx = Window.WIDTH / 4;
 		final int btnPanelLTy = Window.HEIGHT / 2 - btnPanelH;
 		
+		Background background = new Background();
+		
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 
 		String leftText = "항공편조회/" + (User.isLoggedUserAdmin() ? "수정" : "예약");
@@ -66,7 +68,7 @@ public class HomePage extends Page {
 		buttonPanel.setBounds(btnPanelLTx, btnPanelLTy, btnPanelW, btnPanelH);
 		buttonPanel.setOpaque(false);
 
-		JLabel backgroundLabel = new JLabel(Global.background);
+		JLabel backgroundLabel = background.display();
 		backgroundLabel.setBounds(0, 0, Window.WIDTH, Window.HEIGHT);
 
 		JPanel panel = new JPanel();
