@@ -7,8 +7,6 @@ import model.flight.Airplane;
 import model.flight.Flight;
 import model.user.Customer;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;

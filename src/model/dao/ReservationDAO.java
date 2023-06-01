@@ -1,6 +1,5 @@
 package model.dao;
 
-import model.flight.Airplane;
 import model.reservation.Reservation;
 
 public class ReservationDAO extends DAO<Reservation> {

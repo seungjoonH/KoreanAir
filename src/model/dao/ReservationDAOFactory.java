@@ -1,15 +1,14 @@
 package model.dao;
 
-import model.flight.Airplane;
 import model.reservation.Reservation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationFactory extends DAOFactory<Reservation> {
-    private static final ReservationFactory factory = new ReservationFactory();
-    private ReservationFactory() {}
-    public static ReservationFactory getFactory() { return factory; }
+public class ReservationDAOFactory extends DAOFactory<Reservation> {
+    private static final ReservationDAOFactory factory = new ReservationDAOFactory();
+    private ReservationDAOFactory() {}
+    public static ReservationDAOFactory getFactory() { return factory; }
 
     protected ReservationDAO create() { return new ReservationDAO(); }
 

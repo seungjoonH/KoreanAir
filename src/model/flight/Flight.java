@@ -1,11 +1,7 @@
 package model.flight;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 import global.DateUtil;
 import model.CSVModel;
@@ -45,7 +41,7 @@ public class Flight implements CSVModel {
 	}
 
 	public List<Reservation> getReservations() {
-		return ReservationFactory.getFactory().getReservationByFlight(id);
+		return ReservationDAOFactory.getFactory().getReservationByFlight(id);
 	}
 	public int getRemainSeat(Airplane.SeatClass seatClass) {
 		int seat = airplane.getSeat(seatClass);

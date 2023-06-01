@@ -7,17 +7,15 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serial;
 
 import javax.swing.*;
 
 import global.DateUtil;
 import model.dao.FlightDAOFactory;
-import model.dao.ReservationFactory;
+import model.dao.ReservationDAOFactory;
 import model.flight.Airplane;
 import model.flight.Flight;
-import model.user.User;
 import view.page.route.Route;
 import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
@@ -30,7 +28,7 @@ public class FlightDetailPage extends Page {
     public static void setFlight(Flight f) { flight = f; }
 
     public static boolean delete() {
-        boolean reserved = ReservationFactory.getFactory().getReservationByFlight(flight.getKey()).size() > 0;
+        boolean reserved = ReservationDAOFactory.getFactory().getReservationByFlight(flight.getKey()).size() > 0;
         if (reserved) return false;
         FlightDAOFactory.getFactory().delete(flight);
         Route.goBack();

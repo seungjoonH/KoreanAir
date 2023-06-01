@@ -1,7 +1,6 @@
 package model.dao;
 
 import model.flight.Airplane;
-import model.flight.Flight;
 
 public class AirplaneDAO extends DAO<Airplane> {
 	@Override

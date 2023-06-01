@@ -1,6 +1,6 @@
 package view.page;
 
-import model.dao.ReservationFactory;
+import model.dao.ReservationDAOFactory;
 import model.reservation.Reservation;
 import model.user.Customer;
 import model.user.User;
@@ -23,7 +23,7 @@ import java.util.List;
 public class MyReservationPage extends Page implements ChangeListener {
 
     private List<JPanel> reservationsView;
-    private int index = 0;
+    private static int index = 0;
 
     private JSpinner spinner;
     private List<Reservation> reservations;
@@ -32,6 +32,8 @@ public class MyReservationPage extends Page implements ChangeListener {
     private List<List<PassengerInputForm>> forms;
 
     private Color fontColor;
+
+    public static int getIndex() { return index; }
 
     protected MyReservationPage() {
         super(null, null, true);
@@ -49,8 +51,13 @@ public class MyReservationPage extends Page implements ChangeListener {
     @Override
     protected void setInit() {
         super.setInit();
-        ReservationFactory.getFactory().loadList();
-        reservations = ReservationFactory.getFactory().getReservationByUid(User.getUid());
+        JButton deleteButton = new JButton("삭제");
+        deleteButton.addActionListener(this);
+        appbar.setRightWidget(deleteButton);
+
+        index = 0;
+        ReservationDAOFactory.getFactory().loadList();
+        reservations = ReservationDAOFactory.getFactory().getReservationByUid(User.getUid());
 
         reservationsView = new ArrayList<>();
 
@@ -149,13 +156,13 @@ public class MyReservationPage extends Page implements ChangeListener {
         }
     }
 
-    private JPanel buildUserInfoPanel(int index) {
+    private JPanel buildUserInfoPanel(int i) {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(ThemeMode.getBackgroundColor());
         fontColor = ThemeMode.getFontColor();
 
         GridBagConstraints c = new GridBagConstraints();
-        JLabel userLabel = new CustomTextLabel("승객 정보 #" + (index + 1), 20, fontColor, Font.BOLD);
+        JLabel userLabel = new CustomTextLabel("승객 정보 #" + (i + 1), 20, fontColor, Font.BOLD);
         JLabel nameLabel = new CustomTextLabel("이름 :", fontColor);
         JLabel sexLabel = new CustomTextLabel("성별 :", fontColor);
         JLabel birthLabel = new CustomTextLabel("생년월일(YYYY-MM-DD) :", fontColor);
@@ -171,15 +178,21 @@ public class MyReservationPage extends Page implements ChangeListener {
 
         c.gridx = 1; c.gridy = 1;
         c.anchor = GridBagConstraints.LINE_END;
-        panel.add(forms.get(this.index).get(index).getNameField(), c); c.gridy++;
+        panel.add(forms.get(index).get(i).getNameField(), c); c.gridy++;
         c.anchor = GridBagConstraints.LINE_START;
 
-        panel.add(forms.get(this.index).get(index).getSexComboBox(), c); c.gridy++;
+        panel.add(forms.get(index).get(i).getSexComboBox(), c); c.gridy++;
         c.anchor = GridBagConstraints.LINE_END;
-        panel.add(forms.get(this.index).get(index).getBirthField(), c);
-        c.gridy++; panel.add(forms.get(this.index).get(index).getPpNoField(), c);
+        panel.add(forms.get(index).get(i).getBirthField(), c);
+        c.gridy++; panel.add(forms.get(index).get(i).getPpNoField(), c);
 
         return panel;
+    }
+
+    void delete() {
+        ReservationDAOFactory.getFactory().delete(reservations.get(index));
+        JOptionPane.showMessageDialog(this, "삭제되었습니다!");
+        Route.goBack();
     }
 
     @Override
@@ -192,5 +205,8 @@ public class MyReservationPage extends Page implements ChangeListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {}
+    public void actionPerformed(ActionEvent e) {
+        String c = e.getActionCommand();
+        if (c.equals("삭제")) delete();
+    }
 }

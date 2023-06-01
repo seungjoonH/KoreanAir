@@ -1,10 +1,10 @@
 package model.dao;
 
-import model.CSVModel;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
+import model.CSVModel;
 
 public abstract class DAOFactory<T extends CSVModel> {
     // 모든 데이터 로드
@@ -14,7 +14,7 @@ public abstract class DAOFactory<T extends CSVModel> {
         AirportDAOFactory.getFactory().loadList();
         AirplaneDAOFactory.getFactory().loadList();
         FlightDAOFactory.getFactory().loadList();
-        ReservationFactory.getFactory().loadList();
+        ReservationDAOFactory.getFactory().loadList();
     }
 
     private List<T> list = new ArrayList<>();

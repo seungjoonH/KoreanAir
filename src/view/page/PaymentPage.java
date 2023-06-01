@@ -8,12 +8,11 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 import global.NumberUtil;
-import model.dao.ReservationFactory;
+import model.dao.ReservationDAOFactory;
 import model.reservation.Reservation;
 import model.user.User;
 import view.page.route.Route;
 import view.page.theme.ThemeMode;
-import view.widget.Appbar;
 import view.widget.CustomTextLabel;
 import view.widget.button.BackButton;
 
@@ -209,7 +208,7 @@ public class PaymentPage extends Page implements DocumentListener {
         JOptionPane.showMessageDialog(this, msg);
         User.useMileagePoint(Integer.parseInt(mileage));
         User.earnMileagePoint(accumulatedMileage);
-        ReservationFactory.getFactory().add(reservation);
+        ReservationDAOFactory.getFactory().add(reservation);
 
         Route.goHome();
         Route.goTo(new MyPage(new BackButton()));

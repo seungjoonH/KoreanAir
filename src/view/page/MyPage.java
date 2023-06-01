@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.*;
 
-import model.dao.ReservationFactory;
+import model.dao.ReservationDAOFactory;
 import model.reservation.Reservation;
 import model.user.User;
 import view.Window;
@@ -52,7 +52,7 @@ public class MyPage extends Page {
 		myResButton.setPreferredSize(new Dimension(btnW, btnH));
 		myResButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-		List<Reservation> reservations = ReservationFactory.getFactory()
+		List<Reservation> reservations = ReservationDAOFactory.getFactory()
 				.getReservationByUid(User.getUid());
 
 		boolean reserved = reservations.size() > 0;

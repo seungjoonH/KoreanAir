@@ -1,6 +1,6 @@
 package view.page;
 
-import model.dao.ReservationFactory;
+import model.dao.ReservationDAOFactory;
 import model.flight.Airplane;
 import model.flight.Flight;
 import model.reservation.Reservation;
@@ -222,7 +222,7 @@ public class ReservationPage extends Page implements ChangeListener {
     public void reserve() {
         if (!validateField()) return;
 
-        String key = ReservationFactory.getFactory().getLastKey();
+        String key = ReservationDAOFactory.getFactory().getLastKey();
         int id = Integer.parseInt(key) + 1;
 
         int selected = seatClassComboBox.getSelectedIndex();

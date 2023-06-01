@@ -1,9 +1,6 @@
 package model.dao;
 
 import model.user.Admin;
-import model.user.User;
-
-import java.util.List;
 
 public class AdminDAO extends DAO<Admin> {
 	@Override
