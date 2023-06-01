@@ -4,15 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serial;
 
 import javax.swing.*;
 
-import global.Global;
 import model.user.User;
 import view.Window;
 import view.page.route.Route;
+import view.page.theme.ThemeMode;
 import view.widget.button.LoginButton;
 import view.widget.widget.ProfileWidget;
 
@@ -24,7 +23,8 @@ public class HomePage extends Page {
 	protected String getTitle() { return "홈"; }
 
 	public HomePage() {
-		super(new ProfileWidget(), new LoginButton(), false);
+		super(null, new LoginButton(), false);
+		appbar.setLeftWidget(new ProfileWidget());
 	}
 	public HomePage(JComponent left) {
 		super(left, new LoginButton(), false);
@@ -36,8 +36,11 @@ public class HomePage extends Page {
 		super(left, right, displayTitle);
 	}
 
+
 	@Override
 	protected void buildContent() {
+		appbar.setLeftWidget(new ProfileWidget());
+
 		final int btnW = 200;
 		final int btnH = 100;
 		
@@ -45,9 +48,7 @@ public class HomePage extends Page {
 		final int btnPanelH = 100;
 		final int btnPanelLTx = Window.WIDTH / 4;
 		final int btnPanelLTy = Window.HEIGHT / 2 - btnPanelH;
-		
-		Background background = new Background();
-		
+
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 
 		String leftText = "항공편조회/" + (User.isLoggedUserAdmin() ? "수정" : "예약");
@@ -68,14 +69,12 @@ public class HomePage extends Page {
 		buttonPanel.setBounds(btnPanelLTx, btnPanelLTy, btnPanelW, btnPanelH);
 		buttonPanel.setOpaque(false);
 
-		JLabel backgroundLabel = background.display();
-		backgroundLabel.setBounds(0, 0, Window.WIDTH, Window.HEIGHT);
-
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.add(buttonPanel);
-		panel.add(backgroundLabel);
-		
+		panel.add(ThemeMode.getBackground());
+		panel.setBackground(ThemeMode.getBackgroundColor());
+
 		add(panel);
 	}
 
@@ -89,4 +88,5 @@ public class HomePage extends Page {
 		if (msg == null) return;
 		JOptionPane.showMessageDialog(this, msg);
 	}
+
 }

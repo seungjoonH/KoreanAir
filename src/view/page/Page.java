@@ -1,12 +1,10 @@
 package view.page;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.Serial;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import main.Main;
 import view.Window;
@@ -33,8 +31,7 @@ public abstract class Page extends JPanel implements ActionListener {
 
 	public void refresh() {
 		removeAll();
-		build();
-		Main.build();
+		build(); Main.build();
 	}
 
 	protected final void build() {
@@ -48,7 +45,7 @@ public abstract class Page extends JPanel implements ActionListener {
 	
 	protected void buildAppbar() {
 		String title = displayTitle ? getTitle() : null;
-
+		appbar.removeAll();
 		if (left != null) appbar.setLeftWidget(left);
 		if (right != null) appbar.setRightWidget(right);
 		if (title != null) appbar.displayTitle(title);
@@ -58,5 +55,4 @@ public abstract class Page extends JPanel implements ActionListener {
 	protected abstract void buildContent();
 
 	protected void goBack() { Route.goBack(); }
-	protected void goTo(Page page) { Route.goTo(page); }
 }

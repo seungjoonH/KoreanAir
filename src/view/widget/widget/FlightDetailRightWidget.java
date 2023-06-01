@@ -3,6 +3,7 @@ package view.widget.widget;
 import model.user.User;
 import view.page.FlightDetailPage;
 import view.page.route.Route;
+import view.page.theme.ThemeMode;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +40,7 @@ public class FlightDetailRightWidget extends JPanel implements ActionListener {
             panel.add(button1);
         }
 
+        panel.setOpaque(false);
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
     }

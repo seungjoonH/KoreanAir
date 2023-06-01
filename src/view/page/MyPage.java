@@ -4,19 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.util.List;
 
 import javax.swing.*;
 
-import global.Global;
 import model.dao.ReservationFactory;
 import model.reservation.Reservation;
 import model.user.User;
 import view.Window;
 import view.page.route.Route;
-import view.page.Page;
+import view.page.theme.ThemeMode;
 
 public class MyPage extends Page {
 	@Serial
@@ -48,8 +46,6 @@ public class MyPage extends Page {
 		final int btnPanelLTx = Window.WIDTH / 4;
 		final int btnPanelLTy = Window.HEIGHT / 2 - btnPanelH;
 		
-		Background background = new Background();
-		
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		
 		JButton myResButton = new JButton("예약정보");
@@ -72,14 +68,12 @@ public class MyPage extends Page {
 		buttonPanel.setBounds(btnPanelLTx, btnPanelLTy, btnPanelW, btnPanelH);
 		buttonPanel.setOpaque(false);
 
-		JLabel backgroundLabel = background.display();
-		backgroundLabel.setBounds(0, 0, Window.WIDTH, Window.HEIGHT);
-
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.add(buttonPanel);
-		panel.add(backgroundLabel);
-		
+		panel.add(ThemeMode.getBackground());
+		panel.setBackground(ThemeMode.getBackgroundColor());
+
 		add(panel);
 	}
 

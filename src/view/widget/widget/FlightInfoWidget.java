@@ -3,7 +3,8 @@ package view.widget.widget;
 import global.DateUtil;
 import model.flight.Flight;
 import view.Window;
-import view.widget.HeaderTypeLabel;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -11,43 +12,51 @@ import java.awt.*;
 
 public class FlightInfoWidget extends JPanel {
     public FlightInfoWidget(Flight flight) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setPreferredSize(new Dimension(view.Window.WIDTH, Window.HEIGHT / 4));
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setPreferredSize(new Dimension(view.Window.WIDTH - 40, Window.HEIGHT / 4));
+        panel.setBackground(ThemeMode.getBackgroundColor());
+
+        Color fontColor = ThemeMode.getFontColor();
 
         JPanel headPanel = new JPanel();
-        JLabel headerTypeLabel = new HeaderTypeLabel("항공편 정보", true);
+        JLabel headerTypeLabel = new CustomTextLabel("항공편 정보", 20, fontColor, Font.BOLD);
         headerTypeLabel.setPreferredSize(new Dimension(Window.WIDTH - 40, 30));
+        headPanel.setOpaque(false);
         headPanel.add(headerTypeLabel);
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new GridBagLayout());
+        contentPanel.setOpaque(false);
 
         GridBagConstraints c = new GridBagConstraints();
 
-        JLabel flightCodeLabel = new JLabel("항공편 코드 : " + flight.getId());
-        JLabel airlineLabel = new JLabel("항공사 : " + flight.getAirlineName());
+        JLabel flightCodeLabel = new CustomTextLabel("항공편 코드 : " + flight.getId(), fontColor);
+        JLabel airlineLabel = new CustomTextLabel("항공사 : " + flight.getAirlineName(), fontColor);
 
-        JLabel flightDepartureLabel = new HeaderTypeLabel("Departure", false);
-        JLabel departureCountryLabel = new JLabel("출발지 :");
-        JLabel departureAirportLabel = new JLabel("출발 공항 :");
-        JLabel departureGateLabel = new JLabel("출발 게이트 :");
-        JLabel departureTimeLabel = new JLabel("출발 일시 :");
+        JLabel flightDepartureLabel = new CustomTextLabel("Departure", 20, fontColor, Font.BOLD);
+        JLabel departureCountryLabel = new CustomTextLabel("출발지 :", fontColor);
+        JLabel departureAirportLabel = new CustomTextLabel("출발 공항 :", fontColor);
+        JLabel departureGateLabel = new CustomTextLabel("출발 게이트 :", fontColor);
+        JLabel departureTimeLabel = new CustomTextLabel("출발 일시 :", fontColor);
 
-        JLabel departureCountryData = new JLabel(flight.getDeparture().getCountry());
-        JLabel departureAirportData = new JLabel(flight.getDeparture().getKey());
-        JLabel departureGateData = new JLabel(String.valueOf(flight.getDepartureGateNo()));
-        JLabel departureTimeData = new JLabel(DateUtil.timeToString(flight.getDepartureTime()));
+        JLabel departureCountryData = new CustomTextLabel(flight.getDeparture().getCountry(), fontColor);
+        JLabel departureAirportData = new CustomTextLabel(flight.getDeparture().getKey(), fontColor);
+        JLabel departureGateData = new CustomTextLabel(String.valueOf(flight.getDepartureGateNo()), fontColor);
+        JLabel departureTimeData = new CustomTextLabel(DateUtil.timeToString(flight.getDepartureTime()), fontColor);
 
-        JLabel flightDestinationLabel = new HeaderTypeLabel("Destination", false);
-        JLabel destinationCountryLabel = new JLabel("도착지 :");
-        JLabel destinationAirportLabel = new JLabel("도착 공항 :");
-        JLabel destinationGateLabel = new JLabel("도착 게이트 :");
-        JLabel destinationTimeLabel = new JLabel("도착 일시 :");
+        JLabel flightDestinationLabel = new CustomTextLabel("Destination", 20, fontColor, Font.BOLD);
+        JLabel destinationCountryLabel = new CustomTextLabel("도착지 :", fontColor);
+        JLabel destinationAirportLabel = new CustomTextLabel("도착 공항 :", fontColor);
+        JLabel destinationGateLabel = new CustomTextLabel("도착 게이트 :", fontColor);
+        JLabel destinationTimeLabel = new CustomTextLabel("도착 일시 :", fontColor);
 
-        JLabel destinationCountryData = new JLabel(flight.getDestination().getCountry());
-        JLabel destinationAirportData = new JLabel(flight.getDestination().getKey());
-        JLabel destinationGateData = new JLabel(String.valueOf(flight.getDestinationGateNo()));
-        JLabel destinationTimeData = new JLabel(DateUtil.timeToString(flight.getArrivalTime()));
+        JLabel destinationCountryData = new CustomTextLabel(flight.getDestination().getCountry(), fontColor);
+        JLabel destinationAirportData = new CustomTextLabel(flight.getDestination().getKey(), fontColor);
+        JLabel destinationGateData = new CustomTextLabel(String.valueOf(flight.getDestinationGateNo()), fontColor);
+        JLabel destinationTimeData = new CustomTextLabel(DateUtil.timeToString(flight.getArrivalTime()), fontColor);
+
+        contentPanel.setOpaque(false);
 
         c.gridx = 0; c.gridy = 1;
         c.anchor = GridBagConstraints.LINE_START;
@@ -86,9 +95,11 @@ public class FlightInfoWidget extends JPanel {
         contentPanel.add(destinationGateData, c); c.gridy++;
         contentPanel.add(destinationTimeData, c); c.gridy++;
 
-        contentPanel.setBorder(new LineBorder(Color.BLACK));
+        contentPanel.setBorder(new LineBorder(ThemeMode.getFontColor()));
 
-        add(headPanel);
-        add(contentPanel);
+        panel.add(headPanel);
+        panel.add(contentPanel);
+
+        add(panel);
     }
 }

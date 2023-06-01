@@ -19,6 +19,8 @@ import model.flight.Airplane;
 import model.flight.Flight;
 import model.user.User;
 import view.page.route.Route;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 
 public class FlightDetailPage extends Page {
 	@Serial
@@ -52,10 +54,12 @@ public class FlightDetailPage extends Page {
     @Override
     protected void buildContent() {
         JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(ThemeMode.getBackgroundColor());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JPanel sizedBoxW = new JPanel();
         sizedBoxW.setPreferredSize(new Dimension(750, 0));
+        sizedBoxW.setOpaque(false);
 
         JPanel flightPanel = new JPanel(new BorderLayout());
         JPanel codePanel = new JPanel(new BorderLayout());
@@ -65,15 +69,15 @@ public class FlightDetailPage extends Page {
         JPanel economyPanel = new JPanel(new BorderLayout());
         JPanel soldOutPanel = new JPanel(new BorderLayout());
 
-        JLabel codeLabel1 = buildLabel("항공편 코드", true);
-        JLabel codeLabel2 = buildLabel(flight.getId(), false);
+        JLabel codeLabel1 = new CustomTextLabel("항공편 코드", 20, Font.BOLD);
+        JLabel codeLabel2 = new CustomTextLabel(flight.getId(), 20, Font.BOLD);
         codePanel.add(codeLabel1, BorderLayout.NORTH);
         codePanel.add(codeLabel2, BorderLayout.SOUTH);
         codePanel.setPreferredSize(new Dimension(170, 50));
         codePanel.setBackground(Color.WHITE);
 
-        JLabel airlineLabel1 = buildLabel("항공사", true);
-        JLabel airlineLabel2 = buildLabel(flight.getAirlineName(), false);
+        JLabel airlineLabel1 = new CustomTextLabel("항공사", 20, Font.BOLD);
+        JLabel airlineLabel2 = new CustomTextLabel(flight.getAirlineName(), 20, Font.BOLD);
         airlinePanel.add(airlineLabel1, BorderLayout.NORTH);
         airlinePanel.add(airlineLabel2, BorderLayout.SOUTH);
         airlinePanel.setPreferredSize(new Dimension(170, 50));
@@ -83,34 +87,35 @@ public class FlightDetailPage extends Page {
         int business = flight.getRemainSeat(Airplane.SeatClass.BUSINESS);
         int economy = flight.getRemainSeat(Airplane.SeatClass.ECONOMY);
 
-        JLabel firstLabel1 = buildLabel("잔여석 (퍼스트)", true);
-        JLabel firstLabel2 = buildLabel(String.valueOf(first), false);
+        JLabel firstLabel1 = new CustomTextLabel("잔여석 (퍼스트)", 20, Font.BOLD);
+        JLabel firstLabel2 = new CustomTextLabel(String.valueOf(first), 20, Font.BOLD);
         firstPanel.add(firstLabel1, BorderLayout.NORTH);
         firstPanel.add(firstLabel2, BorderLayout.SOUTH);
         firstPanel.setPreferredSize(new Dimension(170, 50));
         firstPanel.setBackground(Color.WHITE);
 
-        JLabel businessLabel1 = buildLabel("잔여석 (비지니스)", true);
-        JLabel businessLabel2 = buildLabel(String.valueOf(business), false);
+        JLabel businessLabel1 = new CustomTextLabel("잔여석 (비지니스)", 20, Font.BOLD);
+        JLabel businessLabel2 = new CustomTextLabel(String.valueOf(business), 20, Font.BOLD);
         businessPanel.add(businessLabel1, BorderLayout.NORTH);
         businessPanel.add(businessLabel2, BorderLayout.SOUTH);
         businessPanel.setPreferredSize(new Dimension(170, 50));
         businessPanel.setBackground(Color.WHITE);
 
-        JLabel economyLabel1 = buildLabel("잔여석 (이코노미)", true);
-        JLabel economyLabel2 = buildLabel(String.valueOf(economy), false);
+        JLabel economyLabel1 = new CustomTextLabel("잔여석 (이코노미)", 20, Font.BOLD);
+        JLabel economyLabel2 = new CustomTextLabel(String.valueOf(economy), 20, Font.BOLD);
         economyPanel.add(economyLabel1, BorderLayout.NORTH);
         economyPanel.add(economyLabel2, BorderLayout.SOUTH);
         economyPanel.setPreferredSize(new Dimension(170, 50));
         economyPanel.setBackground(Color.WHITE);
 
-        JLabel soldOutLabel = buildLabel("매진", true);
+        JLabel soldOutLabel = new CustomTextLabel("매진", 20, Font.BOLD);
         soldOutPanel.add(soldOutLabel, BorderLayout.CENTER);
         soldOutPanel.setPreferredSize(new Dimension(170, 50));
         soldOutPanel.setBackground(new Color(255, 115, 115));
 
         JPanel flightInfoPanel = new JPanel(new GridLayout(0, 5, 20, 20));
 
+        flightInfoPanel.setOpaque(false);
         flightInfoPanel.add(codePanel);
         flightInfoPanel.add(airlinePanel);
         if (first > 0) flightInfoPanel.add(firstPanel);
@@ -118,6 +123,7 @@ public class FlightDetailPage extends Page {
         if (economy > 0) flightInfoPanel.add(economyPanel);
         if (first + business + economy == 0) flightInfoPanel.add(soldOutPanel);
 
+        flightPanel.setOpaque(false);
         flightPanel.add(flightInfoPanel, BorderLayout.WEST);
         flightPanel.add(sizedBoxW, BorderLayout.CENTER);
         flightPanel.add(sizedBoxW, BorderLayout.EAST);
@@ -137,17 +143,10 @@ public class FlightDetailPage extends Page {
         add(panel, BorderLayout.CENTER);
     }
 
-    private JLabel buildLabel(String str, boolean bold) {
-        JLabel label = new JLabel(str);
-        label.setFont(label.getFont().deriveFont(20f));
-        if (bold) label.setFont(label.getFont().deriveFont(Font.BOLD));
-        label.setVerticalAlignment(SwingConstants.CENTER);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        return label;
-    }
-
     private JPanel buildPanel(int type, Flight flight) {
         JPanel panel = new JPanel(new GridLayout(5, 2, 5, 5));
+
+        Color fontColor = ThemeMode.getFontColor();
 
         String[][] strs = { {
             "공항", flight.getDeparture().getCity(),
@@ -161,14 +160,15 @@ public class FlightDetailPage extends Page {
             "시간", DateUtil.onlyTimeToString(flight.getArrivalTime())
         } };
 
-        JLabel headLabel = buildLabel(type == 0 ? "출발" : "도착", true);
+        JLabel headLabel = new CustomTextLabel(type == 0 ? "출발" : "도착", 20, fontColor, Font.BOLD);
 
         panel.add(headLabel);
         panel.add(new JLabel());
 
-        for (String str : strs[type]) panel.add(buildLabel(str, false));
+        for (String str : strs[type]) panel.add(new CustomTextLabel(str, 20, fontColor));
 
         panel.setPreferredSize(new Dimension(300, 100));
+        panel.setOpaque(false);
 
         return panel;
     }

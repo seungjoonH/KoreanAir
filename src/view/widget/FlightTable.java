@@ -1,18 +1,21 @@
 package view.widget;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serial;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 
 import model.flight.Flight;
 import view.page.FlightDetailPage;
 import view.page.FlightModifyPage;
-import view.page.PaymentPage;
 import view.page.ReservationPage;
 import view.page.route.Route;
+import view.page.theme.ThemeMode;
 import view.widget.button.BackButton;
 import view.widget.widget.FlightDetailRightWidget;
 
@@ -27,8 +30,11 @@ public class FlightTable extends JTable implements MouseListener {
 	public FlightTable(List<Flight> flights) {
 		super(castData(flights), columns);
 		this.flights = flights;
-		setDefaultEditor(Object.class, null);
 		addMouseListener(this);
+		setBackground(ThemeMode.getBackgroundColor());
+		setForeground(ThemeMode.getFontColor());
+		setGridColor(ThemeMode.getBackgroundColor());
+		setDefaultEditor(Object.class, null);
 	}
 
 	private static String[][] castData(List<Flight> flights) {

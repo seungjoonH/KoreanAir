@@ -6,7 +6,8 @@ import model.user.Customer;
 import model.user.User;
 import view.Window;
 import view.page.route.Route;
-import view.widget.HeaderTypeLabel;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 import view.widget.form.PassengerInputForm;
 import view.widget.widget.FlightInfoWidget;
 
@@ -30,6 +31,8 @@ public class MyReservationPage extends Page implements ChangeListener {
     private JPanel userInfoPanel;
     private List<List<PassengerInputForm>> forms;
 
+    private Color fontColor;
+
     protected MyReservationPage() {
         super(null, null, true);
     }
@@ -45,6 +48,7 @@ public class MyReservationPage extends Page implements ChangeListener {
 
     @Override
     protected void setInit() {
+        super.setInit();
         ReservationFactory.getFactory().loadList();
         reservations = ReservationFactory.getFactory().getReservationByUid(User.getUid());
 
@@ -52,6 +56,7 @@ public class MyReservationPage extends Page implements ChangeListener {
 
         for (Reservation reservation : reservations) {
             JPanel panel = new JPanel();
+            panel.setOpaque(false);
             panel.add(new FlightInfoWidget(reservation.getFlight()));
             reservationsView.add(panel);
         }
@@ -66,6 +71,8 @@ public class MyReservationPage extends Page implements ChangeListener {
         forms = new ArrayList<>();
         setForms();
 
+        reservationPanel.setOpaque(false);
+        userInfoPanel.setOpaque(false);
         reservationPanel.removeAll();
         reservationPanel.add(reservationsView.get(index));
         loadPassengerNumber();
@@ -92,25 +99,33 @@ public class MyReservationPage extends Page implements ChangeListener {
 
     @Override
     protected void buildContent() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(ThemeMode.getBackgroundColor());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        fontColor = ThemeMode.getFontColor();
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout());
 
         JPanel spinnerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        spinnerPanel.add(new JLabel("예약번호: "));
+        spinnerPanel.setOpaque(false);
+        spinnerPanel.add(new CustomTextLabel("예약번호: ", fontColor));
         spinnerPanel.add(spinner);
 
         JPanel reservationInfoPanel = new JPanel(new BorderLayout());
+        reservationInfoPanel.setOpaque(false);
         reservationInfoPanel.add(new FlightInfoWidget(reservations.get(index).getFlight()), BorderLayout.CENTER);
-        reservationInfoPanel.setPreferredSize(new Dimension(Window.WIDTH - 40, Window.HEIGHT / 3));
+        reservationInfoPanel.setPreferredSize(new Dimension(Window.WIDTH - 40, Window.HEIGHT / 4));
 
         JPanel userInfoScrollPane = new JPanel(new BorderLayout());
-        userInfoScrollPane.add(new JScrollPane(userInfoPanel), BorderLayout.CENTER);
+        JScrollPane pane = new JScrollPane(userInfoPanel);
+        userInfoScrollPane.setOpaque(false);
+        pane.setOpaque(false);
+        userInfoScrollPane.add(pane, BorderLayout.CENTER);
         userInfoScrollPane.setPreferredSize(new Dimension(Window.WIDTH - 40, Window.HEIGHT / 2));
 
+        contentPanel.setOpaque(false);
         contentPanel.add(spinnerPanel, BorderLayout.NORTH);
         contentPanel.add(reservationInfoPanel, BorderLayout.CENTER);
         contentPanel.add(userInfoScrollPane, BorderLayout.SOUTH);
@@ -127,20 +142,24 @@ public class MyReservationPage extends Page implements ChangeListener {
         int size = reservations.get(index).getPassengerSize();
 
         for (int i = 0; i < 10; i++) {
+            JPanel blankPanel = new JPanel();
+            blankPanel.setBackground(ThemeMode.getBackgroundColor());
             if (i < size) userInfoPanel.add(buildUserInfoPanel(i));
-            else userInfoPanel.add(new JPanel());
+            else userInfoPanel.add(blankPanel);
         }
     }
 
     private JPanel buildUserInfoPanel(int index) {
         JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        panel.setBackground(ThemeMode.getBackgroundColor());
+        fontColor = ThemeMode.getFontColor();
 
-        JLabel userLabel = new HeaderTypeLabel("승객 정보 #" + (index + 1), true);
-        JLabel nameLabel = new JLabel("이름 :");
-        JLabel sexLabel = new JLabel("성별 :");
-        JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");
-        JLabel ppLabel = new JLabel("여권번호 :");
+        GridBagConstraints c = new GridBagConstraints();
+        JLabel userLabel = new CustomTextLabel("승객 정보 #" + (index + 1), 20, fontColor, Font.BOLD);
+        JLabel nameLabel = new CustomTextLabel("이름 :", fontColor);
+        JLabel sexLabel = new CustomTextLabel("성별 :", fontColor);
+        JLabel birthLabel = new CustomTextLabel("생년월일(YYYY-MM-DD) :", fontColor);
+        JLabel ppLabel = new CustomTextLabel("여권번호 :", fontColor);
 
         c.gridx = 0; c.gridy = 0;
         c.anchor = GridBagConstraints.LINE_START;

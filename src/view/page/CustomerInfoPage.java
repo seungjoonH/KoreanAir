@@ -1,6 +1,8 @@
 package view.page;
 
 import model.user.Customer;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +38,7 @@ public abstract class CustomerInfoPage extends Page {
 
     @Override
     protected void setInit() {
+        super.setInit();
         idField = new JTextField(20);
         passwordField = new JPasswordField(20);
         nameField = new JTextField(20);
@@ -53,14 +56,18 @@ public abstract class CustomerInfoPage extends Page {
 
     @Override
     protected final void buildContent() {
-        JLabel idLabel = new JLabel("아이디 :");
-        JLabel passwordLabel = new JLabel("비밀번호 :");
-        JLabel nameLabel = new JLabel("이름 :");
-        JLabel sexLabel = new JLabel("성별 :");
-        JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");
-        JLabel emailLabel = new JLabel("이메일 :");
-        JLabel phoneLabel = new JLabel("휴대폰(- 생략) :");
-        JLabel passportNoLabel = new JLabel("여권번호(영문 1자리 + 숫자 8자리) :");
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(ThemeMode.getBackgroundColor());
+        Color fontColor = ThemeMode.getFontColor();
+
+        JLabel idLabel = new CustomTextLabel("아이디 :", fontColor);
+        JLabel passwordLabel = new CustomTextLabel("비밀번호 :", fontColor);
+        JLabel nameLabel = new CustomTextLabel("이름 :", fontColor);
+        JLabel sexLabel = new CustomTextLabel("성별 :", fontColor);
+        JLabel birthLabel = new CustomTextLabel("생년월일(YYYY-MM-DD) :", fontColor);
+        JLabel emailLabel = new CustomTextLabel("이메일 :", fontColor);
+        JLabel phoneLabel = new CustomTextLabel("휴대폰(- 생략) :", fontColor);
+        JLabel passportNoLabel = new CustomTextLabel("여권번호(영문 1자리 + 숫자 8자리) :", fontColor);
 
         submitButton = new JButton(getSubmitButtonText());
         submitButton.addActionListener(this);
@@ -76,7 +83,10 @@ public abstract class CustomerInfoPage extends Page {
         c.gridy = 5; registerPanel.add(emailLabel, c);
         c.gridy = 6; registerPanel.add(phoneLabel, c);
         c.gridy = 7; registerPanel.add(passportNoLabel, c);
-        c.gridy = 8; registerPanel.add(buildMileageTextLabel(), c);
+        if (buildMileageTextLabel() != null) {
+            c.gridy = 8; registerPanel.add(buildMileageTextLabel(), c);
+        }
+
 
         c.gridx = 1; c.anchor = GridBagConstraints.LINE_END;
         c.gridy = 0; registerPanel.add(idField, c);
@@ -89,13 +99,17 @@ public abstract class CustomerInfoPage extends Page {
         c.gridy = 5; registerPanel.add(emailField, c);
         c.gridy = 6; registerPanel.add(phoneField, c);
         c.gridy = 7; registerPanel.add(passportNoField, c);
-        c.gridy = 8; registerPanel.add(buildMileageField(), c);
+        if (buildMileageField() != null) {
+            c.gridy = 8; registerPanel.add(buildMileageField(), c);
+        }
 
         c.gridx = 0; c.gridwidth = 2;
         c.anchor = GridBagConstraints.CENTER;
-        c.gridy = 9; registerPanel.add(submitButton, c);
+        c.gridy++; registerPanel.add(submitButton, c);
 
-        add(registerPanel, BorderLayout.CENTER);
+        registerPanel.setOpaque(false);
+        panel.add(registerPanel, BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
     }
 
     public boolean validateField() {

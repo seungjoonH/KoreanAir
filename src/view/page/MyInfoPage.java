@@ -1,5 +1,6 @@
 package view.page;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.Serial;
 
@@ -9,6 +10,8 @@ import model.dao.CustomerDAOFactory;
 import model.user.Customer;
 import model.user.User;
 import view.page.CustomerInfoPage;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 
 public class MyInfoPage extends CustomerInfoPage {
     @Serial
@@ -63,7 +66,8 @@ public class MyInfoPage extends CustomerInfoPage {
     }
 
     protected JLabel buildMileageTextLabel() {
-        return new JLabel("보유 마일리지: ");
+        Color fontColor = ThemeMode.getFontColor();
+        return new CustomTextLabel("보유 마일리지: ", fontColor);
     }
     protected JTextField buildMileageField() {
         JTextField mileageField = new JTextField(20);

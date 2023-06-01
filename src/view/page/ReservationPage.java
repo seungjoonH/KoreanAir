@@ -7,7 +7,8 @@ import model.reservation.Reservation;
 import model.user.Customer;
 import model.user.User;
 import view.page.route.Route;
-import view.widget.HeaderTypeLabel;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 import view.widget.button.BackButton;
 import view.widget.form.PassengerInputForm;
 import view.widget.widget.FlightInfoWidget;
@@ -63,6 +64,7 @@ public class ReservationPage extends Page implements ChangeListener {
 
     @Override
     protected void setInit() {
+        super.setInit();
         forms = new PassengerInputForm[10];
 
         for (int i = 0; i < 10; i++) {
@@ -80,8 +82,11 @@ public class ReservationPage extends Page implements ChangeListener {
     @Override
     protected void buildContent() {
         JPanel panel = new JPanel();
+        panel.setBackground(ThemeMode.getBackgroundColor());
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        Color fontColor = ThemeMode.getFontColor();
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -96,17 +101,19 @@ public class ReservationPage extends Page implements ChangeListener {
 
         JPanel passengerPanel = new JPanel();
 
-        remainingSeatsLabel = new JLabel(String.valueOf(remain));
+        remainingSeatsLabel = new CustomTextLabel(String.valueOf(remain), fontColor);
 
         SpinnerModel spinnerModel = new SpinnerNumberModel(1, 1, 10, 1);
         numberOfPassengersSpinner = new JSpinner(spinnerModel);
         numberOfPassengersSpinner.addChangeListener(this);
 
-        seatPanel.add(new JLabel("좌석 클래스:"));
+        seatPanel.setOpaque(false);
+        seatPanel.add(new CustomTextLabel("좌석 클래스:", fontColor));
         seatPanel.add(seatClassComboBox);
-        seatPanel.add(new JLabel("잔여석: "));
+        seatPanel.add(new CustomTextLabel("잔여석: ", fontColor));
         seatPanel.add(remainingSeatsLabel);
-        passengerPanel.add(new JLabel("인원 수:"));
+        passengerPanel.setOpaque(false);
+        passengerPanel.add(new CustomTextLabel("인원 수:", fontColor));
         passengerPanel.add(numberOfPassengersSpinner);
 
         JButton paymentButton = new JButton("결제");
@@ -116,6 +123,7 @@ public class ReservationPage extends Page implements ChangeListener {
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
 
+        controlPanel.setOpaque(false);
         controlPanel.add(seatPanel);
         controlPanel.add(passengerPanel);
         controlPanel.add(paymentButton);
@@ -125,8 +133,11 @@ public class ReservationPage extends Page implements ChangeListener {
 
         loadPassengerNumber();
 
+        userInfoPanel.setOpaque(false);
+        userInfoScrollPane.setOpaque(false);
         userInfoScrollPane.setViewportView(userInfoPanel);
 
+        contentPanel.setOpaque(false);
         contentPanel.add(new FlightInfoWidget(flight));
         contentPanel.add(controlPanel);
         contentPanel.add(userInfoScrollPane);
@@ -137,13 +148,16 @@ public class ReservationPage extends Page implements ChangeListener {
 
     private JPanel buildUserInfoPanel(int index) {
         JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(ThemeMode.getBackgroundColor());
         GridBagConstraints c = new GridBagConstraints();
 
-        JLabel userLabel = new HeaderTypeLabel("승객 정보 #" + (index + 1), true);
-        JLabel nameLabel = new JLabel("이름 :");
-        JLabel sexLabel = new JLabel("성별 :");
-        JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");
-        JLabel ppLabel = new JLabel("여권번호 :");
+        Color fontColor = ThemeMode.getFontColor();
+
+        JLabel userLabel = new CustomTextLabel("승객 정보 #" + (index + 1), 20, fontColor, Font.BOLD);
+        JLabel nameLabel = new CustomTextLabel("이름 :", fontColor);
+        JLabel sexLabel = new CustomTextLabel("성별 :", fontColor);
+        JLabel birthLabel = new CustomTextLabel("생년월일(YYYY-MM-DD) :", fontColor);
+        JLabel ppLabel = new CustomTextLabel("여권번호 :", fontColor);
 
         c.gridx = 0; c.gridy = 12;
         c.anchor = GridBagConstraints.LINE_START;
@@ -172,8 +186,10 @@ public class ReservationPage extends Page implements ChangeListener {
         userInfoPanel.removeAll();
 
         for (int i = 0; i < USERINFO_MAX; i++) {
+            JPanel blankPanel = new JPanel();
+            blankPanel.setBackground(ThemeMode.getBackgroundColor());
             if (i < passengerNumber) userInfoPanel.add(buildUserInfoPanel(i));
-            else userInfoPanel.add(new JPanel());
+            else userInfoPanel.add(blankPanel);
         }
     }
 
@@ -185,7 +201,27 @@ public class ReservationPage extends Page implements ChangeListener {
         return list;
     }
 
+    public boolean validateField() {
+        String msg = null;
+        for (int i = 0; i < passengerNumber; i++) {
+            String name = forms[i].getNameField().getText();
+            String birth = forms[i].getBirthField().getText();
+            String ppNo = forms[i].getPpNoField().getText();
+            if (name.equals("")) msg = "이름을 입력해주세요.";
+            else if (birth.equals("")) msg = "생년월일을 입력해주세요.";
+            else if (!birth.matches("\\d{4}-\\d{2}-\\d{2}")) msg = "생년월일을 yyyy-mm-dd 형식에 맞게 입력해주세요.";
+            else if (ppNo.equals("")) msg = "여권번호를 입력해주세요.";
+            else if (!ppNo.matches("[A-Za-z]\\d{8}")) msg = "여권번호를 입력해주세요.";
+            if (msg != null) break;
+        }
+
+        if (msg != null) JOptionPane.showMessageDialog(this, msg);
+        return msg == null;
+    }
+
     public void reserve() {
+        if (!validateField()) return;
+
         String key = ReservationFactory.getFactory().getLastKey();
         int id = Integer.parseInt(key) + 1;
 
@@ -215,6 +251,7 @@ public class ReservationPage extends Page implements ChangeListener {
         PaymentPage.setReservation(reservation);
         Route.goTo(new PaymentPage(new BackButton()));
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

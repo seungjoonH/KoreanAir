@@ -16,6 +16,13 @@ public class CustomTextLabel extends JLabel {
         setFont(new Font(font.getFamily(), Font.PLAIN, font.getSize()));
         setForeground(color);
     }
+    public CustomTextLabel(String text, int size, Color color) {
+        super(text);
+        Font font = getFont();
+        if (size == -1) size = font.getSize();
+        setFont(new Font(font.getFamily(), Font.PLAIN, size));
+        setForeground(color);
+    }
     public CustomTextLabel(String text, int size, int style) {
         super(text);
         Font font = getFont();

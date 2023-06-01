@@ -2,6 +2,8 @@ package view.widget.form;
 
 import global.DateUtil;
 import model.user.Customer;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,17 +75,19 @@ public class FlightInputForm extends JPanel {
     }
 
     private void buildUserInfoPanel() {
-        JLabel idLabel = new JLabel("항공편 코드 :");
-        JLabel airlineLabel = new JLabel("항공사 :");
-        JLabel depAirpLabel = new JLabel("출발지 :");
-        JLabel depGateNoLabel = new JLabel("출발 게이트 :");
-        JLabel depDateLabel = new JLabel("출발일(YYYY-MM-DD) :");
-        JLabel depTimeLabel = new JLabel("출발 시간(HH:MM) :");
-        JLabel desAirpLabel = new JLabel("도착지 :");
-        JLabel desGateNoLabel = new JLabel("도착 게이트 :");
-        JLabel arrDateNoLabel = new JLabel("도착일(YYYY-MM-DD) :");
-        JLabel arrTimeNoLabel = new JLabel("도착 시간(HH:MM) :");
-        JLabel airplaneLabel = new JLabel("항공기 :");
+        Color fontColor = ThemeMode.getFontColor();
+
+        JLabel idLabel = new CustomTextLabel("항공편 코드 :", fontColor);
+        JLabel airlineLabel = new CustomTextLabel("항공사:", fontColor);
+        JLabel depAirpLabel = new CustomTextLabel("출발지 :", fontColor);
+        JLabel depGateNoLabel = new CustomTextLabel("출발 게이트 :", fontColor);
+        JLabel depDateLabel = new CustomTextLabel("출발일(YYYY-MM-DD) :", fontColor);
+        JLabel depTimeLabel = new CustomTextLabel("출발 시간(HH:MM) :", fontColor);
+        JLabel desAirpLabel = new CustomTextLabel("도착지 :", fontColor);
+        JLabel desGateNoLabel = new CustomTextLabel("도착 게이트 :", fontColor);
+        JLabel arrDateNoLabel = new CustomTextLabel("도착일(YYYY-MM-DD) :", fontColor);
+        JLabel arrTimeNoLabel = new CustomTextLabel("도착 시간(HH:MM) :", fontColor);
+        JLabel airplaneLabel = new CustomTextLabel("항공기 :", fontColor);
 
         JPanel flightInfoPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

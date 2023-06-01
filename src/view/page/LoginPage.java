@@ -1,7 +1,6 @@
 package view.page;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serial;
@@ -17,6 +16,8 @@ import javax.swing.JTextField;
 
 import model.user.User;
 import view.page.route.Route;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 
 public class LoginPage extends Page {
 	public enum LoginState { NO_MEM, PW_INCRT, SUCCESS }
@@ -42,11 +43,16 @@ public class LoginPage extends Page {
 	public LoginPage(JComponent left, JComponent right, boolean displayTitle) {
 		super(left, right, displayTitle);
 	}
-	
+
 	@Override
 	protected void buildContent() {
-		JLabel idLabel = new JLabel("아이디:");
-		JLabel passwordLabel = new JLabel("비밀번호:");
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.setBackground(ThemeMode.getBackgroundColor());
+
+		Color fontColor = ThemeMode.getFontColor();
+
+		JLabel idLabel = new CustomTextLabel("아이디:", fontColor);
+		JLabel passwordLabel = new CustomTextLabel("비밀번호:", fontColor);
 
 		idField = new JTextField(20);
 		pwField = new JPasswordField(20);
@@ -60,6 +66,7 @@ public class LoginPage extends Page {
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		buttonPanel.add(loginButton);
 		buttonPanel.add(registerButton);
+		buttonPanel.setOpaque(false);
 
 		JPanel formPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -78,7 +85,10 @@ public class LoginPage extends Page {
 		c.gridx = 0; c.gridy = 2; c.gridwidth = 2;
 		formPanel.add(buttonPanel, c);
 
-		add(formPanel);
+		formPanel.setOpaque(false);
+		panel.add(formPanel);
+
+		add(panel, BorderLayout.CENTER);
 	}
 	
 	public void login() {

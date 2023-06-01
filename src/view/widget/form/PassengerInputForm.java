@@ -1,6 +1,8 @@
 package view.widget.form;
 
 import model.user.Customer;
+import view.page.theme.ThemeMode;
+import view.widget.CustomTextLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,25 +44,19 @@ public class PassengerInputForm {
         return list;
     }
 
-    private JLabel buildLabel(String str, boolean bold) {
-        JLabel label = new JLabel(str);
-        label.setFont(label.getFont().deriveFont(20f));
-        if (bold) label.setFont(label.getFont().deriveFont(Font.BOLD));
-        label.setVerticalAlignment(SwingConstants.CENTER);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        return label;
-    }
-
     private JPanel buildUserInfoPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
+        panel.setOpaque(false);
         GridBagConstraints c = new GridBagConstraints();
 
+        Color fontColor = ThemeMode.getFontColor();
+
         String title = "승객 정보" + (index < 0 ? " #" + (index + 1) : "");
-        JLabel userLabel = buildLabel(title, true);
-        JLabel nameLabel = new JLabel("이름 :");
-        JLabel sexLabel = new JLabel("성별 :");
-        JLabel birthLabel = new JLabel("생년월일(YYYY-MM-DD) :");
-        JLabel ppLabel = new JLabel("여권번호 :");
+        JLabel userLabel = new CustomTextLabel(title, 20, fontColor, Font.BOLD);
+        JLabel nameLabel = new CustomTextLabel("이름 :", fontColor);
+        JLabel sexLabel = new CustomTextLabel("성별 :", fontColor);
+        JLabel birthLabel = new CustomTextLabel("생년월일(YYYY-MM-DD) :", fontColor);
+        JLabel ppLabel = new CustomTextLabel("여권번호 :", fontColor);
 
         c.gridx = 0; c.gridy = 12;
         c.anchor = GridBagConstraints.LINE_START;
