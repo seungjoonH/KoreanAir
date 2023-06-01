@@ -1,6 +1,7 @@
 package view.page;
 
 import model.dao.FlightDAOFactory;
+import util.logger.Logger;
 
 import javax.swing.*;
 
@@ -26,6 +27,7 @@ public class FlightCreatePage extends FlightEditPage {
     protected void submit() {
         FlightDetailPage.setFlight(extractFlight());
         FlightDAOFactory.getFactory().add(extractFlight());
+        Logger.get().log("Flight created: " + extractFlight().getKey());
     }
 
     @Override

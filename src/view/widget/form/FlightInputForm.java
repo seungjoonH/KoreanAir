@@ -75,6 +75,7 @@ public class FlightInputForm extends JPanel {
     }
 
     private void buildUserInfoPanel() {
+        setOpaque(false);
         Color fontColor = ThemeMode.getFontColor();
 
         JLabel idLabel = new CustomTextLabel("항공편 코드 :", fontColor);
@@ -93,6 +94,8 @@ public class FlightInputForm extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0; c.gridy = 0;
         c.anchor = GridBagConstraints.LINE_START;
+
+        flightInfoPanel.setOpaque(false);
         flightInfoPanel.add(idLabel, c);
         c.gridy = 1; flightInfoPanel.add(airlineLabel, c);
         c.gridy = 2; flightInfoPanel.add(depAirpLabel, c);
@@ -108,6 +111,7 @@ public class FlightInputForm extends JPanel {
 
         c.gridx = 1; c.gridy = 0;
         c.anchor = GridBagConstraints.LINE_END;
+        flightInfoPanel.setOpaque(false);
         flightInfoPanel.add(idField, c);
         c.gridy = 1; flightInfoPanel.add(airlineField, c);
         c.gridy = 2; flightInfoPanel.add(depAirpField, c);

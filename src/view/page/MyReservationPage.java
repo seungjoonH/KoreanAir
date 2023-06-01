@@ -4,6 +4,7 @@ import model.dao.ReservationDAOFactory;
 import model.reservation.Reservation;
 import model.user.Customer;
 import model.user.User;
+import util.logger.Logger;
 import view.Window;
 import view.page.route.Route;
 import view.page.theme.ThemeMode;
@@ -193,6 +194,7 @@ public class MyReservationPage extends Page implements ChangeListener {
         ReservationDAOFactory.getFactory().delete(reservations.get(index));
         JOptionPane.showMessageDialog(this, "삭제되었습니다!");
         Route.goBack();
+        Logger.get().log("Reservation deleted: " + reservations.get(index).getKey());
     }
 
     @Override

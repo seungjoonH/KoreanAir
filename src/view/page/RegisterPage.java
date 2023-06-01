@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.user.Customer;
 import model.user.User;
+import util.logger.Logger;
 
 public class RegisterPage extends CustomerInfoPage {
 	public enum RegisterState { DUP_ID, INVLD_IPT, SUCCESS }
@@ -45,10 +46,10 @@ public class RegisterPage extends CustomerInfoPage {
 
 		String msg = "성공적으로 회원가입 되었습니다.";
 		state = User.register(formedUser);
-		
 		if (state == RegisterState.DUP_ID) msg = "이미 존재하는 아이디 입니다.";
-		
 		JOptionPane.showMessageDialog(this, msg);
+
+		Logger.get().log("Registered");
 	}
 
 	@Override

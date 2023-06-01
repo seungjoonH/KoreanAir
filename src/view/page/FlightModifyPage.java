@@ -2,6 +2,7 @@ package view.page;
 
 import model.dao.FlightDAOFactory;
 import model.flight.Flight;
+import util.logger.Logger;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -48,6 +49,7 @@ public class FlightModifyPage extends FlightEditPage {
     protected void submit() {
         FlightDetailPage.setFlight(extractFlight());
         FlightDAOFactory.getFactory().update(extractFlight());
+        Logger.get().log("Flight modified: " + extractFlight().getKey());
     }
 
     @Override

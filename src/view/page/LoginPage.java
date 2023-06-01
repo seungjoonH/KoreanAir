@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import model.user.User;
+import util.logger.Logger;
 import view.page.route.Route;
 import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
@@ -112,7 +113,10 @@ public class LoginPage extends Page {
 		};
 		
 		JOptionPane.showMessageDialog(this, msgs[state.ordinal()]);
-		if (state == LoginState.SUCCESS) Route.goHome();
+		if (state == LoginState.SUCCESS) {
+			Route.goHome();
+			Logger.get().log("Logged in");
+		}
 			
 	}
 

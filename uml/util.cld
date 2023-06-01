@@ -228,7 +228,7 @@
                     </net.java.amateras.uml.properties.BooleanPropertyDescriptor>
                   </propertyDescriptors>
                   <stereoType></stereoType>
-                  <name>util.DestinationFilter</name>
+                  <name>util.filter.DestinationFilter</name>
                   <path>/KoreanAir/src/util/DestinationFilter.java</path>
                   <isAbstract>false</isAbstract>
                 </source>
@@ -374,7 +374,7 @@
                     </net.java.amateras.uml.properties.BooleanPropertyDescriptor>
                   </propertyDescriptors>
                   <stereoType></stereoType>
-                  <name>util.AirlineFilter</name>
+                  <name>util.filter.AirlineFilter</name>
                   <path>/KoreanAir/src/util/AirlineFilter.java</path>
                   <isAbstract>false</isAbstract>
                 </source>
@@ -520,7 +520,7 @@
                     </net.java.amateras.uml.properties.BooleanPropertyDescriptor>
                   </propertyDescriptors>
                   <stereoType></stereoType>
-                  <name>util.DateFilter</name>
+                  <name>util.filter.DateFilter</name>
                   <path>/KoreanAir/src/util/DateFilter.java</path>
                   <isAbstract>false</isAbstract>
                 </source>
@@ -696,7 +696,7 @@
               </net.java.amateras.uml.properties.BooleanPropertyDescriptor>
             </propertyDescriptors>
             <stereoType></stereoType>
-            <name>util.Filter</name>
+            <name>util.filter.Filter</name>
             <path>/KoreanAir/src/util/Filter.java</path>
             <isAbstract>true</isAbstract>
           </net.java.amateras.uml.classdiagram.model.ClassModel>
@@ -829,7 +829,7 @@
         </net.java.amateras.uml.properties.BooleanPropertyDescriptor>
       </propertyDescriptors>
       <stereoType></stereoType>
-      <name>util.DepartureFilter</name>
+      <name>util.filter.DepartureFilter</name>
       <path>/KoreanAir/src/util/DepartureFilter.java</path>
       <isAbstract>false</isAbstract>
     </net.java.amateras.uml.classdiagram.model.ClassModel>

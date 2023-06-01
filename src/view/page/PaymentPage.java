@@ -11,6 +11,7 @@ import global.NumberUtil;
 import model.dao.ReservationDAOFactory;
 import model.reservation.Reservation;
 import model.user.User;
+import util.logger.Logger;
 import view.page.route.Route;
 import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
@@ -209,6 +210,8 @@ public class PaymentPage extends Page implements DocumentListener {
         User.useMileagePoint(Integer.parseInt(mileage));
         User.earnMileagePoint(accumulatedMileage);
         ReservationDAOFactory.getFactory().add(reservation);
+
+        Logger.get().log("Flight reserved: " + reservation.getKey());
 
         Route.goHome();
         Route.goTo(new MyPage(new BackButton()));

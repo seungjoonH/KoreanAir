@@ -1,2 +1,11 @@
-[2023-05-30 10:25:35] user: reserve the flight BU3287
-[2023-05-30 10:25:35] user: logged in
+[2023-06-01T17:20:58.179576] 현승준(customer): Logged in
+[2023-06-01T17:21:03.625127] 현승준(customer): Logged out
+[2023-06-01T17:21:11.791486] 현승준(admin): Logged in
+[2023-06-01T17:21:14.224809] 현승준(admin): Logged out
+[2023-06-01T17:21:18.809112] 현승준(admin): Logged in
+[2023-06-01T17:21:27.248661] 현승준(admin): Flight modified: VX8391
+[2023-06-01T17:21:41.724420] 현승준(admin): Logged out
+[2023-06-01T17:21:45.655864] 현승준(customer): Logged in
+[2023-06-01T17:22:12.347961] 현승준(customer): Flight reserved: 6
+[2023-06-01T17:22:25.592758] 현승준(customer): Reservation deleted: 6
+[2023-06-01T17:22:29.024647] 현승준(customer): Logged out

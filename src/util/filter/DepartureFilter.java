@@ -1,4 +1,4 @@
-package util;
+package util.filter;
 
 import model.flight.Airport;
 import model.flight.Flight;

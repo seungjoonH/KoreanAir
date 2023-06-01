@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.CSVModel;
 import model.dao.*;
+import util.logger.Logger;
 import view.page.LoginPage;
 import view.page.RegisterPage;
 
@@ -45,7 +46,9 @@ public abstract class User implements CSVModel {
 		return LoginPage.LoginState.SUCCESS;
 	}
 	
-	public static void logout() { logged = null; }
+	public static void logout() {
+		Logger.get().log("Logged out"); logged = null;
+	}
 	public static RegisterPage.RegisterState register(User newcomer) {
 		User foundUser = findUser(newcomer.id);
 		

@@ -45,10 +45,8 @@ public abstract class DAO<T extends CSVModel> {
 	public void saveCSV() {
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter(getFilepath()));
-
 			pw.println(getHeader());
 			for (T obj : objs) pw.println(String.join(";", obj.toCSV()));
-
 			pw.close();
 		}
 		catch (IOException e) { e.printStackTrace(); }

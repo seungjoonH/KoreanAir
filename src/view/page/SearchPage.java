@@ -2,13 +2,11 @@ package view.page;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serial;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -23,7 +21,7 @@ import javax.swing.SpinnerNumberModel;
 import model.dao.FlightDAOFactory;
 import model.flight.Airplane;
 import model.flight.Flight;
-import util.*;
+import util.filter.*;
 import view.page.route.Route;
 import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
