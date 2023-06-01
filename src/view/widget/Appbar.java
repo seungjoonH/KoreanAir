@@ -44,6 +44,7 @@ public class Appbar extends JPanel implements MouseListener {
 		
 		Image resizedImage = Global.logo.getImage().getScaledInstance(220, 30, Image.SCALE_DEFAULT);
 		JLabel logoLabel = new JLabel(new ImageIcon(resizedImage));
+		logoLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		logoLabel.addMouseListener(this);
 		centerWidget.removeAll();
 		centerWidget.add(logoLabel);
