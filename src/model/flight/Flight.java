@@ -87,6 +87,7 @@ public class Flight implements CSVModel {
     		String.valueOf(destinationGateNo),
     		DateUtil.timeToString(departureTime), 
     		DateUtil.timeToString(arrivalTime),
+			String.valueOf(airplane.getKey()),
 			String.valueOf(firstPrice),
 			String.valueOf(businessPrice),
 			String.valueOf(economyPrice),

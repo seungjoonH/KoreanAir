@@ -1,6 +1,7 @@
 package view.page;
 
 import model.dao.FlightDAOFactory;
+import model.flight.Airplane;
 import model.flight.Flight;
 import util.logger.Logger;
 
@@ -38,7 +39,10 @@ public class FlightModifyPage extends FlightEditPage {
             flight.getDestination().getKey(),
             String.valueOf(flight.getDestinationGateNo()),
             flight.getArrivalTime(),
-            flight.getAirplane().getKey()
+            flight.getAirplane().getKey(),
+            flight.getPrice(Airplane.SeatClass.FIRST),
+            flight.getPrice(Airplane.SeatClass.BUSINESS),
+            flight.getPrice(Airplane.SeatClass.ECONOMY)
         );
     }
 
