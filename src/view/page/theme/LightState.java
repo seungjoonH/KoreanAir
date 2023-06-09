@@ -8,7 +8,11 @@ import view.Window;
 import java.awt.*;
 
 public class LightState implements ThemeState {
-	public ThemeMode.StateType getType() { return ThemeMode.StateType.LIGHT; }
+	private static LightState lightState = new LightState();
+	private LightState() {}
+	public static LightState getInstance() {
+		return lightState;
+	}
 	public String mode() { return "라이트모드"; }
 	@Override
 	public JLabel getBackground() {
@@ -20,4 +24,8 @@ public class LightState implements ThemeState {
 	public Color getBackgroundColor() { return new Color(0xf9f9f9); }
 	@Override
 	public Color getFontColor() { return Color.BLACK; }
+	@Override
+	public void toggleState() {
+		ThemeMode.setState(DarkState.getInstance());
+	}
 }
