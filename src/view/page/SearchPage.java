@@ -146,7 +146,7 @@ public class SearchPage extends Page {
 		seatPanel.setLayout(new BoxLayout(seatPanel, BoxLayout.X_AXIS));
 		JLabel passengerLabel = new CustomTextLabel("잔여석:", fontColor);
 
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, 1000, 1);
 		seatSpinner = new JSpinner(spinnerModel);
 		seatPanel.setOpaque(false);
 		seatPanel.add(passengerLabel);
