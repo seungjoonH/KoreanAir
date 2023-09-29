@@ -16,11 +16,12 @@ public class Airplane implements CSVModel {
     public Airplane(String[] csv) { fromCSV(csv); }
 
     public int getSeat(SeatClass seatClass) {
-        return switch (seatClass) {
-            case FIRST -> first;
-            case BUSINESS -> business;
-            case ECONOMY -> economy;
+        switch (seatClass) {
+            case FIRST: return first;
+            case BUSINESS: return business;
+            case ECONOMY: return economy;
         };
+        return -1;
     }
 
     @Override

@@ -13,19 +13,19 @@ public class ReservationDAOFactory extends DAOFactory<Reservation> {
     protected ReservationDAO create() { return new ReservationDAO(); }
 
     public Reservation getReservationById(String id) {
-        for (var re : getList()) { if (re.isSameId(id)) return re; }
+        for (Reservation re : getList()) { if (re.isSameId(id)) return re; }
         return null;
     }
 
     public List<Reservation> getReservationByFlight(String flight) {
         List<Reservation> reservations = new ArrayList<>();
-        for (var re : getList()) { if (re.isSameFlight(flight)) reservations.add(re); }
+        for (Reservation re : getList()) { if (re.isSameFlight(flight)) reservations.add(re); }
         return reservations;
     }
 
     public List<Reservation> getReservationByUid(String uid) {
         List<Reservation> reservations = new ArrayList<>();
-        for (var re : getList()) { if (re.isSameUid(uid)) reservations.add(re); }
+        for (Reservation re : getList()) { if (re.isSameUid(uid)) reservations.add(re); }
         return reservations;
     }
 }

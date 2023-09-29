@@ -40,17 +40,18 @@ public class Route implements ActionListener {
 		JButton login = new LoginButton();
 
 		switch (c) {
-			case "뒤로" -> { goBack(); Route.getThisPage().refresh(); }
-			case "로그인" -> goTo(new LoginPage(back));
-			case "로그아웃" -> goHome();
-			case "회원가입" -> goTo(new RegisterPage(back));
-			case "마이페이지" -> goTo(new MyPage(back));
-			case "항공편조회/예약", "항공편조회/수정" -> goTo(new SearchPage(back, login));
-			case "회원정보" -> goTo(new MyInfoPage(back));
-			case "예약" -> goTo(new ReservationPage(back));
-			case "예약정보" -> goTo(new MyReservationPage(back));
-			case "항공편생성" -> goTo(new FlightCreatePage(back));
-			case "수정" -> goTo(new FlightModifyPage(back));
+			case "뒤로": goBack(); Route.getThisPage().refresh(); break;
+			case "로그인": goTo(new LoginPage(back)); break;
+			case "로그아웃": goHome(); break;
+			case "회원가입": goTo(new RegisterPage(back)); break;
+			case "마이페이지": goTo(new MyPage(back)); break;
+			case "항공편조회/예약":
+			case "항공편조회/수정": goTo(new SearchPage(back, login)); break;
+			case "회원정보": goTo(new MyInfoPage(back)); break;
+			case "예약": goTo(new ReservationPage(back)); break;
+			case "예약정보": goTo(new MyReservationPage(back)); break;
+			case "항공편생성": goTo(new FlightCreatePage(back)); break;
+			case "수정": goTo(new FlightModifyPage(back)); break;
 		}
 	}
 }

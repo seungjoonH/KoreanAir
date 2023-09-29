@@ -1,7 +1,6 @@
 package view.page;
 
 import java.awt.event.ActionEvent;
-import java.io.Serial;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -12,9 +11,6 @@ import util.logger.Logger;
 
 public class RegisterPage extends CustomerInfoPage {
 	public enum RegisterState { DUP_ID, INVLD_IPT, SUCCESS }
-
-	@Serial
-	private static final long serialVersionUID = 1L;
 
 	RegisterState state;
 

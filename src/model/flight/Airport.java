@@ -1,9 +1,6 @@
 package model.flight;
 
 import model.CSVModel;
-import model.dao.AirportDAO;
-
-import java.io.IOException;
 
 public class Airport implements CSVModel {
 	String code;

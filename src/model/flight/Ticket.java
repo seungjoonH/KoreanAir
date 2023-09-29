@@ -1,14 +1,13 @@
-package model.flight;
+// package model.flight;
 
-import model.user.Customer;
-import model.user.User;
+// import model.user.Customer;
 
-public class Ticket {
-	private String id;
-	private Customer customer;
-	private Seat seat;
-	private boolean checkedIn;
-	private String barcodeNo;
-	private int price;
-	private int usedMileage;
-}
+// public class Ticket {
+// 	private String id;
+// 	private Customer customer;
+// 	private Seat seat;
+// 	private boolean checkedIn;
+// 	private String barcodeNo;
+// 	private int price;
+// 	private int usedMileage;
+// }

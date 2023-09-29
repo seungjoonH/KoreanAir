@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.Serial;
 
 import javax.swing.*;
 
@@ -16,8 +15,6 @@ import view.widget.button.LoginButton;
 import view.widget.widget.ProfileWidget;
 
 public class HomePage extends Page {
-	@Serial
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected String getTitle() { return "홈"; }

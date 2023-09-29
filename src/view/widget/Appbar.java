@@ -3,7 +3,6 @@ package view.widget;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.Serial;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -16,8 +15,6 @@ import view.page.route.Route;
 import view.page.theme.ThemeMode;
 
 public class Appbar extends JPanel implements MouseListener {
-	@Serial
-	private static final long serialVersionUID = 1L;
 	public static final int height = 40;
 
 	private JPanel panel;

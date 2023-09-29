@@ -3,16 +3,13 @@ package view.widget.widget;
 import model.user.User;
 import view.page.FlightDetailPage;
 import view.page.route.Route;
-import view.page.theme.ThemeMode;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serial;
 
 public class FlightDetailRightWidget extends JPanel implements ActionListener {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     public FlightDetailRightWidget() {

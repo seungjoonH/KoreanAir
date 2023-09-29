@@ -2,16 +2,13 @@ package view.widget.button;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serial;
 
 import javax.swing.*;
 
 import model.user.User;
-import view.page.HomePage;
 import view.page.route.Route;
 
 public class LoginButton extends JButton implements ActionListener {
-	@Serial
 	private static final long serialVersionUID = 1L;
 
 	public LoginButton() {

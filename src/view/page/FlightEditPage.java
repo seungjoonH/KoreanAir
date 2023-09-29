@@ -1,6 +1,5 @@
 package view.page;
 
-import main.Main;
 import model.flight.Flight;
 import view.page.route.Route;
 import view.page.theme.ThemeMode;
@@ -9,7 +8,6 @@ import view.widget.form.FlightInputForm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public abstract class FlightEditPage extends Page {
     protected FlightInputForm form;

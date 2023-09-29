@@ -18,13 +18,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.Serial;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationPage extends Page implements ChangeListener {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private static final Airplane.SeatClass[] classes = Airplane.SeatClass.values();

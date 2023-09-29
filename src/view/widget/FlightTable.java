@@ -1,14 +1,10 @@
 package view.widget;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.Serial;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 
 import model.flight.Flight;
 import view.page.FlightDetailPage;
@@ -20,7 +16,6 @@ import view.widget.button.BackButton;
 import view.widget.widget.FlightDetailRightWidget;
 
 public class FlightTable extends JTable implements MouseListener {
-	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private static final String[] columns = { "코드", "항공사", "출발지", "도착지", "출발시각", "도착시각" };

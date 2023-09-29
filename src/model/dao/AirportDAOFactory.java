@@ -10,7 +10,7 @@ public class AirportDAOFactory extends DAOFactory<Airport> {
     protected AirportDAO create() { return new AirportDAO(); }
 
     public Airport getAirport(String code) {
-        for (var ap : getList()) { if (ap.isSameCode(code)) return ap; }
+        for (Airport ap : getList()) { if (ap.isSameCode(code)) return ap; }
         return null;
     }
 }

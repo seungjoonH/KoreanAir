@@ -1,7 +1,5 @@
 package view.page.theme;
 
-import com.sun.net.httpserver.Request;
-
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;

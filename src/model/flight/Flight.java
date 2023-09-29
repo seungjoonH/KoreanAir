@@ -33,11 +33,12 @@ public class Flight implements CSVModel {
 	public LocalDateTime getArrivalTime() { return arrivalTime; }
 	public Airplane getAirplane() { return airplane; }
 	public int getPrice(Airplane.SeatClass seatClass) {
-		return switch (seatClass) {
-			case FIRST -> firstPrice;
-			case BUSINESS -> businessPrice;
-			case ECONOMY -> economyPrice;
+		switch (seatClass) {
+			case FIRST: return firstPrice;
+			case BUSINESS: return businessPrice;
+			case ECONOMY: return economyPrice;
 		};
+		return -1;
 	}
 
 	public List<Reservation> getReservations() {

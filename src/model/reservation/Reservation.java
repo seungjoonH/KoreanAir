@@ -39,11 +39,12 @@ public class Reservation implements CSVModel {
     public int getSeat() { return getSeat(getSeatClass()); }
 
     public int getSeat(Airplane.SeatClass seatClass) {
-        return switch (seatClass) {
-            case FIRST -> first;
-            case BUSINESS -> business;
-            case ECONOMY -> economy;
+        switch (seatClass) {
+            case FIRST: return first;
+            case BUSINESS: return business;
+            case ECONOMY: return economy;
         };
+        return -1;
     }
 
     public int getRemainSeat() {

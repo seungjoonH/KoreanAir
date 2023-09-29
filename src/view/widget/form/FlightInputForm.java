@@ -5,13 +5,11 @@ import model.dao.AirplaneDAOFactory;
 import model.dao.AirportDAOFactory;
 import model.flight.Airplane;
 import model.flight.Airport;
-import model.user.Customer;
 import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

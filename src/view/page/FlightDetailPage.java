@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.io.Serial;
 
 import javax.swing.*;
 
@@ -21,9 +20,7 @@ import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
 
 public class FlightDetailPage extends Page {
-	@Serial
-    private static final long serialVersionUID = 1L;
-    
+        
 	private static Flight flight;
     public static void setFlight(Flight f) { flight = f; }
 

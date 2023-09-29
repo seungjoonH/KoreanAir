@@ -2,8 +2,6 @@ package view.page;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.Serial;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,9 +20,6 @@ import view.widget.CustomTextLabel;
 
 public class LoginPage extends Page {
 	public enum LoginState { NO_MEM, PW_INCRT, SUCCESS }
-
-	@Serial
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected String getTitle() { return "로그인"; }

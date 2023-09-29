@@ -2,7 +2,6 @@ package view.page;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.Serial;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -28,8 +27,6 @@ import view.widget.CustomTextLabel;
 import view.widget.FlightTable;
 
 public class SearchPage extends Page {
-	@Serial
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected String getTitle() { return "검색"; }

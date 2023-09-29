@@ -2,7 +2,6 @@ package view.page;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.Serial;
 
 import javax.swing.*;
 
@@ -12,8 +11,6 @@ import view.page.route.Route;
 import view.widget.Appbar;
 
 public abstract class Page extends JPanel implements ActionListener {
-	@Serial
-	private static final long serialVersionUID = 1L;
 	
 	protected Appbar appbar = new Appbar();
 	private final JComponent left;

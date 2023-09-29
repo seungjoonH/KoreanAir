@@ -6,8 +6,6 @@ import model.flight.Flight;
 import util.logger.Logger;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class FlightModifyPage extends FlightEditPage {
     private static Flight flight;

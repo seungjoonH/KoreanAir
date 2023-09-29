@@ -10,7 +10,7 @@ public class AirplaneDAOFactory extends DAOFactory<Airplane> {
     protected AirplaneDAO create() { return new AirplaneDAO(); }
 
     public Airplane getAirplane(String model) {
-        for (var ap : getList()) { if (ap.isSameModel(model)) return ap; }
+        for (Airplane ap : getList()) { if (ap.isSameModel(model)) return ap; }
         return null;
     }
 }

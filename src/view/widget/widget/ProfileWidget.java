@@ -7,12 +7,9 @@ import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
 
 import java.awt.*;
-import java.io.Serial;
 
 public class ProfileWidget extends JPanel {
-	@Serial
-	private static final long serialVersionUID = 1L;
-	
+		
 	public ProfileWidget() {
 		if (!User.isLogged()) return;
 		String name = User.getName();

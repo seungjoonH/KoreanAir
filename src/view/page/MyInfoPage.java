@@ -1,21 +1,16 @@
 package view.page;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.io.Serial;
 
 import javax.swing.*;
 
 import model.dao.CustomerDAOFactory;
 import model.user.Customer;
 import model.user.User;
-import view.page.CustomerInfoPage;
 import view.page.theme.ThemeMode;
 import view.widget.CustomTextLabel;
 
 public class MyInfoPage extends CustomerInfoPage {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     @Override
     protected String getTitle() { return "내 정보"; }
